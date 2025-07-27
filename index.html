@@ -75,6 +75,35 @@
             justify-content: center;
         }
 
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
         .logo {
             font-size: 1.5rem;
             font-weight: bold;
@@ -725,8 +754,51 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
             .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 2rem 0;
+                transition: left 0.3s ease;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                margin: 0;
+                gap: 2rem;
+                z-index: 1000;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 0;
+            }
+
+            .nav-menu a {
+                font-size: 1.2rem;
+                padding: 1rem 2rem;
+                display: block;
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid #eee;
+            }
+
+            .nav-logos {
                 display: none;
+            }
+            
+            .hero {
+                margin-top: 70px;
             }
             
             .hero h1 {
@@ -745,6 +817,27 @@
             .swimmer-photo {
                 margin: 0 auto;
             }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-content {
+                padding: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -756,7 +849,12 @@
                 <img src="logo/MNM.png" alt="Logo Izquierdo" class="nav-logo-left">
                 <img src="logo/MNMKIDS.png" alt="Logo Derecho" class="nav-logo-right">
             </div>
-            <ul class="nav-menu">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#escuela">Nuestra Escuela</a></li>
                 <li><a href="#programas">Programas</a></li>
@@ -1142,6 +1240,23 @@
     </footer>
 
     <script>
+        // Funcionalidad del menú hamburguesa
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer click en un enlace
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
         // Smooth scrolling para los enlaces de navegación
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

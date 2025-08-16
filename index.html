@@ -23,13 +23,14 @@
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
             line-height: 1.6;
-            color: var(--text-dark);
+            color: var(--primary-color);
+            background: white;
         }
 
         /* Header */
         .header {
-            background: var(--primary-color);
-            color: var(--text-light);
+            background: white;
+            color: var(--primary-color);
             padding: 1rem 0;
             position: fixed;
             width: 100%;
@@ -45,6 +46,62 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            position: relative;
+        }
+
+        .nav-logos {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            pointer-events: none;
+            z-index: -1;
+            padding: 0 20px;
+        }
+
+        .nav-logo-left, .nav-logo-right {
+            height: 35px;
+            opacity: 0.8;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 1.5rem;
+            margin: 0 150px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+            padding: 5px;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary-color);
+            margin: 3px 0;
+            transition: 0.3s;
+            border-radius: 2px;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
         }
 
         .logo {
@@ -53,14 +110,9 @@
             color: var(--secondary-color);
         }
 
-        .nav-menu {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
 
         .nav-menu a {
-            color: var(--text-light);
+            color: var(--primary-color);
             text-decoration: none;
             transition: color 0.3s;
         }
@@ -164,9 +216,15 @@
 
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             margin-bottom: 3rem;
+        }
+
+        @media (max-width: 768px) {
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .info-card {
@@ -180,6 +238,7 @@
 
         .info-card:hover {
             transform: translateY(-5px);
+            border: 2px solid var(--secondary-color);
         }
 
         .info-card h3 {
@@ -222,6 +281,7 @@
 
         .program-card:hover {
             transform: scale(1.05);
+            border: 2px solid var(--secondary-color);
         }
 
         .program-icon {
@@ -246,8 +306,14 @@
 
         .teachers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .teachers-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .teacher-card {
@@ -303,7 +369,7 @@
         }
 
         .swimmer-photo {
-            width: 300px;
+            width: 240px;
             height: 300px;
             border-radius: 10px;
             overflow: hidden;
@@ -339,8 +405,14 @@
 
         .special-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .special-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
         .special-card {
@@ -368,6 +440,7 @@
 
         .special-card:hover {
             transform: translateY(-5px);
+            border: 2px solid var(--secondary-color);
         }
 
         .special-card:hover::before {
@@ -494,46 +567,75 @@
             background: var(--tertiary-color);
         }
 
-        /* Chatbot */
-        .chatbot-section {
+        /* Sección Síguenos */
+        .follow-section {
             background: var(--gray-light);
-            padding: 3rem 0;
+            padding: 4rem 0;
         }
 
-        .chatbot-embed {
-            max-width: 800px;
-            margin: 0 auto;
+        .social-container {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .social-card {
             background: white;
-            border-radius: 10px;
             padding: 2rem;
+            border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
             text-align: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+            text-decoration: none;
+            color: var(--text-dark);
+            min-width: 200px;
         }
 
-        .chatbot-embed h3 {
-            color: var(--primary-color);
-            margin-bottom: 1rem;
-            font-size: 1.8rem;
+        .social-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
         }
 
-        .chatbot-embed p {
-            margin-bottom: 1.5rem;
-            color: #666;
-        }
-
-        .chatbot-frame {
-            width: 100%;
-            height: 500px;
-            border: 2px solid var(--primary-color);
-            border-radius: 10px;
-            background: #f9f9f9;
+        .social-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1rem;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #999;
-            font-style: italic;
+            border-radius: 50%;
+            background: var(--secondary-color);
+            transition: background 0.3s;
         }
 
+        .social-card:hover .social-logo {
+            background: var(--primary-color);
+        }
+
+        .social-logo svg {
+            width: 45px;
+            height: 45px;
+            fill: var(--primary-color);
+            transition: fill 0.3s;
+        }
+
+        .social-card:hover .social-logo svg {
+            fill: var(--secondary-color);
+        }
+
+        .social-card h4 {
+            color: var(--primary-color);
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .social-card p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Chatbot */
         .chatbot-container {
             position: fixed;
             bottom: 30px;
@@ -602,6 +704,20 @@
             margin-bottom: 1rem;
         }
 
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .contact-icon {
+            width: 20px;
+            height: 20px;
+            fill: var(--secondary-color);
+            flex-shrink: 0;
+        }
+
         .social-icons {
             display: flex;
             gap: 1rem;
@@ -638,8 +754,51 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            .hamburger {
+                display: flex;
+            }
+
             .nav-menu {
+                position: fixed;
+                top: 70px;
+                left: -100%;
+                width: 100%;
+                height: calc(100vh - 70px);
+                background: white;
+                flex-direction: column;
+                align-items: center;
+                justify-content: flex-start;
+                padding: 2rem 0;
+                transition: left 0.3s ease;
+                box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+                margin: 0;
+                gap: 2rem;
+                z-index: 1000;
+            }
+
+            .nav-menu.active {
+                left: 0;
+            }
+
+            .nav-menu li {
+                margin: 0;
+            }
+
+            .nav-menu a {
+                font-size: 0.9rem;
+                padding: 0.8rem 1.5rem;
+                display: block;
+                width: 100%;
+                text-align: center;
+                border-bottom: 1px solid #eee;
+            }
+
+            .nav-logos {
                 display: none;
+            }
+            
+            .hero {
+                margin-top: 70px;
             }
             
             .hero h1 {
@@ -658,6 +817,27 @@
             .swimmer-photo {
                 margin: 0 auto;
             }
+
+            .nav-container {
+                padding: 0 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .hero-content {
+                padding: 1rem;
+            }
+
+            .cta-button {
+                padding: 0.8rem 1.5rem;
+                font-size: 0.9rem;
+            }
         }
     </style>
 </head>
@@ -665,10 +845,16 @@
     <!-- Header -->
     <header class="header">
         <nav class="nav-container">
-            <div class="logo" style="display: flex; align-items: center; gap: 10px;">
-                <img src="logo.png" alt="Logo" style="height: 40px;">
+            <div class="nav-logos">
+                <img src="logo/MNM.png" alt="Logo Izquierdo" class="nav-logo-left">
+                <img src="logo/MNMKIDS.png" alt="Logo Derecho" class="nav-logo-right">
             </div>
-            <ul class="nav-menu">
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul class="nav-menu" id="navMenu">
                 <li><a href="#inicio">Inicio</a></li>
                 <li><a href="#escuela">Nuestra Escuela</a></li>
                 <li><a href="#programas">Programas</a></li>
@@ -691,8 +877,9 @@
             <div class="video-overlay"></div>
         </div>
         <div class="hero-content">
-            <h1>Bienvenidos a Montería Natación Master</h1>
-            <p>Formando campeones en el agua desde el corazón de Córdoba</p>
+            <h1>Bienvenidos al Club  Montería Natación Master</h1>
+            <p>Formando nadadores integrales, ¡Inscríbete!</p>
+            <p>SABEMOS DE NATACIÓN</p>
             <a href="#escuela" class="cta-button">Conoce Más</a>
         </div>
     </section>
@@ -746,7 +933,7 @@
                         </svg>
                     </div>
                     <h3>Natación Básica</h3>
-                    <p>Enseñanza de técnicas fundamentales de natación para principiantes de todas las edades.</p>
+                    <p>Enseñanza de los estilos de natación para todas las edades.</p>
                 </div>
                 <div class="program-card">
                     <div class="program-icon">
@@ -763,8 +950,8 @@
                             <path d="M20.57 14.86L22 13.43 20.57 12 17 15.57 8.43 7 12 3.43 10.57 2 9.14 3.43 7.71 2 5.57 4.14 4.14 2.71 2.71 4.14l1.43 1.43L2 7.71l1.43 1.43L2 10.57 3.43 12 7 8.43 15.57 17 12 20.57 13.43 22l1.43-1.43L16.29 22l2.14-2.14 1.43 1.43 1.43-1.43-1.43-1.43L22 16.29z"/>
                         </svg>
                     </div>
-                    <h3>Acondicionamiento Físico</h3>
-                    <p>Programas de fitness acuático para mejorar la condición física general.</p>
+                    <h3>Enseñanza Progresiva</h3>
+                    <p>Programa pedagógico progresivo por niveles para aprendizaje efectivo de la natación.</p>
                 </div>
                 <div class="program-card">
                     <div class="program-icon">
@@ -773,7 +960,7 @@
                         </svg>
                     </div>
                     <h3>Natación Infantil</h3>
-                    <p>Clases especializadas para niños desde los 3 años con metodología lúdica.</p>
+                    <p>Clases especializadas para niños desde los 5 años - Natación Masterkids.</p>
                 </div>
             </div>
         </div>
@@ -786,27 +973,27 @@
             <div class="teachers-grid">
                 <div class="teacher-card">
                     <div class="teacher-photo">
-                        <img src="profesor1.jpg" alt="Profesor Juan">
+                        <img src="img/profesor1.png" alt="Profesor Raul">
                     </div>
-                    <h3 class="teacher-name">Juan Pérez</h3>
-                    <p class="teacher-role">Entrenador Principal</p>
-                    <p>15 años de experiencia en natación competitiva</p>
+                    <h3 class="teacher-name">Raúl Vicuña</h3>
+                    <p class="teacher-role">Director Deportivo</p>
+                    <p>20 años de experiencia en natación competitiva</p>
                 </div>
                 <div class="teacher-card">
                     <div class="teacher-photo">
-                        <img src="profesor2.jpg" alt="Profesora María">
+                        <img src="img/profesor2.png" alt="Profesor Yassir">
                     </div>
-                    <h3 class="teacher-name">María García</h3>
-                    <p class="teacher-role">Especialista en Natación Infantil</p>
-                    <p>Certificada en pedagogía acuática infantil</p>
+                    <h3 class="teacher-name">Yassir Burgos</h3>
+                    <p class="teacher-role">Instructor de Nivel Básico e Intermedio</p>
+                    <p>Licenciado en Educación Física</p>
                 </div>
                 <div class="teacher-card">
                     <div class="teacher-photo">
-                        <img src="profesor3.jpg" alt="Profesor Carlos">
+                        <img src="profesor3.jpg" alt="Profesor Daniel">
                     </div>
-                    <h3 class="teacher-name">Carlos Rodríguez</h3>
-                    <p class="teacher-role">Entrenador de Alto Rendimiento</p>
-                    <p>Ex-seleccionado nacional de natación</p>
+                    <h3 class="teacher-name">Daniel del Castillo</h3>
+                    <p class="teacher-role">Instructor de Nivel Básico</p>
+                    <p>Licenciado en Educación Física</p>
                 </div>
             </div>
         </div>
@@ -818,20 +1005,18 @@
             <h2 class="section-title">Nadador del Trimestre</h2>
             <div class="swimmer-content">
                 <div class="swimmer-photo">
-                    <img src="nadador-destacado.jpg" alt="Nadador destacado">
+                    <img src="img/nadador-destacado.jpg" alt="Nadador del Trimestre">
                 </div>
                 <div class="swimmer-info">
-                    <span class="achievement-badge">⭐ Octubre - Diciembre 2024</span>
-                    <h3>Santiago López</h3>
-                    <p><strong>Categoría:</strong> Juvenil A</p>
+                    <span class="achievement-badge">⭐ Abril - Junio 2025</span>
+                    <h3>Susana Hoyos</h3>
+                    <p><strong>Categoría:</strong> Infantil</p>
                     <p><strong>Logros:</strong></p>
                     <ul>
-                        <li>🥇 Oro en 100m libre - Campeonato Regional</li>
-                        <li>🥈 Plata en 200m combinado</li>
-                        <li>🏊‍♂️ Nuevo récord personal en 50m mariposa</li>
+                        <li>🏊‍♂️ Con 6 añitos ha demostrado perseverancia y mucho avance</li>
                         <li>💪 100% asistencia a entrenamientos</li>
                     </ul>
-                    <p>"La dedicación y el esfuerzo de Santiago son un ejemplo para todos nuestros nadadores. Su disciplina y compromiso lo han llevado a alcanzar estas importantes metas."</p>
+                    <p>"La dedicación y el esfuerzo de Susana es un ejemplo para todos nuestros nadadores. Su disciplina y compromiso la han llevado a su corta edad avanzar de manera increible."</p>
                 </div>
             </div>
         </div>
@@ -851,11 +1036,11 @@
                         </div>
                         Competencias
                     </h3>
-                    <p>Participamos activamente en competencias regionales y nacionales. Preparamos a nuestros nadadores para:</p>
+                    <p>Nuestros atletas Participan activamente en competencias regionales, nacionales e internacionales. Preparamos a nuestros nadadores para:</p>
                     <ul>
-                        <li>Campeonatos departamentales</li>
+                        <li>Campeonatos departamentales y municipales</li>
                         <li>Juegos intercolegiados</li>
-                        <li>Copa Nacional de Natación</li>
+                        <li>OCEANMAN</li>
                         <li>Festivales acuáticos</li>
                     </ul>
                 </div>
@@ -868,12 +1053,12 @@
                         </div>
                         Clases del Mar
                     </h3>
-                    <p>Programa especial de adaptación al mar abierto:</p>
+                    <p>Programa especial de enseñanza en aguas abiertas:</p>
                     <ul>
-                        <li>Técnicas de natación en aguas abiertas</li>
-                        <li>Seguridad acuática marina</li>
+                        <li>Enseñanza de Técnicas de natación en aguas abiertas</li>
+                        <li>Seguridad acuática en el mar</li>
                         <li>Travesías supervisadas</li>
-                        <li>Preparación para triatlón</li>
+                        <li>Preparación para competencias</li>
                     </ul>
                 </div>
                 <div class="special-card">
@@ -887,10 +1072,9 @@
                     </h3>
                     <p>Premiamos el esfuerzo y dedicación:</p>
                     <ul>
-                        <li>Nadador del mes y trimestre</li>
-                        <li>Becas deportivas</li>
-                        <li>Descuentos por rendimiento</li>
-                        <li>Kit de competencia gratuito</li>
+                        <li>Nadador del trimestre</li>
+                        <li>Descuentos por pronto pago</li>
+                        <li>Estímulos en la preparación de Competencias</li>
                     </ul>
                 </div>
             </div>
@@ -904,22 +1088,28 @@
             <div class="gallery-container">
                 <div class="gallery-track">
                     <div class="gallery-card">
-                        <img src="galeria1.jpg" alt="Entrenamiento de natación">
+                        <img src="img/galeria1.jpg" alt="Entrenamiento de natación">
                     </div>
                     <div class="gallery-card">
-                        <img src="galeria2.jpg" alt="Competencia regional">
+                        <img src="img/galeria2.jpg" alt="Competencia local">
                     </div>
                     <div class="gallery-card">
-                        <img src="galeria3.jpg" alt="Clases grupales">
+                        <img src="img/galeria3.jpg" alt="Competencia Masterkids">
                     </div>
                     <div class="gallery-card">
-                        <img src="galeria4.jpg" alt="Premiación">
+                        <img src="img/galeria 4.jpg" alt="Premiación">
                     </div>
                     <div class="gallery-card">
-                        <img src="galeria5.jpg" alt="Natación infantil">
+                        <img src="img/galeria5.jpg" alt="Clase del mar">
                     </div>
                     <div class="gallery-card">
-                        <img src="galeria6.jpg" alt="Equipo de competencia">
+                        <img src="img/galeria6.jpg" alt="Nuestras boyas para nado en el mar">
+                    </div>
+                    <div class="gallery-card">
+                        <img src="img/galeria7.jpg" alt="Nuestra bandera">
+                    </div>
+                    <div class="gallery-card">
+                        <img src="img/galeria8.png" alt="Nuestros elementos institucionales">
                     </div>
                 </div>
             </div>
@@ -929,7 +1119,7 @@
     <!-- Sección de Descargas -->
     <section class="section downloads" id="descargas">
         <div class="container">
-            <h2 class="section-title">Descarga de Notas</h2>
+            <h2 class="section-title">Descarga de Notas - En construcción</h2>
             <p style="text-align: center; margin-bottom: 2rem;">Ingresa tus datos para descargar tu reporte de progreso y notas</p>
             <form class="download-form" id="downloadForm">
                 <div class="form-group">
@@ -945,30 +1135,52 @@
         </div>
     </section>
 
-    <!-- Sección del Chatbot -->
-    <section class="chatbot-section">
+    <!-- Sección Síguenos -->
+    <section class="follow-section">
         <div class="container">
-            <div class="chatbot-embed">
-                <h3>Asistente Virtual SwimmIA</h3>
-                <p>Comunícate con nuestra asistente virtual SwimmIA para resolver todas tus dudas sobre horarios, inscripciones y programas.</p>
-                <div class="chatbot-frame">
-                    <!-- Aquí se embebe el chatbot -->
-                    <iframe src="chatbot-url" width="100%" height="100%" frameborder="0"></iframe>
-                </div>
+            <h2 class="section-title">Síguenos</h2>
+            <div class="social-container">
+                <a href="https://wa.me/573144809367" target="_blank" class="social-card">
+                    <div class="social-logo">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+                        </svg>
+                    </div>
+                    <h4>WhatsApp</h4>
+                    <p>Contáctanos directamente</p>
+                </a>
+                <a href="https://instagram.com/club_natacion_mnm" target="_blank" class="social-card">
+                    <div class="social-logo">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
+                        </svg>
+                    </div>
+                    <h4>Instagram</h4>
+                    <p>@club_natacion_mnm/</p>
+                </a>
+                <a href="https://web.facebook.com/MNMClubNatacion/?_rdc=1&_rdr#" target="_blank" class="social-card">
+                    <div class="social-logo">
+                        <svg viewBox="0 0 24 24">
+                            <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
+                        </svg>
+                    </div>
+                    <h4>Facebook</h4>
+                    <p>/MNMClubNatacion</p>
+                </a>
             </div>
         </div>
     </section>
 
     <!-- Chatbot -->
     <div class="chatbot-container">
-        <div class="chatbot-button" onclick="alert('SwimmIA - Asistente Virtual activado')">
+        <a href="https://chatbootmnm.streamlit.app/" target="_blank" class="chatbot-button">
             <svg viewBox="0 0 24 24">
                 <path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zm0 14H6l-2 2V4h16v12z"/>
                 <circle cx="12" cy="8" r="1"/>
                 <circle cx="8" cy="8" r="1"/>
                 <circle cx="16" cy="8" r="1"/>
             </svg>
-        </div>
+        </a>
         <div class="chatbot-tooltip">
             <p>Comunícate con nuestra asistente virtual SwimmIA</p>
         </div>
@@ -979,49 +1191,72 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <img src="logo.png" alt="Montería Natación Master" style="width: 150px; margin-bottom: 1rem;">
-                    <p>Formando campeones acuáticos desde 2010</p>
+                    <img src="logo/LOGO-AMARILLO.png" alt="Montería Natación Master" style="width: 150px; margin-bottom: 1rem;">
+                    <p>Formando nadadores integrales desde 2018</p>
                 </div>
                 <div class="footer-section">
                     <h3>Contacto</h3>
-                    <p>📍 Calle 30 #15-45, Montería, Córdoba</p>
-                    <p>📞 (+57) 300 123 4567</p>
-                    <p>📧 info@monterinatacionmaster.com</p>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+                        </svg>
+                        <span>Piscina de la Villaolimpica, Montería, Córdoba</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/>
+                        </svg>
+                        <span>(+57) 314 4809367</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
+                        </svg>
+                        <span>monteriamaster@gmail.com</span>
+                    </div>
                 </div>
                 <div class="footer-section">
-                    <h3>Horarios</h3>
-                    <p>Lunes a Viernes: 6:00 AM - 8:00 PM</p>
-                    <p>Sábados: 7:00 AM - 2:00 PM</p>
-                    <p>Domingos: 8:00 AM - 12:00 PM</p>
-                </div>
-                <div class="footer-section">
-                    <h3>Síguenos</h3>
-                    <div class="social-icons">
-                        <a href="#" class="social-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zM5.838 12a6.162 6.162 0 1112.324 0 6.162 6.162 0 01-12.324 0zM12 16a4 4 0 110-8 4 4 0 010 8zm4.965-10.405a1.44 1.44 0 112.881.001 1.44 1.44 0 01-2.881-.001z"/>
-                            </svg>
-                        </a>
-                        <a href="#" class="social-icon">
-                            <svg viewBox="0 0 24 24">
-                                <path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/>
-                            </svg>
-                        </a>
+                    <h3>Horarios de Atención WhatsApp</h3>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+                            <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                        <span>Lunes a Viernes: 8:00 AM - 6:00 PM</span>
+                    </div>
+                    <div class="contact-item">
+                        <svg class="contact-icon" viewBox="0 0 24 24">
+                            <path d="M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8z"/>
+                            <path d="M12.5 7H11v6l5.25 3.15.75-1.23-4.5-2.67z"/>
+                        </svg>
+                        <span>Sábados: 8:00 AM - 12:00 PM</span>
                     </div>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Montería Natación Master. Todos los derechos reservados.</p>
+                <p>&copy; 2025 Montería Natación Master. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
 
     <script>
+        // Funcionalidad del menú hamburguesa
+        const hamburger = document.getElementById('hamburger');
+        const navMenu = document.getElementById('navMenu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Cerrar menú al hacer click en un enlace
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
         // Smooth scrolling para los enlaces de navegación
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {

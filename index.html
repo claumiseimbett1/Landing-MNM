@@ -233,7 +233,7 @@
             color: var(--tertiary-color);
             font-weight: bold;
             font-size: 1.1rem;
-            padding: 0 3rem;
+            padding: 0 4rem;
             display: inline-block;
             flex-shrink: 0;
             min-width: max-content;
@@ -257,7 +257,7 @@
         }
 
         @keyframes slide {
-            0% { transform: translateX(0); }
+            0% { transform: translateX(100%); }
             100% { transform: translateX(-50%); }
         }
 
@@ -1120,7 +1120,7 @@
             }
 
             .announcement-item {
-                padding: 0 1rem;
+                padding: 0 2rem;
                 font-size: 1rem;
             }
 
@@ -1215,18 +1215,18 @@
 
             .announcements-track {
                 animation: slide 3s linear infinite;
-                /* Mostrar indicios de próximos anuncios */
-                width: calc(100% + 2rem);
-                margin-left: -1rem;
+                /* Asegurar que todos los anuncios se vean */
+                width: calc(100% + 4rem);
+                margin-left: -2rem;
             }
 
             .announcement-item {
-                padding: 0 0.5rem;
+                padding: 0 1rem;
                 line-height: 1.1;
                 font-size: 0.85rem;
-                /* Reducir el ancho mínimo para permitir más contenido visible */
-                min-width: 80vw;
-                max-width: 85vw;
+                /* Asegurar que el anuncio se vea completo */
+                min-width: 75vw;
+                max-width: 80vw;
             }
 
             .announcement-title {

@@ -3,44 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- SEO Meta Tags -->
-    <title>Club Montería Natación Master - Clases de Natación en Montería, Córdoba</title>
-    <meta name="description" content="Club de natación en Montería, Córdoba. Clases para niños y adultos, natación competitiva, MasterKids desde 5 años. Instructores certificados en Villaolímpica. ¡Inscríbete ya!">
-    <meta name="keywords" content="natación montería, clases natación montería, club natación córdoba, MasterKids, natación competitiva, piscina villaolímpica montería, instructores natación certificados, aprender nadar montería">
-    <meta name="robots" content="index, follow">
-    <meta name="author" content="Club Montería Natación Master">
-    <meta name="geo.region" content="CO-COR">
-    <meta name="geo.placename" content="Montería, Córdoba">
-    <meta name="geo.position" content="8.7479;-75.8814">
-    <meta name="ICBM" content="8.7479, -75.8814">
-    
-    <!-- Open Graph / Facebook -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="Club Montería Natación Master - Clases de Natación">
-    <meta property="og:description" content="🏊‍♂️ Club de natación en Montería. Clases para todas las edades, instructores certificados, natación competitiva. ¡Aprende a nadar con los mejores!">
-    <meta property="og:image" content="https://clubnatacionmnm.com/img/og-image.jpg">
-    <meta property="og:url" content="https://clubnatacionmnm.com">
-    <meta property="og:site_name" content="Club Montería Natación Master">
-    <meta property="og:locale" content="es_CO">
-    
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Club Montería Natación Master">
-    <meta name="twitter:description" content="🏊‍♂️ Clases de natación para todas las edades en Montería. Instructores certificados en Villaolímpica.">
-    <meta name="twitter:image" content="https://clubnatacionmnm.com/img/twitter-image.jpg">
-    
-    <!-- Canonical URL -->
-    <link rel="canonical" href="https://clubnatacionmnm.com">
-    
-    <!-- DNS Prefetch -->
-    <link rel="dns-prefetch" href="//wa.me">
-    <link rel="dns-prefetch" href="//instagram.com">
-    <link rel="dns-prefetch" href="//chatbootmnm.streamlit.app">
-    
-    <!-- Preconnect for performance -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <title>Montería Natación Master</title>
     <style>
         * {
             margin: 0;
@@ -201,19 +164,9 @@
             padding: 2rem;
         }
 
-        .hero-content p {
-            line-height: 1.2;
-            margin-bottom: 0.5rem;
-        }
-
-        .hero-content p:last-of-type {
-            margin-top: 0.3rem;
-            margin-bottom: 1.5rem;
-        }
-
         .hero h1 {
             font-size: 3rem;
-            margin-bottom: 0.7rem;
+            margin-bottom: 1rem;
             text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
         }
 
@@ -393,13 +346,10 @@
         }
 
         .offer-features {
-            display: flex;
-            flex-direction: column;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1rem;
             margin-top: 1.5rem;
-            max-width: 400px;
-            margin-left: auto;
-            margin-right: auto;
         }
 
         .feature {
@@ -435,8 +385,8 @@
             }
 
             .offer-features {
+                grid-template-columns: 1fr;
                 padding: 0 1rem;
-                max-width: none;
             }
         }
 
@@ -549,35 +499,9 @@
         /* Qué Enseñamos */
         .programs {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            grid-template-rows: auto auto;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 2rem;
             margin-top: 2rem;
-        }
-
-        .programs .program-card:nth-child(4) {
-            grid-column: 1;
-            grid-row: 2;
-            transform: translateX(50%);
-        }
-
-        .programs .program-card:nth-child(5) {
-            grid-column: 3;
-            grid-row: 2;
-            transform: translateX(-50%);
-        }
-
-        @media (max-width: 768px) {
-            .programs {
-                grid-template-columns: 1fr;
-            }
-            
-            .programs .program-card:nth-child(4),
-            .programs .program-card:nth-child(5) {
-                grid-column: 1;
-                grid-row: auto;
-                transform: none;
-            }
         }
 
         .program-card {
@@ -664,95 +588,6 @@
         .teacher-role {
             color: #666;
             font-style: italic;
-        }
-
-        /* Testimonios */
-        .testimonials {
-            background: var(--gray-light);
-            padding: 4rem 0;
-        }
-
-        .testimonials-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 2rem;
-        }
-
-        .testimonial-card {
-            background: white;
-            padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-        }
-
-        .testimonial-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
-        }
-
-        .testimonial-card::before {
-            content: '"';
-            position: absolute;
-            top: -10px;
-            left: 20px;
-            font-size: 4rem;
-            color: var(--secondary-color);
-            font-family: Georgia, serif;
-            line-height: 1;
-        }
-
-        .testimonial-content {
-            margin-bottom: 1.5rem;
-        }
-
-        .stars {
-            font-size: 1.2rem;
-            margin-bottom: 1rem;
-            color: #ffd700;
-        }
-
-        .testimonial-content p {
-            font-style: italic;
-            line-height: 1.6;
-            color: var(--text-dark);
-            margin: 0;
-            font-size: 1rem;
-        }
-
-        .testimonial-author {
-            padding-top: 1rem;
-            border-top: 1px solid #eee;
-        }
-
-        .author-info h4 {
-            margin: 0 0 0.25rem 0;
-            color: var(--primary-color);
-            font-size: 1rem;
-        }
-
-        .author-info span {
-            color: #666;
-            font-size: 0.9rem;
-        }
-
-        @media (max-width: 768px) {
-            .testimonials-grid {
-                grid-template-columns: 1fr;
-                gap: 1.5rem;
-            }
-            
-            .testimonial-card {
-                padding: 1.5rem;
-            }
-            
-            .testimonial-card::before {
-                font-size: 3rem;
-                top: -5px;
-                left: 15px;
-            }
         }
 
         /* Nadador del Trimestre */
@@ -1018,138 +853,6 @@
 
         .submit-button:hover {
             background: var(--tertiary-color);
-        }
-
-        /* PQRS */
-        .pqrs-section {
-            background: white;
-            padding: 4rem 0;
-        }
-
-        .pqrs-description {
-            text-align: center;
-            font-size: 1.1rem;
-            color: #666;
-            margin-bottom: 2rem;
-            max-width: 600px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .pqrs-form {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--gray-light);
-            padding: 3rem;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-        }
-
-        .form-row {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .pqrs-form .form-group {
-            margin-bottom: 1.5rem;
-        }
-
-        .pqrs-form label {
-            display: block;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-            font-weight: bold;
-            font-size: 0.95rem;
-        }
-
-        .pqrs-form input,
-        .pqrs-form select,
-        .pqrs-form textarea {
-            width: 100%;
-            padding: 0.875rem;
-            border: 2px solid #ddd;
-            border-radius: 8px;
-            font-size: 1rem;
-            transition: border-color 0.3s, box-shadow 0.3s;
-            background: white;
-        }
-
-        .pqrs-form input:focus,
-        .pqrs-form select:focus,
-        .pqrs-form textarea:focus {
-            outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(65, 176, 222, 0.1);
-        }
-
-        .pqrs-form textarea {
-            resize: vertical;
-            min-height: 120px;
-            font-family: inherit;
-        }
-
-        .pqrs-submit {
-            width: 100%;
-            background: var(--primary-color);
-            color: white;
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1.1rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s;
-            position: relative;
-        }
-
-        .pqrs-submit:hover {
-            background: var(--tertiary-color);
-            transform: translateY(-2px);
-        }
-
-        .pqrs-submit:disabled {
-            background: #ccc;
-            cursor: not-allowed;
-            transform: none;
-        }
-
-        .pqrs-response {
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .pqrs-response.success {
-            background: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-        }
-
-        .pqrs-response.error {
-            background: #f8d7da;
-            color: #721c24;
-            border: 1px solid #f5c6cb;
-        }
-
-        @media (max-width: 768px) {
-            .pqrs-form {
-                padding: 2rem 1.5rem;
-                margin: 0 1rem;
-            }
-            
-            .form-row {
-                grid-template-columns: 1fr;
-                gap: 0;
-            }
-            
-            .pqrs-description {
-                padding: 0 1rem;
-                font-size: 1rem;
-            }
         }
 
         /* Sección Síguenos */
@@ -1734,123 +1437,14 @@
             }
         }
     </style>
-    
-    <!-- Schema Markup / Datos Estructurados -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SportsClub",
-      "name": "Club Montería Natación Master",
-      "alternateName": "MNM Natación",
-      "description": "Club de natación profesional en Montería, Córdoba. Clases para todas las edades, natación competitiva y recreativa.",
-      "url": "https://clubnatacionmnm.com",
-      "logo": "https://clubnatacionmnm.com/logo/MNM.png",
-      "image": [
-        "https://clubnatacionmnm.com/img/club-exterior.jpg",
-        "https://clubnatacionmnm.com/img/piscina-principal.jpg",
-        "https://clubnatacionmnm.com/img/clases-grupo.jpg"
-      ],
-      "telephone": "+573144809367",
-      "email": "monteriamaster@gmail.com",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Villaolímpica",
-        "addressLocality": "Montería",
-        "addressRegion": "Córdoba",
-        "postalCode": "230001",
-        "addressCountry": "CO"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "8.7479",
-        "longitude": "-75.8814"
-      },
-      "openingHours": [
-        "Mo-Fr 06:00-20:00",
-        "Sa 08:00-18:00",
-        "Su 08:00-16:00"
-      ],
-      "sport": ["Swimming", "Aquatic Sports"],
-      "priceRange": "$$",
-      "currenciesAccepted": "COP",
-      "paymentAccepted": "Cash, Credit Card, Bank Transfer",
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Programas de Natación",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Natación Básica",
-              "description": "Enseñanza de los estilos de natación para todas las edades"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Natación Competitiva",
-              "description": "Entrenamiento especializado para competencias"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "MasterKids",
-              "description": "Natación infantil para niños desde 5 años"
-            }
-          }
-        ]
-      },
-      "member": [
-        {
-          "@type": "Person",
-          "name": "Raúl Vicuña",
-          "jobTitle": "Director Deportivo - Entrenador del Equipo",
-          "description": "20 años de experiencia en natación competitiva"
-        }
-      ],
-      "amenityFeature": [
-        {
-          "@type": "LocationFeatureSpecification",
-          "name": "Piscina Olímpica",
-          "value": true
-        },
-        {
-          "@type": "LocationFeatureSpecification",
-          "name": "Instructores Certificados",
-          "value": true
-        },
-        {
-          "@type": "LocationFeatureSpecification",
-          "name": "Clases Grupales",
-          "value": true
-        }
-      ],
-      "areaServed": {
-        "@type": "City",
-        "name": "Montería",
-        "containedInPlace": {
-          "@type": "State",
-          "name": "Córdoba",
-          "containedInPlace": {
-            "@type": "Country",
-            "name": "Colombia"
-          }
-        }
-      }
-    }
-    </script>
 </head>
 <body>
     <!-- Header -->
     <header class="header">
         <nav class="nav-container">
             <div class="nav-logos">
-                <img src="logo/MNM.png" alt="Logo Club Montería Natación Master - MNM" class="nav-logo-left" loading="eager">
-                <img src="logo/MNMKIDS.png" alt="Logo MNM Kids - Natación infantil Montería" class="nav-logo-right" loading="eager">
+                <img src="logo/MNM.png" alt="Logo Izquierdo" class="nav-logo-left">
+                <img src="logo/MNMKIDS.png" alt="Logo Derecho" class="nav-logo-right">
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -1862,21 +1456,19 @@
                 <li><a href="#escuela">Nuestra Escuela</a></li>
                 <li><a href="#programas">Programas</a></li>
                 <li><a href="#profesores">Profesores</a></li>
-                <li><a href="#testimonios">Testimonios</a></li>
                 <li><a href="#destacado">Nadador Destacado</a></li>
                 <li><a href="#galeria">Galería</a></li>
                 <li><a href="#asistente">Asistente Virtual</a></li>
                 <li><a href="#descargas">Descargas</a></li>
-                <li><a href="#pqrs">PQRS</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
         </nav>
     </header>
 
     <!-- Hero Section con Video -->
-    <section class="hero" id="inicio" aria-label="Sección principal del Club Montería Natación Master">
+    <section class="hero" id="inicio">
         <div class="video-container">
-            <video autoplay muted loop aria-label="Video promocional del Club Montería Natación Master mostrando clases y actividades">
+            <video autoplay muted loop>
                 <source src="video/natacion-banner.mp4" type="video/mp4">
                 Tu navegador no soporta el elemento de video.
             </video>
@@ -1971,7 +1563,7 @@
                         </div>
                     </div>
                     <div class="offer-details">
-                        <h3 class="offer-title">💸 ¡MATRÍCULA GRATIS! 💸</h3>
+                        <h3 class="offer-title">💸 ¡MATRÍCULA GRATIS - TARIFA ESPECIAL! 💸</h3>
                         <p class="offer-description">Inscríbete antes del <span id="offer-end-date"></span> y obtén tu matrícula completamente GRATIS</p>
                         <div class="offer-features">
                             <div class="feature">✅ Matrícula $0 pesos</div>
@@ -2070,7 +1662,7 @@
                         </svg>
                     </div>
                     <h3>Natación Infantil</h3>
-                    <p>Clases especializadas para niños desde los 5 años - Natación Masterkids. "Desarrolla disciplina, confianza y coordinación"</p>
+                    <p>Clases especializadas para niños desde los 5 años - Natación Masterkids. "Desarrolla en tu niño disciplina, confianza y coordinación"</p>
                 </div>
                 <div class="program-card">
                     <div class="program-icon">
@@ -2079,7 +1671,7 @@
                         </svg>
                     </div>
                     <h3>Natación Master</h3>
-                    <p>Nunca es tarde para aprender - Clases para adultos principiantes. Mejora tu salud cardiovascular y tonifica tu cuerpo"</p>
+                    <p>Nunca es tarde para aprender - Clases para adultos principiantes. "Mejora tu salud cardiovascular y tonifica tu cuerpo"</p>
                 </div>
             </div>
         </div>
@@ -2092,7 +1684,7 @@
             <div class="teachers-grid">
                 <div class="teacher-card">
                     <div class="teacher-photo">
-                        <img src="img/profesor1.png" alt="Raúl Vicuña - Director Deportivo y Entrenador del Equipo de Natación MNM" loading="lazy">
+                        <img src="img/profesor1.png" alt="Profesor Raul">
                     </div>
                     <h3 class="teacher-name">Raúl Vicuña</h3>
                     <p class="teacher-role">Director Deportivo - Entrenador del Equipo</p>
@@ -2100,7 +1692,7 @@
                 </div>
                 <div class="teacher-card">
                     <div class="teacher-photo">
-                        <img src="img/profesor2.png" alt="Yassir Burgos - Instructor de Nivel Básico e Intermedio de Natación" loading="lazy">
+                        <img src="img/profesor2.png" alt="Profesor Yassir">
                     </div>
                     <h3 class="teacher-name">Yassir Burgos</h3>
                     <p class="teacher-role">Instructor de Nivel Básico e Intermedio</p>
@@ -2108,58 +1700,11 @@
                 </div>
                 <div class="teacher-card">
                     <div class="teacher-photo">
-                        <img src="img/profesor3.png" alt="Daniel del Castillo - Instructor de Nivel Básico de Natación" loading="lazy">
+                        <img src="img/profesor3.png" alt="Profesor Daniel">
                     </div>
                     <h3 class="teacher-name">Daniel del Castillo</h3>
                     <p class="teacher-role">Instructor de Nivel Básico</p>
                     <p>Licenciado en Educación Física</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonios -->
-    <section class="section testimonials" id="testimonios">
-        <div class="container">
-            <h2 class="section-title">Testimonios de Nuestra Familia MNM</h2>
-            <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"Mi hija empezó en MasterKids con 5 años y ahora nada con mucha confianza. Los instructores son increíbles y muy pacientes. ¡100% recomendado!"</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>María González</h4>
-                            <span>Madre de Sofía (7 años)</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"Como adulto principiante tenía miedo al agua. En MNM me enseñaron con mucha paciencia y ahora disfruto nadar. Excelente metodología!"</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>Carlos Ruiz</h4>
-                            <span>Estudiante Adulto Master</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="testimonial-card">
-                    <div class="testimonial-content">
-                        <div class="stars">⭐⭐⭐⭐⭐</div>
-                        <p>"Mi hijo participa en competencias gracias al excelente entrenamiento de MNM. Ha ganado varias medallas y se siente muy orgulloso. ¡Gracias!"</p>
-                    </div>
-                    <div class="testimonial-author">
-                        <div class="author-info">
-                            <h4>Ana Martínez</h4>
-                            <span>Madre de Diego (12 años)</span>
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
@@ -2171,7 +1716,7 @@
             <h2 class="section-title">Nadador del Trimestre</h2>
             <div class="swimmer-content">
                 <div class="swimmer-photo">
-                    <img src="img/nadador-destacado.jpg" alt="Susana Hoyos - Nadadora del Trimestre abril-junio 2025, categoría infantil" loading="lazy">
+                    <img src="img/nadador-destacado.jpg" alt="Nadador del Trimestre">
                 </div>
                 <div class="swimmer-info">
                     <span class="achievement-badge">⭐ Abril - Junio 2025</span>
@@ -2222,9 +1767,9 @@
                     <p>Programa especial de enseñanza en aguas abiertas:</p>
                     <ul>
                         <li>Enseñanza de Técnicas de natación en aguas abiertas</li>
-                        <li>Seguridad acuática en el mar</li>
+                        <li>Nuestros eventos procuran una adecuada seguridad acuática en el mar</li>
                         <li>Travesías supervisadas</li>
-                        <li>Preparación para competencias</li>
+                        <li>Preparación para competencias en aguas abiertas</li>
                     </ul>
                 </div>
                 <div class="special-card">
@@ -2240,7 +1785,7 @@
                     <ul>
                         <li>Nadador del trimestre</li>
                         <li>Descuentos por pronto pago</li>
-                        <li>Estímulos en la preparación de Competencias</li>
+                        <li>Estímulos para nivel Equipo cuando los nadadores estan en preparación de Competencias</li>
                     </ul>
                 </div>
             </div>
@@ -2369,68 +1914,6 @@
                     <input type="email" id="email" name="email" required>
                 </div>
                 <button type="submit" class="submit-button">Descargar Notas</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- PQRS - Peticiones, Quejas, Reclamos y Sugerencias -->
-    <section class="section pqrs-section" id="pqrs">
-        <div class="container">
-            <h2 class="section-title">PQRS - Peticiones, Quejas, Reclamos y Sugerencias</h2>
-            <p class="pqrs-description">Tu opinión es importante para nosotros. Comparte tus comentarios, sugerencias o inquietudes.</p>
-            
-            <form class="pqrs-form" id="pqrsForm" action="https://formspree.io/f/xqaloevw" method="POST">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="pqrsName">Nombre Completo *</label>
-                        <input type="text" id="pqrsName" name="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="pqrsEmail">Correo Electrónico *</label>
-                        <input type="email" id="pqrsEmail" name="email" required>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label for="pqrsPhone">Teléfono</label>
-                        <input type="tel" id="pqrsPhone" name="phone">
-                    </div>
-                    <div class="form-group">
-                        <label for="pqrsType">Tipo de PQRS *</label>
-                        <select id="pqrsType" name="type" required>
-                            <option value="">Seleccionar...</option>
-                            <option value="Petición">Petición</option>
-                            <option value="Queja">Queja</option>
-                            <option value="Reclamo">Reclamo</option>
-                            <option value="Sugerencia">Sugerencia</option>
-                            <option value="Felicitación">Felicitación</option>
-                        </select>
-                    </div>
-                </div>
-                
-                <div class="form-group">
-                    <label for="pqrsSubject">Asunto *</label>
-                    <input type="text" id="pqrsSubject" name="subject" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="pqrsMessage">Mensaje *</label>
-                    <textarea id="pqrsMessage" name="message" rows="6" required placeholder="Describe detalladamente tu petición, queja, reclamo o sugerencia..."></textarea>
-                </div>
-                
-                <!-- Campos ocultos para Formspree -->
-                <input type="hidden" name="_subject" value="Nueva PQRS - Club Montería Natación Master">
-                <input type="hidden" name="_next" value="https://clubnatacionmnm.com/#pqrs">
-                <input type="hidden" name="_language" value="es">
-                <input type="hidden" name="_format" value="plain">
-                
-                <button type="submit" class="submit-button pqrs-submit">
-                    <span class="button-text">Enviar PQRS</span>
-                    <span class="button-loading" style="display: none;">Enviando...</span>
-                </button>
-                
-                <div class="pqrs-response" id="pqrsResponse" style="display: none;"></div>
             </form>
         </div>
     </section>
@@ -2746,73 +2229,6 @@
 
         // Inicializar contador cuando la página cargue
         initOfferCountdown();
-
-        // Manejo del formulario PQRS con Formspree
-        document.getElementById('pqrsForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            
-            const form = e.target;
-            const submitBtn = form.querySelector('.pqrs-submit');
-            const buttonText = submitBtn.querySelector('.button-text');
-            const buttonLoading = submitBtn.querySelector('.button-loading');
-            const responseDiv = document.getElementById('pqrsResponse');
-            
-            // Validar campos requeridos
-            const formData = new FormData(form);
-            const data = Object.fromEntries(formData);
-            
-            if (!data.name || !data.email || !data.type || !data.subject || !data.message) {
-                showResponse('Por favor, completa todos los campos obligatorios.', 'error');
-                return;
-            }
-            
-            // Mostrar estado de carga
-            submitBtn.disabled = true;
-            buttonText.style.display = 'none';
-            buttonLoading.style.display = 'inline';
-            
-            try {
-                // Enviar formulario usando fetch API
-                const response = await fetch(form.action, {
-                    method: form.method,
-                    body: formData,
-                    headers: {
-                        'Accept': 'application/json'
-                    }
-                });
-                
-                if (response.ok) {
-                    showResponse('¡Tu PQRS ha sido enviado exitosamente a monteriamaster@gmail.com! Te responderemos pronto. Gracias por contactarnos.', 'success');
-                    form.reset();
-                } else {
-                    const errorData = await response.json();
-                    if (errorData.errors) {
-                        showResponse('Error al enviar: ' + errorData.errors.map(error => error.message).join(', '), 'error');
-                    } else {
-                        showResponse('Error al enviar el formulario. Por favor, verifica todos los campos e intenta nuevamente.', 'error');
-                    }
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                showResponse('Error al enviar el formulario. Por favor, intenta nuevamente o envía tu consulta directamente a monteriamaster@gmail.com', 'error');
-            }
-            
-            // Restaurar botón
-            submitBtn.disabled = false;
-            buttonText.style.display = 'inline';
-            buttonLoading.style.display = 'none';
-            
-            function showResponse(message, type) {
-                responseDiv.textContent = message;
-                responseDiv.className = `pqrs-response ${type}`;
-                responseDiv.style.display = 'block';
-                
-                // Ocultar después de 10 segundos
-                setTimeout(() => {
-                    responseDiv.style.display = 'none';
-                }, 10000);
-            }
-        });
     </script>
 </body>
 </html>

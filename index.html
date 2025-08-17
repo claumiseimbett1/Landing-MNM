@@ -2379,7 +2379,7 @@
             <h2 class="section-title">PQRS - Peticiones, Quejas, Reclamos y Sugerencias</h2>
             <p class="pqrs-description">Tu opinión es importante para nosotros. Comparte tus comentarios, sugerencias o inquietudes.</p>
             
-            <form class="pqrs-form" id="pqrsForm">
+            <form class="pqrs-form" id="pqrsForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="pqrsName">Nombre Completo *</label>
@@ -2418,6 +2418,12 @@
                     <label for="pqrsMessage">Mensaje *</label>
                     <textarea id="pqrsMessage" name="message" rows="6" required placeholder="Describe detalladamente tu petición, queja, reclamo o sugerencia..."></textarea>
                 </div>
+                
+                <!-- Campos ocultos para Formspree -->
+                <input type="hidden" name="_to" value="monteriamaster@gmail.com">
+                <input type="hidden" name="_subject" value="Nueva PQRS - Club Montería Natación Master">
+                <input type="hidden" name="_next" value="#pqrs">
+                <input type="hidden" name="_language" value="es">
                 
                 <button type="submit" class="submit-button pqrs-submit">
                     <span class="button-text">Enviar PQRS</span>
@@ -2741,8 +2747,8 @@
         // Inicializar contador cuando la página cargue
         initOfferCountdown();
 
-        // Manejo del formulario PQRS
-        document.getElementById('pqrsForm').addEventListener('submit', function(e) {
+        // Manejo del formulario PQRS con Formspree
+        document.getElementById('pqrsForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const form = e.target;
@@ -2751,11 +2757,10 @@
             const buttonLoading = submitBtn.querySelector('.button-loading');
             const responseDiv = document.getElementById('pqrsResponse');
             
-            // Recopilar datos del formulario
+            // Validar campos requeridos
             const formData = new FormData(form);
             const data = Object.fromEntries(formData);
             
-            // Validar campos requeridos
             if (!data.name || !data.email || !data.type || !data.subject || !data.message) {
                 showResponse('Por favor, completa todos los campos obligatorios.', 'error');
                 return;
@@ -2766,8 +2771,22 @@
             buttonText.style.display = 'none';
             buttonLoading.style.display = 'inline';
             
-            // Crear el cuerpo del email
-            const emailBody = `
+            try {
+                // Enviar formulario usando fetch API
+                const response = await fetch(form.action, {
+                    method: form.method,
+                    body: formData,
+                    headers: {
+                        'Accept': 'application/json'
+                    }
+                });
+                
+                if (response.ok) {
+                    showResponse('¡Tu PQRS ha sido enviado exitosamente! Nos pondremos en contacto contigo pronto.', 'success');
+                    form.reset();
+                } else {
+                    // Si Formspree no está configurado, usar método alternativo
+                    const emailBody = `
 NUEVA PQRS - ${data.type}
 
 INFORMACIÓN DE CONTACTO:
@@ -2784,36 +2803,31 @@ ${data.message}
 ---
 Enviado desde: Club Montería Natación Master
 Fecha: ${new Date().toLocaleString('es-ES')}
-            `.trim();
-            
-            // Crear mailto link
-            const mailtoLink = `mailto:monteriamaster@gmail.com?subject=PQRS: ${data.type} - ${data.subject}&body=${encodeURIComponent(emailBody)}`;
-            
-            // Simular envío (abrir cliente de email)
-            setTimeout(() => {
-                try {
+                    `.trim();
+                    
+                    const mailtoLink = `mailto:monteriamaster@gmail.com?subject=PQRS: ${data.type} - ${data.subject}&body=${encodeURIComponent(emailBody)}`;
                     window.location.href = mailtoLink;
-                    showResponse('Tu PQRS ha sido preparado. Se abrirá tu cliente de email para enviarlo.', 'success');
-                    form.reset();
-                } catch (error) {
-                    showResponse('Error al abrir el cliente de email. Por favor, envía tu consulta directamente a monteriamaster@gmail.com', 'error');
+                    showResponse('Se abrirá tu cliente de email para enviar el PQRS. Si no se abre automáticamente, envía tu consulta a monteriamaster@gmail.com', 'success');
                 }
-                
-                // Restaurar botón
-                submitBtn.disabled = false;
-                buttonText.style.display = 'inline';
-                buttonLoading.style.display = 'none';
-            }, 1000);
+            } catch (error) {
+                console.error('Error:', error);
+                showResponse('Error al enviar el formulario. Por favor, intenta nuevamente o envía tu consulta directamente a monteriamaster@gmail.com', 'error');
+            }
+            
+            // Restaurar botón
+            submitBtn.disabled = false;
+            buttonText.style.display = 'inline';
+            buttonLoading.style.display = 'none';
             
             function showResponse(message, type) {
                 responseDiv.textContent = message;
                 responseDiv.className = `pqrs-response ${type}`;
                 responseDiv.style.display = 'block';
                 
-                // Ocultar después de 8 segundos
+                // Ocultar después de 10 segundos
                 setTimeout(() => {
                     responseDiv.style.display = 'none';
-                }, 8000);
+                }, 10000);
             }
         });
     </script>

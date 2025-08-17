@@ -917,21 +917,18 @@
             }
         }
 
-        /* Forzar una sola columna en móvil - regla adicional */
+        /* Forzar una sola columna en móvil usando flexbox */
         @media screen and (max-width: 768px) {
-            section#programas .container .programs {
-                grid-template-columns: 1fr !important;
-                display: grid !important;
+            .programs {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 1.5rem !important;
             }
             
-            .section .programs {
-                grid-template-columns: 1fr !important;
-                display: grid !important;
-            }
-            
-            div.programs {
-                grid-template-columns: 1fr !important;
-                display: grid !important;
+            .program-card {
+                width: 100% !important;
+                max-width: none !important;
+                flex: none !important;
             }
         }
 

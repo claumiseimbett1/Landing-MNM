@@ -1898,6 +1898,8 @@
     <!-- Librerías para manejar Excel y PDF -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <!-- EmailJS para envío de emails gratis -->
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
 </head>
 <body>
     <!-- Header -->
@@ -2478,6 +2480,10 @@
                     <input type="text" id="documento" name="documento" placeholder="Ej: 1234567890" required>
                 </div>
                 <div class="form-group">
+                    <label for="email">Correo Electrónico</label>
+                    <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+                </div>
+                <div class="form-group">
                     <div class="checkbox-group">
                         <label class="checkbox-label">
                             <input type="checkbox" id="aceptarTratamiento" name="aceptarTratamiento" required>
@@ -2486,7 +2492,20 @@
                         </label>
                     </div>
                 </div>
-                <button type="submit" class="submit-button">Buscar Notas en Todos los Niveles</button>
+                <button type="submit" class="submit-button" id="btnEnviarCodigo">Enviar Código de Verificación</button>
+            </form>
+            
+            <!-- Formulario de verificación (oculto inicialmente) -->
+            <form class="download-form" id="verificationForm" style="display: none; margin-top: 20px;">
+                <div class="form-group">
+                    <label for="codigoVerificacion">Código de Verificación</label>
+                    <input type="text" id="codigoVerificacion" name="codigoVerificacion" placeholder="Ingresa el código de 6 dígitos" maxlength="6" required>
+                    <small style="color: #666;">Revisa tu correo electrónico (incluyendo spam)</small>
+                </div>
+                <div style="display: flex; gap: 10px;">
+                    <button type="submit" class="submit-button">Verificar y Buscar Notas</button>
+                    <button type="button" class="submit-button" id="btnReenviarCodigo" style="background: #6c757d;">Reenviar Código</button>
+                </div>
             </form>
             <div id="resultadoBusqueda" class="resultado-busqueda" style="display: none;">
                 <h3>Información Encontrada:</h3>
@@ -2703,6 +2722,41 @@
         // Variables globales para el manejo de Excel
         let workbook = null;
         let datosEncontrados = null;
+        
+        // Variables para verificación por email
+        let codigoVerificacion = null;
+        let datosFormulario = null;
+        
+        // Inicializar EmailJS (necesitarás configurar tu cuenta)
+        // NOTA: Debes registrarte en https://www.emailjs.com/ y obtener estos valores
+        const EMAIL_SERVICE_ID = 'TU_SERVICE_ID'; // Cambiar por tu Service ID
+        const EMAIL_TEMPLATE_ID = 'TU_TEMPLATE_ID'; // Cambiar por tu Template ID  
+        const EMAIL_PUBLIC_KEY = 'TU_PUBLIC_KEY'; // Cambiar por tu Public Key
+        
+        // Inicializar EmailJS
+        emailjs.init(EMAIL_PUBLIC_KEY);
+
+        // Generar código de verificación de 6 dígitos
+        function generarCodigoVerificacion() {
+            return Math.floor(100000 + Math.random() * 900000).toString();
+        }
+
+        // Enviar código de verificación por email
+        async function enviarCodigoVerificacion(email, codigo) {
+            try {
+                const templateParams = {
+                    to_email: email,
+                    codigo_verificacion: codigo,
+                    institucion: 'Montería Natación Master'
+                };
+
+                await emailjs.send(EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID, templateParams);
+                return true;
+            } catch (error) {
+                console.error('Error enviando email:', error);
+                return false;
+            }
+        }
 
         // Cargar archivo Excel al iniciar
         async function cargarArchivoExcel() {
@@ -3017,15 +3071,21 @@
             }
         }
 
-        // Manejo del formulario de descarga
+        // Manejo del formulario principal - enviar código de verificación
         document.getElementById('downloadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
             
             const documento = document.getElementById('documento').value.trim();
+            const email = document.getElementById('email').value.trim();
             const aceptarTratamiento = document.getElementById('aceptarTratamiento').checked;
             
             if (!documento) {
                 alert('Por favor ingresa el número de documento');
+                return;
+            }
+
+            if (!email) {
+                alert('Por favor ingresa el correo electrónico');
                 return;
             }
 
@@ -3034,6 +3094,54 @@
                 return;
             }
 
+            // Guardar datos del formulario
+            datosFormulario = { documento, email };
+            
+            // Generar y enviar código
+            codigoVerificacion = generarCodigoVerificacion();
+            
+            // Cambiar botón a estado de envío
+            const btn = document.getElementById('btnEnviarCodigo');
+            const textoOriginal = btn.textContent;
+            btn.textContent = 'Enviando código...';
+            btn.disabled = true;
+            
+            try {
+                const enviado = await enviarCodigoVerificacion(email, codigoVerificacion);
+                
+                if (enviado) {
+                    // Mostrar formulario de verificación
+                    document.getElementById('verificationForm').style.display = 'block';
+                    alert('Código enviado a tu correo electrónico. Revisa también la carpeta de spam.');
+                } else {
+                    alert('Error enviando el código. Verifica tu email e intenta nuevamente.');
+                }
+            } catch (error) {
+                alert('Error enviando el código. Intenta nuevamente.');
+            } finally {
+                // Restaurar botón
+                btn.textContent = textoOriginal;
+                btn.disabled = false;
+            }
+        });
+
+        // Manejo del formulario de verificación
+        document.getElementById('verificationForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const codigoIngresado = document.getElementById('codigoVerificacion').value.trim();
+            
+            if (!codigoIngresado) {
+                alert('Por favor ingresa el código de verificación');
+                return;
+            }
+
+            if (codigoIngresado !== codigoVerificacion) {
+                alert('Código incorrecto. Verifica e intenta nuevamente.');
+                return;
+            }
+
+            // Código correcto, proceder con la búsqueda
             // Ocultar resultados previos
             document.getElementById('resultadoBusqueda').style.display = 'none';
             document.getElementById('mensajeError').style.display = 'none';
@@ -3044,7 +3152,7 @@
             }
             
             // Buscar estudiante en todos los niveles
-            const resultados = buscarEstudianteEnTodosLosNiveles(documento);
+            const resultados = buscarEstudianteEnTodosLosNiveles(datosFormulario.documento);
             
             if (resultados) {
                 datosEncontrados = resultados;
@@ -3058,9 +3166,45 @@
                 } else {
                     tituloResultado.textContent = 'Información Encontrada:';
                 }
+                
+                // Ocultar formulario de verificación
+                document.getElementById('verificationForm').style.display = 'none';
             } else {
                 document.getElementById('mensajeError').style.display = 'block';
                 datosEncontrados = null;
+            }
+        });
+
+        // Botón para reenviar código
+        document.getElementById('btnReenviarCodigo').addEventListener('click', async function() {
+            if (!datosFormulario) {
+                alert('Error: No hay datos del formulario');
+                return;
+            }
+
+            // Generar nuevo código
+            codigoVerificacion = generarCodigoVerificacion();
+            
+            // Cambiar botón a estado de envío
+            const btn = this;
+            const textoOriginal = btn.textContent;
+            btn.textContent = 'Reenviando...';
+            btn.disabled = true;
+            
+            try {
+                const enviado = await enviarCodigoVerificacion(datosFormulario.email, codigoVerificacion);
+                
+                if (enviado) {
+                    alert('Código reenviado a tu correo electrónico.');
+                } else {
+                    alert('Error reenviando el código. Intenta nuevamente.');
+                }
+            } catch (error) {
+                alert('Error reenviando el código. Intenta nuevamente.');
+            } finally {
+                // Restaurar botón
+                btn.textContent = textoOriginal;
+                btn.disabled = false;
             }
         });
 

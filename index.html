@@ -1032,7 +1032,11 @@
         @media (max-width: 768px) {
             @keyframes slide {
                 0% { transform: translateX(0); }
-                100% { transform: translateX(-100%); }
+                100% { transform: translateX(-50%); }
+            }
+            
+            .announcements-track {
+                width: 200% !important;
             }
             
             .hamburger {
@@ -1213,10 +1217,15 @@
         @media (max-width: 480px) {
             @keyframes slide {
                 0% { transform: translateX(0); }
-                100% { transform: translateX(-100%); }
+                100% { transform: translateX(-50%); }
             }
+            
             .announcements {
                 padding: 1rem 0;
+            }
+            
+            .announcements-track {
+                width: 200% !important;
             }
 
             .announcement-item {
@@ -1355,6 +1364,10 @@
                 <span class="announcement-subtitle">dudas del reglamento, reposiciones e inscripciones</span>
             </div>
             <!-- Duplicamos los anuncios para loop continuo -->
+          <div class="announcement-item">
+                <span class="announcement-title">🏊‍♂️ ¡Natación el mejor deporte  </span>
+                <span class="announcement-subtitle">¡El deporte más completo para el desarrollo de tu hijo!</span>
+            </div>
             <div class="announcement-item">
                 <span class="announcement-title">🏆 Próxima competencia del equipo del Club</span>
                 <span class="announcement-subtitle"> 23 de Agosto de 2025</span>

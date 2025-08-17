@@ -2751,16 +2751,34 @@
             html += '<h4>Información del Estudiante:</h4>';
             html += `<p><strong>Nivel:</strong> ${datos[1] || 'N/A'}</p>`;
             html += `<p><strong>Mes:</strong> ${datos[2] || 'N/A'}</p>`;
-            html += `<p><strong>Fecha de Evaluación:</strong> ${datos[3] || 'N/A'}</p>`;
             html += `<p><strong>Nombre:</strong> ${datos[4] || 'N/A'}</p>`;
             html += `<p><strong>Documento:</strong> ${datos[5] || 'N/A'}</p>`;
             
-            // Notas de evaluación (columnas G a N, índices 6 a 13)
+            // Notas de evaluación con nombres específicos
             html += '<h4>Notas de Evaluación:</h4>';
-            for (let i = 6; i <= 13; i++) {
-                if (encabezados[i] && (datos[i] !== undefined && datos[i] !== null && datos[i] !== '')) {
-                    html += `<p><strong>${encabezados[i]}:</strong> ${datos[i]}</p>`;
+            
+            // Definir los nombres de las columnas de evaluación
+            const nombresEvaluacion = [
+                'AMBIENTACIÓN',
+                'FLOTACIÓN DEFENSIVA', 
+                'PATADA CROL',
+                'PATADA ESPALDA',
+                'ENS. CROL',
+                'ENS ESPALDA',
+                'SALTO'
+            ];
+            
+            // Mostrar notas de evaluación (columnas G a M, índices 6 a 12)
+            for (let i = 6; i <= 12; i++) {
+                const nombreEvaluacion = nombresEvaluacion[i - 6];
+                if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
+                    html += `<p><strong>${nombreEvaluacion}:</strong> ${datos[i]}</p>`;
                 }
+            }
+            
+            // Pase de Nivel (columna N, índice 13)
+            if (datos[13] !== undefined && datos[13] !== null && datos[13] !== '') {
+                html += `<p><strong>Pase de Nivel 4,7 ptos:</strong> ${datos[13]}</p>`;
             }
             
             // Nota de cambio de nivel (columna O, índice 14)
@@ -2810,24 +2828,36 @@
             yPosition += 8;
             doc.text(`Mes: ${datos[2] || 'N/A'}`, 20, yPosition);
             yPosition += 8;
-            doc.text(`Fecha de Evaluación: ${datos[3] || 'N/A'}`, 20, yPosition);
-            yPosition += 8;
             doc.text(`Nombre: ${datos[4] || 'N/A'}`, 20, yPosition);
             yPosition += 8;
             doc.text(`Documento: ${datos[5] || 'N/A'}`, 20, yPosition);
             yPosition += 15;
             
-            // Notas de evaluación (columnas G a N, índices 6 a 13)
+            // Notas de evaluación con nombres específicos
             doc.setFontSize(14);
             doc.setFont("helvetica", "bold");
             doc.text('Notas de Evaluación:', 20, yPosition);
             yPosition += 10;
             
+            // Definir los nombres de las columnas de evaluación
+            const nombresEvaluacion = [
+                'AMBIENTACIÓN',
+                'FLOTACIÓN DEFENSIVA', 
+                'PATADA CROL',
+                'PATADA ESPALDA',
+                'ENS. CROL',
+                'ENS ESPALDA',
+                'SALTO'
+            ];
+            
             doc.setFontSize(12);
             doc.setFont("helvetica", "normal");
-            for (let i = 6; i <= 13; i++) {
-                if (encabezados[i] && (datos[i] !== undefined && datos[i] !== null && datos[i] !== '')) {
-                    const texto = `${encabezados[i]}: ${datos[i]}`;
+            
+            // Mostrar notas de evaluación (columnas G a M, índices 6 a 12)
+            for (let i = 6; i <= 12; i++) {
+                const nombreEvaluacion = nombresEvaluacion[i - 6];
+                if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
+                    const texto = `${nombreEvaluacion}: ${datos[i]}`;
                     const lineas = doc.splitTextToSize(texto, 170);
                     doc.text(lineas, 20, yPosition);
                     yPosition += lineas.length * 8;
@@ -2837,6 +2867,20 @@
                         doc.addPage();
                         yPosition = 30;
                     }
+                }
+            }
+            
+            // Pase de Nivel (columna N, índice 13)
+            if (datos[13] !== undefined && datos[13] !== null && datos[13] !== '') {
+                const texto = `Pase de Nivel 4,7 ptos: ${datos[13]}`;
+                const lineas = doc.splitTextToSize(texto, 170);
+                doc.text(lineas, 20, yPosition);
+                yPosition += lineas.length * 8;
+                
+                // Nueva página si es necesario
+                if (yPosition > 250) {
+                    doc.addPage();
+                    yPosition = 30;
                 }
             }
             

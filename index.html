@@ -917,6 +917,14 @@
             }
         }
 
+        /* Forzar una sola columna en móvil - regla adicional */
+        @media screen and (max-width: 768px) {
+            section#programas .programs {
+                grid-template-columns: 1fr !important;
+                display: grid !important;
+            }
+        }
+
         .special-card {
             background: var(--primary-color);
             color: white;

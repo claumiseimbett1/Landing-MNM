@@ -225,7 +225,7 @@
 
         .announcements-track {
             display: flex;
-            animation: slide 18s linear infinite;
+            animation: slide 12s linear infinite;
             align-items: center;
         }
 
@@ -245,13 +245,15 @@
         .announcement-title {
             display: block;
             font-size: 1.4rem;
-            margin-bottom: 0.1rem;
+            margin-bottom: 0.05rem;
+            line-height: 1.1;
         }
 
         .announcement-subtitle {
             display: block;
             font-size: 0.9rem;
             opacity: 0.9;
+            line-height: 1.1;
         }
 
         @keyframes slide {
@@ -1130,7 +1132,7 @@
             }
 
             .announcements-track {
-                animation: slide 15s linear infinite;
+                animation: slide 10s linear infinite;
             }
 
             /* Alternar galerías en tablet */
@@ -1222,7 +1224,7 @@
             }
 
             .announcements-track {
-                animation: slide 12s linear infinite;
+                animation: slide 8s linear infinite;
             }
 
             /* Pausar animación al tocar en móvil */
@@ -1906,9 +1908,9 @@
 
             // Ajustar velocidad según el tamaño de pantalla
             if (window.innerWidth <= 480) {
-                announcementsTrack.style.animationDuration = '12s';
+                announcementsTrack.style.animationDuration = '8s';
             } else if (window.innerWidth <= 768) {
-                announcementsTrack.style.animationDuration = '15s';
+                announcementsTrack.style.animationDuration = '10s';
             }
         }
 
@@ -1916,11 +1918,11 @@
         window.addEventListener('resize', () => {
             const currentWidth = window.innerWidth;
             if (currentWidth <= 480) {
-                announcementsTrack.style.animationDuration = '12s';
+                announcementsTrack.style.animationDuration = '8s';
             } else if (currentWidth <= 768) {
-                announcementsTrack.style.animationDuration = '15s';
+                announcementsTrack.style.animationDuration = '10s';
             } else {
-                announcementsTrack.style.animationDuration = '18s';
+                announcementsTrack.style.animationDuration = '12s';
             }
         });
 

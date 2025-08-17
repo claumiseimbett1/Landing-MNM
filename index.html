@@ -147,6 +147,20 @@
             object-fit: cover;
         }
 
+        /* Mejorar video en móvil */
+        @media (max-width: 768px) {
+            .video-container video {
+                transform: translateX(-50%) translateY(-50%);
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                min-width: 100%;
+                min-height: 100%;
+                width: auto;
+                height: auto;
+            }
+        }
+
         .video-overlay {
             position: absolute;
             top: 0;
@@ -173,6 +187,27 @@
         .hero p {
             font-size: 1.5rem;
             margin-bottom: 2rem;
+        }
+
+        /* Ajustar tamaño de texto del banner en móvil */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
         }
 
         .cta-button {
@@ -857,13 +892,21 @@
             }
 
             .programs {
-                grid-template-columns: 1fr;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
             }
 
             .programs .program-card:nth-child(4),
             .programs .program-card:nth-child(5) {
-                grid-column: 1;
+                grid-column: auto;
                 transform: none;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .programs {
+                grid-template-columns: 1fr;
+                gap: 1rem;
             }
         }
 

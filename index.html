@@ -218,7 +218,7 @@
         /* Sección de Anuncios Deslizantes */
         .announcements {
             background: var(--secondary-color);
-            padding: 1rem 0;
+            padding: 1.5rem 0;
             overflow: hidden;
             position: relative;
         }
@@ -226,17 +226,32 @@
         .announcements-track {
             display: flex;
             animation: slide 25s linear infinite;
-            white-space: nowrap;
+            align-items: center;
         }
 
         .announcement-item {
             color: var(--tertiary-color);
             font-weight: bold;
             font-size: 1.1rem;
-            padding: 0 3rem;
+            padding: 0 4rem;
             display: inline-block;
             flex-shrink: 0;
             min-width: max-content;
+            line-height: 1.4;
+            text-align: center;
+            white-space: pre-line;
+        }
+
+        .announcement-title {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .announcement-subtitle {
+            display: block;
+            font-size: 1rem;
+            opacity: 0.9;
         }
 
         @keyframes slide {
@@ -1045,12 +1060,19 @@
             }
 
             .announcements {
-                padding: 0.8rem 0;
+                padding: 1.2rem 0;
             }
 
             .announcement-item {
+                padding: 0 2rem;
+            }
+
+            .announcement-title {
+                font-size: 1rem;
+            }
+
+            .announcement-subtitle {
                 font-size: 0.9rem;
-                padding: 0 1.5rem;
             }
 
             .announcements-track {
@@ -1101,13 +1123,20 @@
         /* Optimización para pantallas muy pequeñas */
         @media (max-width: 480px) {
             .announcements {
-                padding: 0.5rem 0;
+                padding: 1rem 0;
             }
 
             .announcement-item {
+                padding: 0 1.5rem;
+                line-height: 1.3;
+            }
+
+            .announcement-title {
+                font-size: 0.9rem;
+            }
+
+            .announcement-subtitle {
                 font-size: 0.8rem;
-                padding: 0 1rem;
-                line-height: 1.4;
             }
 
             .announcements-track {
@@ -1208,19 +1237,55 @@
     <!-- Anuncios del Mes -->
     <section class="announcements">
         <div class="announcements-track">
-            <div class="announcement-item">🏊‍♂️ ¡Inscripciones abiertas para clases de natación Septiembre - 2025!</div>
-            <div class="announcement-item">🏆 Próxima competencia 23 de Agosto de 2025 - ¡Prepárate con nosotros!</div>
-            <div class="announcement-item">👶 Natación MasterKids - Programa especial para niños desde 5 años</div>
-            <div class="announcement-item">💪 Descuentos especiales por pronto pago - ¡Consulta condiciones!</div>
-            <div class="announcement-item">🎯 Proximamente disponible la "Descarga de Notas" de tu puntaje del nivel en el mes</div>
-            <div class="announcement-item">🏊‍♂️ Preguntale a nuestro Asistente Virtual NatalIA tus dudas acerca de reglamento, reposiciones e inscripciones</div>
+            <div class="announcement-item">
+                <span class="announcement-title">🏊‍♂️ ¡Inscripciones abiertas para clases de natación Septiembre</span>
+                <span class="announcement-subtitle">2025!</span>
+            </div>
+            <div class="announcement-item">
+                <span class="announcement-title">🏆 Próxima competencia 23 de Agosto de 2025</span>
+                <span class="announcement-subtitle">¡Prepárate con nosotros!</span>
+            </div>
+            <div class="announcement-item">
+                <span class="announcement-title">👶 Natación MasterKids</span>
+                <span class="announcement-subtitle">Programa especial para niños desde 5 años</span>
+            </div>
+            <div class="announcement-item">
+                <span class="announcement-title">💪 Descuentos especiales por pronto pago</span>
+                <span class="announcement-subtitle">¡Consulta condiciones!</span>
+            </div>
+            <div class="announcement-item">
+                <span class="announcement-title">🎯 Proximamente disponible la "Descarga de Notas"</span>
+                <span class="announcement-subtitle">de tu puntaje del nivel en el mes</span>
+            </div>
+            <div class="announcement-item">
+                <span class="announcement-title">🏊‍♂️ Preguntale a nuestro Asistente Virtual NatalIA</span>
+                <span class="announcement-subtitle">tus dudas acerca de reglamento, reposiciones e inscripciones</span>
+            </div>
             <!-- Duplicamos los anuncios para loop continuo -->
-            <div class="announcement-item">🏊‍♂️ ¡Inscripciones abiertas para clases de natación Septiembre - 2025!</div>
-            <div class="announcement-item">🏆 Próxima competencia 23 de Agosto de 2025 - ¡Prepárate con nosotros!</div>
-            <div class="announcement-item">👶 Natación MasterKids - Programa especial para niños desde 5 años</div>
-            <div class="announcement-item">💪 Descuentos especiales por pronto pago - ¡Consulta condiciones!</div>
-            <div class="announcement-item">🎯 Proximamente disponible la "Descarga de Notas" de tu puntaje del nivel en el mes</div>
-            <div class="announcement-item">🏊‍♂️ Preguntale a nuestro Asistente Virtual NatalIA tus dudas acerca de reglamento, reposiciones e inscripciones</div>
+            <div class="announcement-item">
+                <span class="announcement-title">🏊‍♂️ ¡Inscripciones abiertas para clases de natación Septiembre</span>
+                <span class="announcement-subtitle">2025!</span>
+            </div>
+            <div class="announcement-item">
+                <span class="announcement-title">🏆 Próxima competencia 23 de Agosto de 2025</span>
+                <span class="announcement-subtitle">¡Prepárate con nosotros!</span>
+            </div>
+            <div class="announcement-item">
+                <span class="announcement-title">👶 Natación MasterKids</span>
+                <span class="announcement-subtitle">Programa especial para niños desde 5 años</span>
+            </div>
+            <div class="announcement-item">
+                <span class="announcement-title">💪 Descuentos especiales por pronto pago</span>
+                <span class="announcement-subtitle">¡Consulta condiciones!</span>
+            </div>
+            <div class="announcement-item">
+                <span class="announcement-title">🎯 Proximamente disponible la "Descarga de Notas"</span>
+                <span class="announcement-subtitle">de tu puntaje del nivel en el mes</span>
+            </div>
+            <div class="announcement-item">
+                <span class="announcement-title">🏊‍♂️ Preguntale a nuestro Asistente Virtual NatalIA</span>
+                <span class="announcement-subtitle">tus dudas acerca de reglamento, reposiciones e inscripciones</span>
+            </div>
         </div>
     </section>
 

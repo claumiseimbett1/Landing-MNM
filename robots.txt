@@ -1,0 +1,27 @@
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://clubnatacionmnm.com/sitemap.xml
+
+# Disallow certain files
+Disallow: *.css$
+Disallow: *.js$
+Disallow: /img/temp/
+Disallow: /backup/
+
+# Crawl delay (optional - helps with server load)
+Crawl-delay: 1
+
+# Allow specific bots
+User-agent: Googlebot
+Allow: /
+
+User-agent: Bingbot
+Allow: /
+
+User-agent: FacebookExternalHit
+Allow: /
+
+User-agent: Twitterbot
+Allow: /

@@ -2818,10 +2818,10 @@
             // Configurar fuente
             doc.setFont("helvetica");
             
-            // Función para agregar logos (se convertirán automáticamente a base64)
-            async function agregarLogos() {
+            // Función para agregar logo (se convertirá automáticamente a base64)
+            async function agregarLogo() {
                 try {
-                    // Cargar y agregar logo principal MNM
+                    // Cargar y agregar solo el logo principal MNM
                     const logoMNM = await fetch('./logo/MNM.png');
                     const logoMNMBlob = await logoMNM.blob();
                     const logoMNMBase64 = await new Promise(resolve => {
@@ -2833,29 +2833,17 @@
                     // Agregar logo MNM (lado izquierdo)
                     doc.addImage(logoMNMBase64, 'PNG', 15, 10, 25, 25);
                     
-                    // Cargar y agregar logo amarillo
-                    const logoAmarillo = await fetch('./logo/LOGO-AMARILLO.png');
-                    const logoAmarilloBlob = await logoAmarillo.blob();
-                    const logoAmarilloBase64 = await new Promise(resolve => {
-                        const reader = new FileReader();
-                        reader.onload = () => resolve(reader.result);
-                        reader.readAsDataURL(logoAmarilloBlob);
-                    });
-                    
-                    // Agregar logo amarillo (lado derecho)
-                    doc.addImage(logoAmarilloBase64, 'PNG', 155, 10, 25, 25);
-                    
                 } catch (error) {
-                    console.log('No se pudieron cargar los logos:', error);
+                    console.log('No se pudo cargar el logo:', error);
                 }
             }
             
-            // Agregar logos al inicio
-            agregarLogos().then(() => {
+            // Agregar logo al inicio
+            agregarLogo().then(() => {
                 // Continuar con el resto del PDF
                 generarContenidoPDF();
             }).catch(() => {
-                // Si falla la carga de logos, continuar sin ellos
+                // Si falla la carga del logo, continuar sin él
                 generarContenidoPDF();
             });
             
@@ -2870,7 +2858,7 @@
                 
                 // Título
                 doc.setFontSize(18);
-                doc.text('Reporte de Notas - Montería Natación Master', 45, 25);
+                doc.text('Reporte de Notas - Montería Natación Master', 50, 25);
                 
                 // Fecha
                 doc.setFontSize(10);

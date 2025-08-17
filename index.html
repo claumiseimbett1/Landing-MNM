@@ -149,16 +149,8 @@
 
         /* Mejorar video en móvil */
         @media (max-width: 768px) {
-            .video-container {
-                position: fixed;
-                top: 0;
-                left: 0;
-                width: 100vw;
-                height: 100vh;
-                z-index: -1;
-            }
-            
             .video-container video {
+                transform: translateX(-50%) translateY(-50%);
                 position: absolute;
                 top: 50%;
                 left: 50%;
@@ -166,13 +158,6 @@
                 min-height: 100%;
                 width: auto;
                 height: auto;
-                transform: translateX(-50%) translateY(-50%);
-                object-fit: cover;
-            }
-            
-            .hero {
-                position: relative;
-                z-index: 1;
             }
         }
 

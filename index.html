@@ -2725,75 +2725,88 @@
             }
 
             const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+            const resultados = [];
             
-            // Buscar en la columna F (índice 5) el documento
+            // Buscar en la columna F (índice 5) el documento - pueden ser múltiples registros
             for (let i = 1; i < data.length; i++) {
                 if (data[i][5] && data[i][5].toString() === documento) {
-                    return {
+                    resultados.push({
                         fila: i + 1,
                         datos: data[i],
                         encabezados: data[0]
-                    };
+                    });
                 }
             }
-            return null;
+            
+            return resultados.length > 0 ? resultados : null;
         }
 
         // Mostrar datos del estudiante
-        function mostrarDatosEstudiante(resultado) {
+        function mostrarDatosEstudiante(resultados) {
             const datosDiv = document.getElementById('datosEstudiante');
-            const datos = resultado.datos;
-            const encabezados = resultado.encabezados;
+            let html = '';
             
-            let html = '<div class="datos-estudiante">';
-            
-            // Información básica del estudiante
-            html += '<h4>Información del Estudiante:</h4>';
-            html += `<p><strong>Nivel:</strong> ${datos[1] || 'N/A'}</p>`;
-            html += `<p><strong>Mes:</strong> ${datos[2] || 'N/A'}</p>`;
-            html += `<p><strong>Nombre:</strong> ${datos[4] || 'N/A'}</p>`;
-            html += `<p><strong>Documento:</strong> ${datos[5] || 'N/A'}</p>`;
-            
-            // Notas de evaluación con nombres específicos
-            html += '<h4>Notas de Evaluación:</h4>';
-            
-            // Definir los nombres de las columnas de evaluación
-            const nombresEvaluacion = [
-                'AMBIENTACIÓN',
-                'FLOTACIÓN DEFENSIVA', 
-                'PATADA CROL',
-                'PATADA ESPALDA',
-                'ENS. CROL',
-                'ENS ESPALDA',
-                'SALTO'
-            ];
-            
-            // Mostrar notas de evaluación (columnas G a M, índices 6 a 12)
-            for (let i = 6; i <= 12; i++) {
-                const nombreEvaluacion = nombresEvaluacion[i - 6];
-                if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
-                    html += `<p><strong>${nombreEvaluacion}:</strong> ${datos[i]}</p>`;
+            // Si hay múltiples registros, mostrar cada uno por separado
+            for (let r = 0; r < resultados.length; r++) {
+                const resultado = resultados[r];
+                const datos = resultado.datos;
+                const encabezados = resultado.encabezados;
+                
+                html += `<div class="datos-estudiante" style="margin-bottom: 20px; ${r > 0 ? 'border-top: 2px solid var(--secondary-color); padding-top: 15px;' : ''}">`;
+                
+                if (resultados.length > 1) {
+                    html += `<h3 style="color: var(--primary-color); margin-bottom: 15px;">Registro ${r + 1} de ${resultados.length}</h3>`;
                 }
+                
+                // Información básica del estudiante
+                html += '<h4>Información del Estudiante:</h4>';
+                html += `<p><strong>Nivel:</strong> ${datos[1] || 'N/A'}</p>`;
+                html += `<p><strong>Mes:</strong> ${datos[2] || 'N/A'}</p>`;
+                html += `<p><strong>Nombre:</strong> ${datos[4] || 'N/A'}</p>`;
+                html += `<p><strong>Documento:</strong> ${datos[5] || 'N/A'}</p>`;
+                
+                // Notas de evaluación con nombres específicos
+                html += '<h4>Notas de Evaluación:</h4>';
+                
+                // Definir los nombres de las columnas de evaluación
+                const nombresEvaluacion = [
+                    'AMBIENTACIÓN',
+                    'FLOTACIÓN DEFENSIVA', 
+                    'PATADA CROL',
+                    'PATADA ESPALDA',
+                    'ENS. CROL',
+                    'ENS ESPALDA',
+                    'SALTO'
+                ];
+                
+                // Mostrar notas de evaluación (columnas G a M, índices 6 a 12)
+                for (let i = 6; i <= 12; i++) {
+                    const nombreEvaluacion = nombresEvaluacion[i - 6];
+                    if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
+                        html += `<p><strong>${nombreEvaluacion}:</strong> ${datos[i]}</p>`;
+                    }
+                }
+                
+                // Pase de Nivel (columna N, índice 13)
+                if (datos[13] !== undefined && datos[13] !== null && datos[13] !== '') {
+                    html += `<p><strong>Pase de Nivel 4,7 ptos:</strong> ${datos[13]}</p>`;
+                }
+                
+                // Nota de cambio de nivel (columna O, índice 14)
+                if (datos[14] !== undefined && datos[14] !== null && datos[14] !== '') {
+                    html += '<h4>Evaluación de Nivel:</h4>';
+                    html += `<p><strong>${encabezados[14] || 'Cambio de Nivel'}:</strong> ${datos[14]}</p>`;
+                }
+                
+                html += '</div>';
             }
             
-            // Pase de Nivel (columna N, índice 13)
-            if (datos[13] !== undefined && datos[13] !== null && datos[13] !== '') {
-                html += `<p><strong>Pase de Nivel 4,7 ptos:</strong> ${datos[13]}</p>`;
-            }
-            
-            // Nota de cambio de nivel (columna O, índice 14)
-            if (datos[14] !== undefined && datos[14] !== null && datos[14] !== '') {
-                html += '<h4>Evaluación de Nivel:</h4>';
-                html += `<p><strong>${encabezados[14] || 'Cambio de Nivel'}:</strong> ${datos[14]}</p>`;
-            }
-            
-            html += '</div>';
             datosDiv.innerHTML = html;
         }
 
         // Generar PDF con los datos
         function generarPDF() {
-            if (!datosEncontrados) return;
+            if (!datosEncontrados || datosEncontrados.length === 0) return;
 
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
@@ -2812,52 +2825,89 @@
             // Línea separadora
             doc.line(20, 50, 190, 50);
             
-            const datos = datosEncontrados.datos;
-            const encabezados = datosEncontrados.encabezados;
             let yPosition = 65;
+
+            // Iterar sobre todos los registros encontrados
+            for (let r = 0; r < datosEncontrados.length; r++) {
+                const resultado = datosEncontrados[r];
+                const datos = resultado.datos;
+                const encabezados = resultado.encabezados;
+                
+                // Si hay múltiples registros, agregar separación
+                if (r > 0) {
+                    if (yPosition > 200) {
+                        doc.addPage();
+                        yPosition = 30;
+                    } else {
+                        yPosition += 20;
+                        doc.line(20, yPosition - 10, 190, yPosition - 10);
+                    }
+                }
+                
+                if (datosEncontrados.length > 1) {
+                    doc.setFontSize(16);
+                    doc.setFont("helvetica", "bold");
+                    doc.text(`Registro ${r + 1} de ${datosEncontrados.length}`, 20, yPosition);
+                    yPosition += 15;
+                }
             
-            // Información básica del estudiante
-            doc.setFontSize(14);
-            doc.setFont("helvetica", "bold");
-            doc.text('Información del Estudiante:', 20, yPosition);
-            yPosition += 10;
-            
-            doc.setFontSize(12);
-            doc.setFont("helvetica", "normal");
-            doc.text(`Nivel: ${datos[1] || 'N/A'}`, 20, yPosition);
-            yPosition += 8;
-            doc.text(`Mes: ${datos[2] || 'N/A'}`, 20, yPosition);
-            yPosition += 8;
-            doc.text(`Nombre: ${datos[4] || 'N/A'}`, 20, yPosition);
-            yPosition += 8;
-            doc.text(`Documento: ${datos[5] || 'N/A'}`, 20, yPosition);
-            yPosition += 15;
-            
-            // Notas de evaluación con nombres específicos
-            doc.setFontSize(14);
-            doc.setFont("helvetica", "bold");
-            doc.text('Notas de Evaluación:', 20, yPosition);
-            yPosition += 10;
-            
-            // Definir los nombres de las columnas de evaluación
-            const nombresEvaluacion = [
-                'AMBIENTACIÓN',
-                'FLOTACIÓN DEFENSIVA', 
-                'PATADA CROL',
-                'PATADA ESPALDA',
-                'ENS. CROL',
-                'ENS ESPALDA',
-                'SALTO'
-            ];
-            
-            doc.setFontSize(12);
-            doc.setFont("helvetica", "normal");
-            
-            // Mostrar notas de evaluación (columnas G a M, índices 6 a 12)
-            for (let i = 6; i <= 12; i++) {
-                const nombreEvaluacion = nombresEvaluacion[i - 6];
-                if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
-                    const texto = `${nombreEvaluacion}: ${datos[i]}`;
+                // Información básica del estudiante
+                doc.setFontSize(14);
+                doc.setFont("helvetica", "bold");
+                doc.text('Información del Estudiante:', 20, yPosition);
+                yPosition += 10;
+                
+                doc.setFontSize(12);
+                doc.setFont("helvetica", "normal");
+                doc.text(`Nivel: ${datos[1] || 'N/A'}`, 20, yPosition);
+                yPosition += 8;
+                doc.text(`Mes: ${datos[2] || 'N/A'}`, 20, yPosition);
+                yPosition += 8;
+                doc.text(`Nombre: ${datos[4] || 'N/A'}`, 20, yPosition);
+                yPosition += 8;
+                doc.text(`Documento: ${datos[5] || 'N/A'}`, 20, yPosition);
+                yPosition += 15;
+                
+                // Notas de evaluación con nombres específicos
+                doc.setFontSize(14);
+                doc.setFont("helvetica", "bold");
+                doc.text('Notas de Evaluación:', 20, yPosition);
+                yPosition += 10;
+                
+                // Definir los nombres de las columnas de evaluación
+                const nombresEvaluacion = [
+                    'AMBIENTACIÓN',
+                    'FLOTACIÓN DEFENSIVA', 
+                    'PATADA CROL',
+                    'PATADA ESPALDA',
+                    'ENS. CROL',
+                    'ENS ESPALDA',
+                    'SALTO'
+                ];
+                
+                doc.setFontSize(12);
+                doc.setFont("helvetica", "normal");
+                
+                // Mostrar notas de evaluación (columnas G a M, índices 6 a 12)
+                for (let i = 6; i <= 12; i++) {
+                    const nombreEvaluacion = nombresEvaluacion[i - 6];
+                    if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
+                        const texto = `${nombreEvaluacion}: ${datos[i]}`;
+                        const lineas = doc.splitTextToSize(texto, 170);
+                        doc.text(lineas, 20, yPosition);
+                        yPosition += lineas.length * 8;
+                        
+                        // Nueva página si es necesario
+                        if (yPosition > 250) {
+                            doc.addPage();
+                            yPosition = 30;
+                        }
+                    }
+                }
+                
+                // Pase de Nivel (columna N, índice 13)
+                if (datos[13] !== undefined && datos[13] !== null && datos[13] !== '') {
+                    const texto = `Pase de Nivel 4,7 ptos: ${datos[13]}`;
                     const lineas = doc.splitTextToSize(texto, 170);
                     doc.text(lineas, 20, yPosition);
                     yPosition += lineas.length * 8;
@@ -2868,34 +2918,21 @@
                         yPosition = 30;
                     }
                 }
-            }
-            
-            // Pase de Nivel (columna N, índice 13)
-            if (datos[13] !== undefined && datos[13] !== null && datos[13] !== '') {
-                const texto = `Pase de Nivel 4,7 ptos: ${datos[13]}`;
-                const lineas = doc.splitTextToSize(texto, 170);
-                doc.text(lineas, 20, yPosition);
-                yPosition += lineas.length * 8;
                 
-                // Nueva página si es necesario
-                if (yPosition > 250) {
-                    doc.addPage();
-                    yPosition = 30;
+                // Nota de cambio de nivel (columna O, índice 14)
+                if (datos[14] !== undefined && datos[14] !== null && datos[14] !== '') {
+                    yPosition += 10;
+                    doc.setFontSize(14);
+                    doc.setFont("helvetica", "bold");
+                    doc.text('Evaluación de Nivel:', 20, yPosition);
+                    yPosition += 10;
+                    
+                    doc.setFontSize(12);
+                    doc.setFont("helvetica", "normal");
+                    const nombreCampo = encabezados[14] || 'Cambio de Nivel';
+                    doc.text(`${nombreCampo}: ${datos[14]}`, 20, yPosition);
+                    yPosition += 15;
                 }
-            }
-            
-            // Nota de cambio de nivel (columna O, índice 14)
-            if (datos[14] !== undefined && datos[14] !== null && datos[14] !== '') {
-                yPosition += 10;
-                doc.setFontSize(14);
-                doc.setFont("helvetica", "bold");
-                doc.text('Evaluación de Nivel:', 20, yPosition);
-                yPosition += 10;
-                
-                doc.setFontSize(12);
-                doc.setFont("helvetica", "normal");
-                const nombreCampo = encabezados[14] || 'Cambio de Nivel';
-                doc.text(`${nombreCampo}: ${datos[14]}`, 20, yPosition);
             }
             
             // Pie de página
@@ -2903,7 +2940,8 @@
             doc.text('Montería Natación Master - Sistema de Notas', 20, 285);
             
             // Descargar PDF
-            const nombreArchivo = `notas_${datos[5] || 'estudiante'}_${new Date().toISOString().split('T')[0]}.pdf`;
+            const primerDato = datosEncontrados[0].datos;
+            const nombreArchivo = `notas_${primerDato[5] || 'estudiante'}_${new Date().toISOString().split('T')[0]}.pdf`;
             doc.save(nombreArchivo);
         }
 
@@ -2929,12 +2967,20 @@
             }
             
             // Buscar estudiante
-            const resultado = buscarEstudiante(documento, nivel);
+            const resultados = buscarEstudiante(documento, nivel);
             
-            if (resultado) {
-                datosEncontrados = resultado;
-                mostrarDatosEstudiante(resultado);
+            if (resultados) {
+                datosEncontrados = resultados;
+                mostrarDatosEstudiante(resultados);
                 document.getElementById('resultadoBusqueda').style.display = 'block';
+                
+                // Actualizar el mensaje si hay múltiples registros
+                const tituloResultado = document.querySelector('#resultadoBusqueda h3');
+                if (resultados.length > 1) {
+                    tituloResultado.textContent = `Se encontraron ${resultados.length} registros:`;
+                } else {
+                    tituloResultado.textContent = 'Información Encontrada:';
+                }
             } else {
                 document.getElementById('mensajeError').style.display = 'block';
                 datosEncontrados = null;

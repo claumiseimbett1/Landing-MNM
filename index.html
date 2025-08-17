@@ -1030,6 +1030,11 @@
 
         /* Responsive */
         @media (max-width: 768px) {
+            @keyframes slide {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-100%); }
+            }
+            
             .hamburger {
                 display: flex;
             }
@@ -1206,6 +1211,10 @@
 
         /* Optimización para pantallas muy pequeñas */
         @media (max-width: 480px) {
+            @keyframes slide {
+                0% { transform: translateX(0); }
+                100% { transform: translateX(-100%); }
+            }
             .announcements {
                 padding: 1rem 0;
             }

@@ -191,6 +191,69 @@
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
         }
 
+        /* Sección de Anuncios Deslizantes */
+        .announcements {
+            background: var(--secondary-color);
+            padding: 1rem 0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .announcements-track {
+            display: flex;
+            animation: slide 20s linear infinite;
+            white-space: nowrap;
+        }
+
+        .announcement-item {
+            color: var(--tertiary-color);
+            font-weight: bold;
+            font-size: 1.1rem;
+            padding: 0 3rem;
+            display: inline-block;
+            flex-shrink: 0;
+        }
+
+        @keyframes slide {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Sección de Inscripción */
+        .enrollment-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+            padding: 3rem 0;
+            text-align: center;
+        }
+
+        .enrollment-button {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--tertiary-color);
+            padding: 1.5rem 3rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .enrollment-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            background: #f0f03a;
+        }
+
+        .enrollment-text {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
         /* Secciones */
         .section {
             padding: 4rem 0;
@@ -849,6 +912,21 @@
                 padding: 0.8rem 1.5rem;
                 font-size: 0.9rem;
             }
+
+            .announcement-item {
+                font-size: 1rem;
+                padding: 0 2rem;
+            }
+
+            .enrollment-button {
+                font-size: 1.2rem;
+                padding: 1.2rem 2rem;
+            }
+
+            .enrollment-text {
+                font-size: 1rem;
+                margin-bottom: 1.5rem;
+            }
         }
     </style>
 </head>
@@ -892,6 +970,28 @@
             <p>Formando nadadores integrales, ¡Inscríbete!</p>
             <p>SABEMOS DE NATACIÓN</p>
             <a href="#escuela" class="cta-button">Conoce Más</a>
+        </div>
+    </section>
+
+    <!-- Anuncios del Mes -->
+    <section class="announcements">
+        <div class="announcements-track">
+            <div class="announcement-item">🏊‍♂️ ¡Inscripciones abiertas para clases de natación 2025!</div>
+            <div class="announcement-item">🌊 Clases del mar todos los sábados - ¡Ven y disfruta!</div>
+            <div class="announcement-item">🏆 Próxima competencia departamental - ¡Prepárate con nosotros!</div>
+            <div class="announcement-item">👶 Natación MasterKids - Programa especial para niños desde 5 años</div>
+            <div class="announcement-item">💪 Descuentos especiales por pronto pago - ¡Consulta condiciones!</div>
+            <div class="announcement-item">🎯 Entrenamientos personalizados disponibles</div>
+        </div>
+    </section>
+
+    <!-- Sección de Inscripción -->
+    <section class="enrollment-section">
+        <div class="container">
+            <p class="enrollment-text">¿Listo para comenzar tu aventura acuática?</p>
+            <a href="https://wa.me/573144809367?text=Hola,%20quiero%20información%20sobre%20las%20clases%20de%20natación" target="_blank" rel="noopener noreferrer" class="enrollment-button">
+                ¡Inscríbete Aquí!
+            </a>
         </div>
     </section>
 

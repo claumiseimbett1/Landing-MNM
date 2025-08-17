@@ -698,7 +698,102 @@
             font-size: 0.9rem;
         }
 
-        /* Chatbot */
+        /* Sección del Asistente Virtual */
+        .chatbot-section {
+            background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+            padding: 4rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .chatbot-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(222,222,60,0.1) 0%, transparent 70%);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(180deg); }
+        }
+
+        .chatbot-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .chatbot-title {
+            color: var(--secondary-color);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+
+        .chatbot-description {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .chatbot-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .chatbot-feature {
+            background: rgba(255,255,255,0.1);
+            padding: 1.5rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .chatbot-feature h4 {
+            color: var(--secondary-color);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .chatbot-feature p {
+            color: white;
+            font-size: 0.9rem;
+        }
+
+        .chatbot-main-button {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--tertiary-color);
+            padding: 1.5rem 3rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.3rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 1rem;
+        }
+
+        .chatbot-main-button:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            background: #f0f03a;
+        }
+
+        /* Chatbot Flotante Mejorado */
         .chatbot-container {
             position: fixed;
             bottom: 30px;
@@ -707,45 +802,56 @@
         }
 
         .chatbot-button {
-            width: 70px;
-            height: 70px;
-            background: var(--secondary-color);
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--secondary-color), #f0f03a);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            transition: transform 0.3s;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            transition: all 0.3s ease;
+            animation: pulse 2s infinite;
+            border: 3px solid var(--primary-color);
+        }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 8px 25px rgba(0,0,0,0.4), 0 0 0 0 rgba(222,222,60,0.7); }
+            70% { box-shadow: 0 8px 25px rgba(0,0,0,0.4), 0 0 0 10px rgba(222,222,60,0); }
+            100% { box-shadow: 0 8px 25px rgba(0,0,0,0.4), 0 0 0 0 rgba(222,222,60,0); }
         }
 
         .chatbot-button:hover {
-            transform: scale(1.1);
+            transform: scale(1.15);
+            animation: none;
         }
 
         .chatbot-button svg {
-            width: 35px;
-            height: 35px;
+            width: 40px;
+            height: 40px;
             fill: var(--tertiary-color);
         }
 
         .chatbot-tooltip {
             position: absolute;
-            bottom: 85px;
+            bottom: 95px;
             right: 0;
             background: var(--tertiary-color);
             color: white;
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
+            padding: 1rem 1.5rem;
+            border-radius: 15px;
             white-space: nowrap;
             opacity: 0;
-            transition: opacity 0.3s;
+            transition: all 0.3s ease;
             pointer-events: none;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+            font-weight: bold;
         }
 
         .chatbot-button:hover + .chatbot-tooltip {
             opacity: 1;
+            transform: translateY(-5px);
         }
 
         /* Downloads - Additional styles */
@@ -927,6 +1033,36 @@
                 font-size: 1rem;
                 margin-bottom: 1.5rem;
             }
+
+            .chatbot-title {
+                font-size: 2rem;
+            }
+
+            .chatbot-description {
+                font-size: 1rem;
+            }
+
+            .chatbot-features {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .chatbot-main-button {
+                font-size: 1.1rem;
+                padding: 1.2rem 2rem;
+            }
+
+            .chatbot-button {
+                width: 70px;
+                height: 70px;
+                bottom: 20px;
+                right: 20px;
+            }
+
+            .chatbot-button svg {
+                width: 35px;
+                height: 35px;
+            }
         }
     </style>
 </head>
@@ -950,6 +1086,7 @@
                 <li><a href="#profesores">Profesores</a></li>
                 <li><a href="#destacado">Nadador Destacado</a></li>
                 <li><a href="#galeria">Galería</a></li>
+                <li><a href="#asistente">Asistente Virtual</a></li>
                 <li><a href="#descargas">Descargas</a></li>
                 <li><a href="#contacto">Contacto</a></li>
             </ul>
@@ -1223,6 +1360,42 @@
                         <img src="img/galeria8.png" alt="Nuestros elementos institucionales">
                     </div>
                 </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección del Asistente Virtual -->
+    <section class="chatbot-section" id="asistente">
+        <div class="container">
+            <div class="chatbot-content">
+                <h2 class="chatbot-title">🤖 Conoce a NatalIA</h2>
+                <p class="chatbot-description">
+                    Nuestro asistente virtual inteligente está aquí para ayudarte las 24 horas. 
+                    NatalIA puede resolver tus dudas sobre reglamentos, inscripciones, horarios y mucho más.
+                </p>
+                
+                <div class="chatbot-features">
+                    <div class="chatbot-feature">
+                        <h4>📋 Información de Reglamentos</h4>
+                        <p>Consulta todas las normas y políticas de la escuela</p>
+                    </div>
+                    <div class="chatbot-feature">
+                        <h4>📅 Horarios y Reposiciones</h4>
+                        <p>Conoce horarios disponibles y cómo reponer clases</p>
+                    </div>
+                    <div class="chatbot-feature">
+                        <h4>💳 Inscripciones y Pagos</h4>
+                        <p>Información sobre costos, descuentos y métodos de pago</p>
+                    </div>
+                    <div class="chatbot-feature">
+                        <h4>🏊‍♂️ Programas y Niveles</h4>
+                        <p>Descubre cuál es el programa ideal para ti</p>
+                    </div>
+                </div>
+
+                <a href="https://chatbootmnm.streamlit.app/" target="_blank" rel="noopener noreferrer" class="chatbot-main-button">
+                    Chatear con NatalIA
+                </a>
             </div>
         </div>
     </section>

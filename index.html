@@ -534,8 +534,13 @@
 
         .checkbox-label input[type="checkbox"] {
             width: auto;
-            margin-right: 0.5rem;
-            margin-top: 0.2rem;
+            margin-right: 8px;
+            margin-top: 2px;
+            transform: scale(1.2);
+        }
+
+        .checkbox-text {
+            color: #555;
         }
 
         .pqrs-submit-btn {
@@ -2472,6 +2477,15 @@
                     <label for="documento">Número de Documento</label>
                     <input type="text" id="documento" name="documento" placeholder="Ej: 1234567890" required>
                 </div>
+                <div class="form-group">
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="aceptarTratamiento" name="aceptarTratamiento" required>
+                            <span class="checkmark"></span>
+                            <span class="checkbox-text">Autorizo el tratamiento de mis datos personales según la Ley 1581 de 2012</span>
+                        </label>
+                    </div>
+                </div>
                 <button type="submit" class="submit-button">Buscar Notas en Todos los Niveles</button>
             </form>
             <div id="resultadoBusqueda" class="resultado-busqueda" style="display: none;">
@@ -2864,13 +2878,24 @@
                 doc.setFontSize(10);
                 doc.text(`Fecha de generación: ${new Date().toLocaleDateString()}`, 20, 45);
                 
+                // Nota de autorización de datos
+                doc.setFontSize(8);
+                doc.setFont("helvetica", "italic");
+                const textoAutorizacion = "NOTA: Al descargar este documento acepto la autorización del tratamiento de mis datos personales según la Ley 1581 de 2012";
+                const lineasAutorizacion = doc.splitTextToSize(textoAutorizacion, 170);
+                doc.text(lineasAutorizacion, 20, 52);
+                
+                // Restaurar fuente
+                doc.setFont("helvetica", "normal");
+                
                 // Línea separadora
-                doc.line(20, 50, 190, 50);
+                const nuevaYLinea = 52 + (lineasAutorizacion.length * 4) + 5;
+                doc.line(20, nuevaYLinea, 190, nuevaYLinea);
                 
                 // Agregar pie de página en primera página
                 agregarPieDePagina();
                 
-                let yPosition = 65;
+                let yPosition = nuevaYLinea + 10;
 
                 // Iterar sobre todos los registros encontrados
                 for (let r = 0; r < datosEncontrados.length; r++) {
@@ -2997,9 +3022,15 @@
             e.preventDefault();
             
             const documento = document.getElementById('documento').value.trim();
+            const aceptarTratamiento = document.getElementById('aceptarTratamiento').checked;
             
             if (!documento) {
                 alert('Por favor ingresa el número de documento');
+                return;
+            }
+
+            if (!aceptarTratamiento) {
+                alert('Debes autorizar el tratamiento de datos personales para continuar');
                 return;
             }
 

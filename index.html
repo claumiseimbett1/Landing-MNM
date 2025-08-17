@@ -1341,29 +1341,29 @@
             }
 
             .announcements-track {
-                animation: slide 3s linear infinite;
-                /* Asegurar que todos los anuncios se vean */
-                width: calc(100% + 4rem);
-                margin-left: -2rem;
+                animation: slide 2.5s linear infinite;
+                /* Optimizar para mostrar múltiples anuncios */
+                width: calc(100% + 3rem);
+                margin-left: -1.5rem;
             }
 
             .announcement-item {
-                padding: 0 1rem;
+                padding: 0 0.8rem;
                 line-height: 1.1;
                 font-size: 0.85rem;
-                /* Asegurar que el anuncio se vea completo */
-                min-width: 75vw;
-                max-width: 80vw;
+                /* Reducir ancho para mostrar más anuncios */
+                min-width: 45vw;
+                max-width: 50vw;
             }
 
             .announcement-title {
-                font-size: 0.85rem;
-                line-height: 1;
+                font-size: 0.8rem;
+                line-height: 0.95;
             }
 
             .announcement-subtitle {
-                font-size: 0.65rem;
-                line-height: 1;
+                font-size: 0.6rem;
+                line-height: 0.95;
             }
 
             /* Pausar animación al tocar en móvil */
@@ -2121,7 +2121,7 @@
 
             // Ajustar velocidad según el tamaño de pantalla
             if (window.innerWidth <= 480) {
-                announcementsTrack.style.animationDuration = '3s';
+                announcementsTrack.style.animationDuration = '2.5s';
             } else if (window.innerWidth <= 768) {
                 announcementsTrack.style.animationDuration = '4s';
             }
@@ -2131,7 +2131,7 @@
         window.addEventListener('resize', () => {
             const currentWidth = window.innerWidth;
             if (currentWidth <= 480) {
-                announcementsTrack.style.animationDuration = '3s';
+                announcementsTrack.style.animationDuration = '2.5s';
             } else if (currentWidth <= 768) {
                 announcementsTrack.style.animationDuration = '4s';
             } else {

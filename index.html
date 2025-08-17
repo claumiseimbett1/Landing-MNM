@@ -2466,22 +2466,13 @@
     <section class="section downloads" id="descargas">
         <div class="container">
             <h2 class="section-title">Descarga de Notas</h2>
-            <p class="download-description">Ingresa tu número de documento para descargar tu reporte de progreso y notas</p>
+            <p class="download-description">Ingresa tu número de documento para buscar todas tus evaluaciones en los niveles I, II y III</p>
             <form class="download-form" id="downloadForm">
                 <div class="form-group">
                     <label for="documento">Número de Documento</label>
                     <input type="text" id="documento" name="documento" placeholder="Ej: 1234567890" required>
                 </div>
-                <div class="form-group">
-                    <label for="nivel">Nivel</label>
-                    <select id="nivel" name="nivel" required>
-                        <option value="">Selecciona tu nivel</option>
-                        <option value="NIVEL 1">Nivel 1</option>
-                        <option value="NIVEL 2">Nivel 2</option>
-                        <option value="NIVEL 3">Nivel 3</option>
-                    </select>
-                </div>
-                <button type="submit" class="submit-button">Buscar y Descargar Notas</button>
+                <button type="submit" class="submit-button">Buscar Notas en Todos los Niveles</button>
             </form>
             <div id="resultadoBusqueda" class="resultado-busqueda" style="display: none;">
                 <h3>Información Encontrada:</h3>
@@ -2489,7 +2480,7 @@
                 <button id="generarPDF" class="submit-button" style="margin-top: 15px;">Generar PDF</button>
             </div>
             <div id="mensajeError" class="mensaje-error" style="display: none;">
-                <p>No se encontraron datos para el documento ingresado en el nivel seleccionado.</p>
+                <p>No se encontraron datos para el documento ingresado en ninguno de los niveles (I, II, III).</p>
             </div>
         </div>
     </section>
@@ -2711,17 +2702,17 @@
             }
         }
 
-        // Buscar estudiante por documento en el nivel especificado
-        function buscarEstudiante(documento, nivel) {
+        // Buscar estudiante por documento en un nivel específico
+        function buscarEstudianteEnNivel(documento, nivel) {
             if (!workbook) {
                 console.error('Archivo Excel no cargado');
-                return null;
+                return [];
             }
 
             const sheet = workbook.Sheets[nivel];
             if (!sheet) {
                 console.error(`Hoja ${nivel} no encontrada`);
-                return null;
+                return [];
             }
 
             const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
@@ -2733,12 +2724,26 @@
                     resultados.push({
                         fila: i + 1,
                         datos: data[i],
-                        encabezados: data[0]
+                        encabezados: data[0],
+                        nivel: nivel
                     });
                 }
             }
             
-            return resultados.length > 0 ? resultados : null;
+            return resultados;
+        }
+
+        // Buscar estudiante por documento en todos los niveles
+        function buscarEstudianteEnTodosLosNiveles(documento) {
+            const niveles = ['NIVEL 1', 'NIVEL 2', 'NIVEL 3'];
+            let todosLosResultados = [];
+            
+            for (const nivel of niveles) {
+                const resultados = buscarEstudianteEnNivel(documento, nivel);
+                todosLosResultados = todosLosResultados.concat(resultados);
+            }
+            
+            return todosLosResultados.length > 0 ? todosLosResultados : null;
         }
 
         // Mostrar datos del estudiante
@@ -2760,6 +2765,7 @@
                 
                 // Información básica del estudiante
                 html += '<h4>Información del Estudiante:</h4>';
+                html += `<p><strong>Hoja/Nivel:</strong> ${resultado.nivel || 'N/A'}</p>`;
                 html += `<p><strong>Nivel:</strong> ${datos[1] || 'N/A'}</p>`;
                 html += `<p><strong>Mes:</strong> ${datos[2] || 'N/A'}</p>`;
                 html += `<p><strong>Nombre:</strong> ${datos[4] || 'N/A'}</p>`;
@@ -2859,6 +2865,8 @@
                 
                 doc.setFontSize(12);
                 doc.setFont("helvetica", "normal");
+                doc.text(`Hoja/Nivel: ${resultado.nivel || 'N/A'}`, 20, yPosition);
+                yPosition += 8;
                 doc.text(`Nivel: ${datos[1] || 'N/A'}`, 20, yPosition);
                 yPosition += 8;
                 doc.text(`Mes: ${datos[2] || 'N/A'}`, 20, yPosition);
@@ -2950,10 +2958,9 @@
             e.preventDefault();
             
             const documento = document.getElementById('documento').value.trim();
-            const nivel = document.getElementById('nivel').value;
             
-            if (!documento || !nivel) {
-                alert('Por favor completa todos los campos');
+            if (!documento) {
+                alert('Por favor ingresa el número de documento');
                 return;
             }
 
@@ -2966,18 +2973,18 @@
                 await cargarArchivoExcel();
             }
             
-            // Buscar estudiante
-            const resultados = buscarEstudiante(documento, nivel);
+            // Buscar estudiante en todos los niveles
+            const resultados = buscarEstudianteEnTodosLosNiveles(documento);
             
             if (resultados) {
                 datosEncontrados = resultados;
                 mostrarDatosEstudiante(resultados);
                 document.getElementById('resultadoBusqueda').style.display = 'block';
                 
-                // Actualizar el mensaje si hay múltiples registros
+                // Actualizar el mensaje con el total de registros encontrados
                 const tituloResultado = document.querySelector('#resultadoBusqueda h3');
                 if (resultados.length > 1) {
-                    tituloResultado.textContent = `Se encontraron ${resultados.length} registros:`;
+                    tituloResultado.textContent = `Se encontraron ${resultados.length} registros en todos los niveles:`;
                 } else {
                     tituloResultado.textContent = 'Información Encontrada:';
                 }

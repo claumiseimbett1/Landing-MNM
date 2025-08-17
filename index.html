@@ -225,7 +225,7 @@
 
         .announcements-track {
             display: flex;
-            animation: slide 25s linear infinite;
+            animation: slide 18s linear infinite;
             align-items: center;
         }
 
@@ -244,13 +244,13 @@
 
         .announcement-title {
             display: block;
-            font-size: 1.2rem;
-            margin-bottom: 0.2rem;
+            font-size: 1.4rem;
+            margin-bottom: 0.1rem;
         }
 
         .announcement-subtitle {
             display: block;
-            font-size: 1rem;
+            font-size: 0.9rem;
             opacity: 0.9;
         }
 
@@ -1122,15 +1122,15 @@
             }
 
             .announcement-title {
-                font-size: 1rem;
+                font-size: 1.2rem;
             }
 
             .announcement-subtitle {
-                font-size: 0.9rem;
+                font-size: 0.8rem;
             }
 
             .announcements-track {
-                animation: slide 20s linear infinite;
+                animation: slide 15s linear infinite;
             }
 
             /* Alternar galerías en tablet */
@@ -1214,15 +1214,15 @@
             }
 
             .announcement-title {
-                font-size: 0.9rem;
+                font-size: 1rem;
             }
 
             .announcement-subtitle {
-                font-size: 0.8rem;
+                font-size: 0.75rem;
             }
 
             .announcements-track {
-                animation: slide 18s linear infinite;
+                animation: slide 12s linear infinite;
             }
 
             /* Pausar animación al tocar en móvil */
@@ -1320,8 +1320,8 @@
     <section class="announcements">
         <div class="announcements-track">
             <div class="announcement-item">
-                <span class="announcement-title">🏊‍♂️ ¡Inscripciones abiertas para clases de natación Septiembre</span>
-                <span class="announcement-subtitle">2025!</span>
+                <span class="announcement-title">🏊‍♂️ ¡Inscripciones abiertas clases de natación </span>
+                <span class="announcement-subtitle">Septiembre 2025!</span>
             </div>
             <div class="announcement-item">
                 <span class="announcement-title">🏆 Próxima competencia 23 de Agosto de 2025</span>
@@ -1329,24 +1329,24 @@
             </div>
             <div class="announcement-item">
                 <span class="announcement-title">👶 Natación MasterKids</span>
-                <span class="announcement-subtitle">Programa especial para niños desde 5 años</span>
+                <span class="announcement-subtitle">Especial para niños desde 5 años</span>
             </div>
             <div class="announcement-item">
                 <span class="announcement-title">💪 Descuentos especiales por pronto pago</span>
                 <span class="announcement-subtitle">¡Consulta condiciones!</span>
             </div>
             <div class="announcement-item">
-                <span class="announcement-title">🎯 Proximamente disponible la "Descarga de Notas"</span>
-                <span class="announcement-subtitle">de tu puntaje del nivel en el mes</span>
+                <span class="announcement-title">🎯 Proximamente "Descarga de Notas"</span>
+                <span class="announcement-subtitle">Conoce tu puntaje de nivel en el mes</span>
             </div>
             <div class="announcement-item">
                 <span class="announcement-title">🏊‍♂️ Preguntale a nuestro Asistente Virtual NatalIA</span>
-                <span class="announcement-subtitle">tus dudas acerca de reglamento, reposiciones e inscripciones</span>
+                <span class="announcement-subtitle">dudas del reglamento, reposiciones e inscripciones</span>
             </div>
             <!-- Duplicamos los anuncios para loop continuo -->
             <div class="announcement-item">
-                <span class="announcement-title">🏊‍♂️ ¡Inscripciones abiertas para clases de natación Septiembre</span>
-                <span class="announcement-subtitle">2025!</span>
+                <span class="announcement-title">🏊‍♂️ ¡Inscripciones abiertas clases de natación </span>
+                <span class="announcement-subtitle">Septiembre 2025!</span>
             </div>
             <div class="announcement-item">
                 <span class="announcement-title">🏆 Próxima competencia 23 de Agosto de 2025</span>
@@ -1354,19 +1354,19 @@
             </div>
             <div class="announcement-item">
                 <span class="announcement-title">👶 Natación MasterKids</span>
-                <span class="announcement-subtitle">Programa especial para niños desde 5 años</span>
+                <span class="announcement-subtitle">Especial para niños desde 5 años</span>
             </div>
             <div class="announcement-item">
                 <span class="announcement-title">💪 Descuentos especiales por pronto pago</span>
                 <span class="announcement-subtitle">¡Consulta condiciones!</span>
             </div>
             <div class="announcement-item">
-                <span class="announcement-title">🎯 Proximamente disponible la "Descarga de Notas"</span>
-                <span class="announcement-subtitle">de tu puntaje del nivel en el mes</span>
+                <span class="announcement-title">🎯 Proximamente "Descarga de Notas"</span>
+                <span class="announcement-subtitle">Conoce tu puntaje de nivel en el mes</span>
             </div>
             <div class="announcement-item">
                 <span class="announcement-title">🏊‍♂️ Preguntale a nuestro Asistente Virtual NatalIA</span>
-                <span class="announcement-subtitle">tus dudas acerca de reglamento, reposiciones e inscripciones</span>
+                <span class="announcement-subtitle">dudas del reglamento, reposiciones e inscripciones</span>
             </div>
         </div>
     </section>
@@ -1906,9 +1906,9 @@
 
             // Ajustar velocidad según el tamaño de pantalla
             if (window.innerWidth <= 480) {
-                announcementsTrack.style.animationDuration = '18s';
+                announcementsTrack.style.animationDuration = '12s';
             } else if (window.innerWidth <= 768) {
-                announcementsTrack.style.animationDuration = '20s';
+                announcementsTrack.style.animationDuration = '15s';
             }
         }
 
@@ -1916,11 +1916,11 @@
         window.addEventListener('resize', () => {
             const currentWidth = window.innerWidth;
             if (currentWidth <= 480) {
-                announcementsTrack.style.animationDuration = '18s';
+                announcementsTrack.style.animationDuration = '12s';
             } else if (currentWidth <= 768) {
-                announcementsTrack.style.animationDuration = '20s';
+                announcementsTrack.style.animationDuration = '15s';
             } else {
-                announcementsTrack.style.animationDuration = '25s';
+                announcementsTrack.style.animationDuration = '18s';
             }
         });
 

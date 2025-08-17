@@ -2765,7 +2765,6 @@
                 
                 // Información básica del estudiante
                 html += '<h4>Información del Estudiante:</h4>';
-                html += `<p><strong>Hoja/Nivel:</strong> ${resultado.nivel || 'N/A'}</p>`;
                 html += `<p><strong>Nivel:</strong> ${datos[1] || 'N/A'}</p>`;
                 html += `<p><strong>Mes:</strong> ${datos[2] || 'N/A'}</p>`;
                 html += `<p><strong>Nombre:</strong> ${datos[4] || 'N/A'}</p>`;
@@ -2799,10 +2798,9 @@
                 }
                 
                 // Nota de cambio de nivel (columna O, índice 14)
-                if (datos[14] !== undefined && datos[14] !== null && datos[14] !== '') {
-                    html += '<h4>Evaluación de Nivel:</h4>';
-                    html += `<p><strong>${encabezados[14] || 'Cambio de Nivel'}:</strong> ${datos[14]}</p>`;
-                }
+                html += '<h4>Evaluación de Nivel:</h4>';
+                const cambioNivel = (datos[14] !== undefined && datos[14] !== null && datos[14] !== '') ? datos[14] : 'NO';
+                html += `<p><strong>${encabezados[14] || 'Cambio de Nivel'}:</strong> ${cambioNivel}</p>`;
                 
                 html += '</div>';
             }
@@ -2820,87 +2818,142 @@
             // Configurar fuente
             doc.setFont("helvetica");
             
-            // Título
-            doc.setFontSize(18);
-            doc.text('Reporte de Notas - Montería Natación Master', 20, 30);
+            // Función para agregar logos (se convertirán automáticamente a base64)
+            async function agregarLogos() {
+                try {
+                    // Cargar y agregar logo principal MNM
+                    const logoMNM = await fetch('./logo/MNM.png');
+                    const logoMNMBlob = await logoMNM.blob();
+                    const logoMNMBase64 = await new Promise(resolve => {
+                        const reader = new FileReader();
+                        reader.onload = () => resolve(reader.result);
+                        reader.readAsDataURL(logoMNMBlob);
+                    });
+                    
+                    // Agregar logo MNM (lado izquierdo)
+                    doc.addImage(logoMNMBase64, 'PNG', 15, 10, 25, 25);
+                    
+                    // Cargar y agregar logo amarillo
+                    const logoAmarillo = await fetch('./logo/LOGO-AMARILLO.png');
+                    const logoAmarilloBlob = await logoAmarillo.blob();
+                    const logoAmarilloBase64 = await new Promise(resolve => {
+                        const reader = new FileReader();
+                        reader.onload = () => resolve(reader.result);
+                        reader.readAsDataURL(logoAmarilloBlob);
+                    });
+                    
+                    // Agregar logo amarillo (lado derecho)
+                    doc.addImage(logoAmarilloBase64, 'PNG', 155, 10, 25, 25);
+                    
+                } catch (error) {
+                    console.log('No se pudieron cargar los logos:', error);
+                }
+            }
             
-            // Fecha
-            doc.setFontSize(10);
-            doc.text(`Fecha de generación: ${new Date().toLocaleDateString()}`, 20, 45);
+            // Agregar logos al inicio
+            agregarLogos().then(() => {
+                // Continuar con el resto del PDF
+                generarContenidoPDF();
+            }).catch(() => {
+                // Si falla la carga de logos, continuar sin ellos
+                generarContenidoPDF();
+            });
             
-            // Línea separadora
-            doc.line(20, 50, 190, 50);
-            
-            let yPosition = 65;
+            function generarContenidoPDF() {
+                // Título
+                doc.setFontSize(18);
+                doc.text('Reporte de Notas - Montería Natación Master', 45, 25);
+                
+                // Fecha
+                doc.setFontSize(10);
+                doc.text(`Fecha de generación: ${new Date().toLocaleDateString()}`, 20, 45);
+                
+                // Línea separadora
+                doc.line(20, 50, 190, 50);
+                
+                    let yPosition = 65;
 
-            // Iterar sobre todos los registros encontrados
-            for (let r = 0; r < datosEncontrados.length; r++) {
-                const resultado = datosEncontrados[r];
-                const datos = resultado.datos;
-                const encabezados = resultado.encabezados;
-                
-                // Si hay múltiples registros, agregar separación
-                if (r > 0) {
-                    if (yPosition > 200) {
-                        doc.addPage();
-                        yPosition = 30;
-                    } else {
-                        yPosition += 20;
-                        doc.line(20, yPosition - 10, 190, yPosition - 10);
+                // Iterar sobre todos los registros encontrados
+                for (let r = 0; r < datosEncontrados.length; r++) {
+                    const resultado = datosEncontrados[r];
+                    const datos = resultado.datos;
+                    const encabezados = resultado.encabezados;
+                    
+                    // Si hay múltiples registros, agregar separación
+                    if (r > 0) {
+                        if (yPosition > 200) {
+                            doc.addPage();
+                            yPosition = 30;
+                        } else {
+                            yPosition += 20;
+                            doc.line(20, yPosition - 10, 190, yPosition - 10);
+                        }
                     }
-                }
+                    
+                    if (datosEncontrados.length > 1) {
+                        doc.setFontSize(16);
+                        doc.setFont("helvetica", "bold");
+                        doc.text(`Registro ${r + 1} de ${datosEncontrados.length}`, 20, yPosition);
+                        yPosition += 15;
+                    }
                 
-                if (datosEncontrados.length > 1) {
-                    doc.setFontSize(16);
+                    // Información básica del estudiante
+                    doc.setFontSize(14);
                     doc.setFont("helvetica", "bold");
-                    doc.text(`Registro ${r + 1} de ${datosEncontrados.length}`, 20, yPosition);
+                    doc.text('Información del Estudiante:', 20, yPosition);
+                    yPosition += 10;
+                    
+                    doc.setFontSize(12);
+                    doc.setFont("helvetica", "normal");
+                    doc.text(`Nivel: ${datos[1] || 'N/A'}`, 20, yPosition);
+                    yPosition += 8;
+                    doc.text(`Mes: ${datos[2] || 'N/A'}`, 20, yPosition);
+                    yPosition += 8;
+                    doc.text(`Nombre: ${datos[4] || 'N/A'}`, 20, yPosition);
+                    yPosition += 8;
+                    doc.text(`Documento: ${datos[5] || 'N/A'}`, 20, yPosition);
                     yPosition += 15;
-                }
-            
-                // Información básica del estudiante
-                doc.setFontSize(14);
-                doc.setFont("helvetica", "bold");
-                doc.text('Información del Estudiante:', 20, yPosition);
-                yPosition += 10;
-                
-                doc.setFontSize(12);
-                doc.setFont("helvetica", "normal");
-                doc.text(`Hoja/Nivel: ${resultado.nivel || 'N/A'}`, 20, yPosition);
-                yPosition += 8;
-                doc.text(`Nivel: ${datos[1] || 'N/A'}`, 20, yPosition);
-                yPosition += 8;
-                doc.text(`Mes: ${datos[2] || 'N/A'}`, 20, yPosition);
-                yPosition += 8;
-                doc.text(`Nombre: ${datos[4] || 'N/A'}`, 20, yPosition);
-                yPosition += 8;
-                doc.text(`Documento: ${datos[5] || 'N/A'}`, 20, yPosition);
-                yPosition += 15;
-                
-                // Notas de evaluación con nombres específicos
-                doc.setFontSize(14);
-                doc.setFont("helvetica", "bold");
-                doc.text('Notas de Evaluación:', 20, yPosition);
-                yPosition += 10;
-                
-                // Definir los nombres de las columnas de evaluación
-                const nombresEvaluacion = [
-                    'AMBIENTACIÓN',
-                    'FLOTACIÓN DEFENSIVA', 
-                    'PATADA CROL',
-                    'PATADA ESPALDA',
-                    'ENS. CROL',
-                    'ENS ESPALDA',
-                    'SALTO'
-                ];
-                
-                doc.setFontSize(12);
-                doc.setFont("helvetica", "normal");
-                
-                // Mostrar notas de evaluación (columnas G a M, índices 6 a 12)
-                for (let i = 6; i <= 12; i++) {
-                    const nombreEvaluacion = nombresEvaluacion[i - 6];
-                    if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
-                        const texto = `${nombreEvaluacion}: ${datos[i]}`;
+                    
+                    // Notas de evaluación con nombres específicos
+                    doc.setFontSize(14);
+                    doc.setFont("helvetica", "bold");
+                    doc.text('Notas de Evaluación:', 20, yPosition);
+                    yPosition += 10;
+                    
+                    // Definir los nombres de las columnas de evaluación
+                    const nombresEvaluacion = [
+                        'AMBIENTACIÓN',
+                        'FLOTACIÓN DEFENSIVA', 
+                        'PATADA CROL',
+                        'PATADA ESPALDA',
+                        'ENS. CROL',
+                        'ENS ESPALDA',
+                        'SALTO'
+                    ];
+                    
+                    doc.setFontSize(12);
+                    doc.setFont("helvetica", "normal");
+                    
+                    // Mostrar notas de evaluación (columnas G a M, índices 6 a 12)
+                    for (let i = 6; i <= 12; i++) {
+                        const nombreEvaluacion = nombresEvaluacion[i - 6];
+                        if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
+                            const texto = `${nombreEvaluacion}: ${datos[i]}`;
+                            const lineas = doc.splitTextToSize(texto, 170);
+                            doc.text(lineas, 20, yPosition);
+                            yPosition += lineas.length * 8;
+                            
+                            // Nueva página si es necesario
+                            if (yPosition > 250) {
+                                doc.addPage();
+                                yPosition = 30;
+                            }
+                        }
+                    }
+                    
+                    // Pase de Nivel (columna N, índice 13)
+                    if (datos[13] !== undefined && datos[13] !== null && datos[13] !== '') {
+                        const texto = `Pase de Nivel 4,7 ptos: ${datos[13]}`;
                         const lineas = doc.splitTextToSize(texto, 170);
                         doc.text(lineas, 20, yPosition);
                         yPosition += lineas.length * 8;
@@ -2911,24 +2964,8 @@
                             yPosition = 30;
                         }
                     }
-                }
-                
-                // Pase de Nivel (columna N, índice 13)
-                if (datos[13] !== undefined && datos[13] !== null && datos[13] !== '') {
-                    const texto = `Pase de Nivel 4,7 ptos: ${datos[13]}`;
-                    const lineas = doc.splitTextToSize(texto, 170);
-                    doc.text(lineas, 20, yPosition);
-                    yPosition += lineas.length * 8;
                     
-                    // Nueva página si es necesario
-                    if (yPosition > 250) {
-                        doc.addPage();
-                        yPosition = 30;
-                    }
-                }
-                
-                // Nota de cambio de nivel (columna O, índice 14)
-                if (datos[14] !== undefined && datos[14] !== null && datos[14] !== '') {
+                    // Nota de cambio de nivel (columna O, índice 14)
                     yPosition += 10;
                     doc.setFontSize(14);
                     doc.setFont("helvetica", "bold");
@@ -2938,19 +2975,20 @@
                     doc.setFontSize(12);
                     doc.setFont("helvetica", "normal");
                     const nombreCampo = encabezados[14] || 'Cambio de Nivel';
-                    doc.text(`${nombreCampo}: ${datos[14]}`, 20, yPosition);
+                    const cambioNivelPDF = (datos[14] !== undefined && datos[14] !== null && datos[14] !== '') ? datos[14] : 'NO';
+                    doc.text(`${nombreCampo}: ${cambioNivelPDF}`, 20, yPosition);
                     yPosition += 15;
                 }
+                
+                // Pie de página
+                doc.setFontSize(8);
+                doc.text('Montería Natación Master - Sistema de Notas', 20, 285);
+                
+                // Descargar PDF
+                const primerDato = datosEncontrados[0].datos;
+                const nombreArchivo = `notas_${primerDato[5] || 'estudiante'}_${new Date().toISOString().split('T')[0]}.pdf`;
+                doc.save(nombreArchivo);
             }
-            
-            // Pie de página
-            doc.setFontSize(8);
-            doc.text('Montería Natación Master - Sistema de Notas', 20, 285);
-            
-            // Descargar PDF
-            const primerDato = datosEncontrados[0].datos;
-            const nombreArchivo = `notas_${primerDato[5] || 'estudiante'}_${new Date().toISOString().split('T')[0]}.pdf`;
-            doc.save(nombreArchivo);
         }
 
         // Manejo del formulario de descarga

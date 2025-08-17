@@ -622,6 +622,60 @@
             transform: translateY(-20px) scale(1.05);
         }
 
+        /* Galería móvil alternativa */
+        .gallery-mobile {
+            display: none;
+            padding: 2rem 0;
+            background: var(--gray-light);
+        }
+
+        .gallery-mobile-container {
+            overflow-x: auto;
+            padding: 1rem 0;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .gallery-mobile-container::-webkit-scrollbar {
+            display: none;
+        }
+
+        .gallery-mobile-track {
+            display: flex;
+            gap: 1rem;
+            padding: 0 1rem;
+            min-width: max-content;
+        }
+
+        .gallery-mobile-card {
+            width: 250px;
+            height: 300px;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            flex-shrink: 0;
+            transition: transform 0.3s;
+        }
+
+        .gallery-mobile-card:active {
+            transform: scale(0.98);
+        }
+
+        .gallery-mobile-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-mobile-hint {
+            text-align: center;
+            color: #666;
+            font-size: 0.9rem;
+            margin-top: 1rem;
+            font-style: italic;
+        }
+
         /* Descargas */
         .downloads {
             background: white;
@@ -1079,6 +1133,15 @@
                 animation: slide 20s linear infinite;
             }
 
+            /* Alternar galerías en tablet */
+            .gallery {
+                display: none;
+            }
+
+            .gallery-mobile {
+                display: block;
+            }
+
             .enrollment-button {
                 font-size: 1.2rem;
                 padding: 1.2rem 2rem;
@@ -1117,6 +1180,25 @@
             .chatbot-button svg {
                 width: 35px;
                 height: 35px;
+            }
+
+            /* Alternar galerías en móvil */
+            .gallery {
+                display: none;
+            }
+
+            .gallery-mobile {
+                display: block;
+            }
+
+            .gallery-mobile-card {
+                width: 200px;
+                height: 240px;
+            }
+
+            .gallery-mobile-hint {
+                font-size: 0.8rem;
+                padding: 0 1rem;
             }
         }
 
@@ -1531,6 +1613,42 @@
         </div>
     </section>
 
+    <!-- Galería Móvil -->
+    <section class="gallery-mobile" id="galeria-mobile">
+        <div class="container">
+            <h2 class="section-title">Galería</h2>
+            <div class="gallery-mobile-container">
+                <div class="gallery-mobile-track">
+                    <div class="gallery-mobile-card">
+                        <img src="img/galeria1.jpg" alt="Entrenamiento de natación">
+                    </div>
+                    <div class="gallery-mobile-card">
+                        <img src="img/galeria2.jpg" alt="Competencia local">
+                    </div>
+                    <div class="gallery-mobile-card">
+                        <img src="img/galeria3.jpg" alt="Competencia Masterkids">
+                    </div>
+                    <div class="gallery-mobile-card">
+                        <img src="img/galeria4.jpg" alt="Premiación">
+                    </div>
+                    <div class="gallery-mobile-card">
+                        <img src="img/galeria5.jpg" alt="Clase del mar">
+                    </div>
+                    <div class="gallery-mobile-card">
+                        <img src="img/galeria6.jpg" alt="Nuestras boyas para nado en el mar">
+                    </div>
+                    <div class="gallery-mobile-card">
+                        <img src="img/galeria7.jpg" alt="Nuestra bandera">
+                    </div>
+                    <div class="gallery-mobile-card">
+                        <img src="img/galeria8.png" alt="Nuestros elementos institucionales">
+                    </div>
+                </div>
+            </div>
+            <p class="gallery-mobile-hint">👈 Desliza horizontalmente para ver más fotos</p>
+        </div>
+    </section>
+
     <!-- Sección del Asistente Virtual -->
     <section class="chatbot-section" id="asistente">
         <div class="container">
@@ -1805,6 +1923,31 @@
                 announcementsTrack.style.animationDuration = '25s';
             }
         });
+
+        // Optimización para galería móvil
+        const galleryMobileContainer = document.querySelector('.gallery-mobile-container');
+        const galleryMobileHint = document.querySelector('.gallery-mobile-hint');
+
+        if (galleryMobileContainer && window.innerWidth <= 768) {
+            let isScrolling = false;
+
+            galleryMobileContainer.addEventListener('scroll', () => {
+                if (!isScrolling) {
+                    galleryMobileHint.style.opacity = '0.5';
+                    isScrolling = true;
+                }
+
+                // Ocultar hint después de scroll
+                clearTimeout(galleryMobileContainer.scrollTimeout);
+                galleryMobileContainer.scrollTimeout = setTimeout(() => {
+                    galleryMobileHint.style.opacity = '1';
+                    isScrolling = false;
+                }, 1500);
+            });
+
+            // Scroll suave con momentum en iOS
+            galleryMobileContainer.style.webkitOverflowScrolling = 'touch';
+        }
     </script>
 </body>
 </html>

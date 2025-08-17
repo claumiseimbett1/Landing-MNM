@@ -2860,6 +2860,14 @@
             });
             
             function generarContenidoPDF() {
+                // Función auxiliar para agregar pie de página
+                function agregarPieDePagina() {
+                    const fontSize = doc.getFontSize();
+                    doc.setFontSize(8);
+                    doc.text('Montería Natación Master - Sistema de Notas', 20, 285);
+                    doc.setFontSize(fontSize); // Restaurar tamaño original
+                }
+                
                 // Título
                 doc.setFontSize(18);
                 doc.text('Reporte de Notas - Montería Natación Master', 45, 25);
@@ -2871,7 +2879,10 @@
                 // Línea separadora
                 doc.line(20, 50, 190, 50);
                 
-                    let yPosition = 65;
+                // Agregar pie de página en primera página
+                agregarPieDePagina();
+                
+                let yPosition = 65;
 
                 // Iterar sobre todos los registros encontrados
                 for (let r = 0; r < datosEncontrados.length; r++) {
@@ -2883,6 +2894,8 @@
                     if (r > 0) {
                         if (yPosition > 200) {
                             doc.addPage();
+                            // Agregar pie de página en nueva página
+                            agregarPieDePagina();
                             yPosition = 30;
                         } else {
                             yPosition += 20;
@@ -2946,6 +2959,8 @@
                             // Nueva página si es necesario
                             if (yPosition > 250) {
                                 doc.addPage();
+                                // Agregar pie de página en nueva página
+                                agregarPieDePagina();
                                 yPosition = 30;
                             }
                         }
@@ -2961,6 +2976,8 @@
                         // Nueva página si es necesario
                         if (yPosition > 250) {
                             doc.addPage();
+                            // Agregar pie de página en nueva página
+                            agregarPieDePagina();
                             yPosition = 30;
                         }
                     }
@@ -2979,10 +2996,6 @@
                     doc.text(`${nombreCampo}: ${cambioNivelPDF}`, 20, yPosition);
                     yPosition += 15;
                 }
-                
-                // Pie de página
-                doc.setFontSize(8);
-                doc.text('Montería Natación Master - Sistema de Notas', 20, 285);
                 
                 // Descargar PDF
                 const primerDato = datosEncontrados[0].datos;

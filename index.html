@@ -2379,7 +2379,7 @@
             <h2 class="section-title">PQRS - Peticiones, Quejas, Reclamos y Sugerencias</h2>
             <p class="pqrs-description">Tu opinión es importante para nosotros. Comparte tus comentarios, sugerencias o inquietudes.</p>
             
-            <form class="pqrs-form" id="pqrsForm" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+            <form class="pqrs-form" id="pqrsForm" action="https://formspree.io/f/xqaloevw" method="POST">
                 <div class="form-row">
                     <div class="form-group">
                         <label for="pqrsName">Nombre Completo *</label>
@@ -2420,10 +2420,10 @@
                 </div>
                 
                 <!-- Campos ocultos para Formspree -->
-                <input type="hidden" name="_to" value="monteriamaster@gmail.com">
                 <input type="hidden" name="_subject" value="Nueva PQRS - Club Montería Natación Master">
-                <input type="hidden" name="_next" value="#pqrs">
+                <input type="hidden" name="_next" value="https://clubnatacionmnm.com/#pqrs">
                 <input type="hidden" name="_language" value="es">
+                <input type="hidden" name="_format" value="plain">
                 
                 <button type="submit" class="submit-button pqrs-submit">
                     <span class="button-text">Enviar PQRS</span>
@@ -2782,32 +2782,15 @@
                 });
                 
                 if (response.ok) {
-                    showResponse('¡Tu PQRS ha sido enviado exitosamente! Nos pondremos en contacto contigo pronto.', 'success');
+                    showResponse('¡Tu PQRS ha sido enviado exitosamente a monteriamaster@gmail.com! Te responderemos pronto. Gracias por contactarnos.', 'success');
                     form.reset();
                 } else {
-                    // Si Formspree no está configurado, usar método alternativo
-                    const emailBody = `
-NUEVA PQRS - ${data.type}
-
-INFORMACIÓN DE CONTACTO:
-Nombre: ${data.name}
-Email: ${data.email}
-Teléfono: ${data.phone || 'No proporcionado'}
-
-TIPO: ${data.type}
-ASUNTO: ${data.subject}
-
-MENSAJE:
-${data.message}
-
----
-Enviado desde: Club Montería Natación Master
-Fecha: ${new Date().toLocaleString('es-ES')}
-                    `.trim();
-                    
-                    const mailtoLink = `mailto:monteriamaster@gmail.com?subject=PQRS: ${data.type} - ${data.subject}&body=${encodeURIComponent(emailBody)}`;
-                    window.location.href = mailtoLink;
-                    showResponse('Se abrirá tu cliente de email para enviar el PQRS. Si no se abre automáticamente, envía tu consulta a monteriamaster@gmail.com', 'success');
+                    const errorData = await response.json();
+                    if (errorData.errors) {
+                        showResponse('Error al enviar: ' + errorData.errors.map(error => error.message).join(', '), 'error');
+                    } else {
+                        showResponse('Error al enviar el formulario. Por favor, verifica todos los campos e intenta nuevamente.', 'error');
+                    }
                 }
             } catch (error) {
                 console.error('Error:', error);

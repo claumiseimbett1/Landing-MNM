@@ -1351,7 +1351,7 @@
             }
 
             .announcements-track {
-                animation: slide 5s linear infinite;
+                animation: slide 18s linear infinite;
                 width: max-content;
                 display: flex;
                 gap: 0;
@@ -2135,7 +2135,7 @@
 
             // Ajustar velocidad según el tamaño de pantalla
             if (window.innerWidth <= 480) {
-                announcementsTrack.style.animationDuration = '5s';
+                announcementsTrack.style.animationDuration = '18s';
             } else if (window.innerWidth <= 768) {
                 announcementsTrack.style.animationDuration = '5s';
             }
@@ -2145,7 +2145,7 @@
         window.addEventListener('resize', () => {
             const currentWidth = window.innerWidth;
             if (currentWidth <= 480) {
-                announcementsTrack.style.animationDuration = '5s';
+                announcementsTrack.style.animationDuration = '18s';
             } else if (currentWidth <= 768) {
                 announcementsTrack.style.animationDuration = '5s';
             } else {

@@ -261,6 +261,135 @@
             100% { transform: translateX(-50%); }
         }
 
+        /* Sección de Ofertas Especiales */
+        .special-offers {
+            background: white;
+            padding: 3rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            display: block;
+            border-top: 3px solid var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
+        }
+
+        .special-offers.hidden {
+            display: none;
+        }
+
+        .offer-content {
+            position: relative;
+            z-index: 2;
+        }
+
+        .countdown-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .countdown-timer {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .time-unit {
+            background: var(--primary-color);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 15px;
+            min-width: 100px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+
+        .time-number {
+            display: block;
+            font-size: 2.5rem;
+            font-weight: bold;
+            line-height: 1;
+        }
+
+        .time-label {
+            display: block;
+            font-size: 0.9rem;
+            margin-top: 0.5rem;
+            opacity: 0.9;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+
+        .offer-details {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .offer-title {
+            color: var(--primary-color);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .offer-description {
+            font-size: 1.2rem;
+            color: var(--text-dark);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .offer-features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .feature {
+            background: var(--gray-light);
+            padding: 1rem;
+            border-radius: 10px;
+            font-weight: bold;
+            color: var(--primary-color);
+            border-left: 4px solid var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .countdown-timer {
+                gap: 1rem;
+            }
+
+            .time-unit {
+                min-width: 80px;
+                padding: 1rem;
+            }
+
+            .time-number {
+                font-size: 2rem;
+            }
+
+            .offer-title {
+                font-size: 1.5rem;
+            }
+
+            .offer-description {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+
+            .offer-features {
+                grid-template-columns: 1fr;
+                padding: 0 1rem;
+            }
+        }
+
         /* Sección de Inscripción */
         .enrollment-section {
             background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
@@ -1408,6 +1537,44 @@
         </div>
     </section>
 
+    <!-- Sección de Ofertas Especiales -->
+    <section class="special-offers" id="ofertas">
+        <div class="container">
+            <h2 class="section-title">🔥 ¡Oferta Especial! 🔥</h2>
+            <div class="offer-content">
+                <div class="countdown-container">
+                    <div class="countdown-timer">
+                        <div class="time-unit">
+                            <span class="time-number" id="days">00</span>
+                            <span class="time-label">Días</span>
+                        </div>
+                        <div class="time-unit">
+                            <span class="time-number" id="hours">00</span>
+                            <span class="time-label">Horas</span>
+                        </div>
+                        <div class="time-unit">
+                            <span class="time-number" id="minutes">00</span>
+                            <span class="time-label">Minutos</span>
+                        </div>
+                        <div class="time-unit">
+                            <span class="time-number" id="seconds">00</span>
+                            <span class="time-label">Segundos</span>
+                        </div>
+                    </div>
+                    <div class="offer-details">
+                        <h3 class="offer-title">💸 ¡MATRÍCULA GRATIS! 💸</h3>
+                        <p class="offer-description">Inscríbete antes del <span id="offer-end-date"></span> y obtén tu matrícula completamente GRATIS</p>
+                        <div class="offer-features">
+                            <div class="feature">✅ Matrícula $0 pesos</div>
+                            <div class="feature">✅ Evaluación física incluida</div>
+                            <div class="feature">✅ Kit de bienvenida</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Sección de Inscripción -->
     <section class="enrollment-section">
         <div class="container">
@@ -1999,6 +2166,68 @@
             // Scroll suave con momentum en iOS
             galleryMobileContainer.style.webkitOverflowScrolling = 'touch';
         }
+
+        // Configuración del contador de ofertas especiales
+        const offerConfig = {
+            enabled: true, // Cambiar a false para ocultar
+            endDate: '2025-09-30', // Fecha fin de la oferta (YYYY-MM-DD)
+            title: '💸 ¡MATRÍCULA GRATIS! 💸',
+            description: 'y obtén tu matrícula completamente GRATIS'
+        };
+
+        // Función para inicializar el contador
+        function initOfferCountdown() {
+            const offerSection = document.querySelector('.special-offers');
+            const offerEndDateSpan = document.getElementById('offer-end-date');
+            
+            if (!offerConfig.enabled) {
+                offerSection.style.display = 'none';
+                return;
+            }
+
+            // Establecer fecha fin en el HTML
+            const endDate = new Date(offerConfig.endDate);
+            offerEndDateSpan.textContent = endDate.toLocaleDateString('es-ES', {
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+
+            // Actualizar título si está configurado
+            const titleElement = document.querySelector('.offer-title');
+            if (titleElement && offerConfig.title) {
+                titleElement.textContent = offerConfig.title;
+            }
+
+            // Función para actualizar el contador
+            function updateCountdown() {
+                const now = new Date().getTime();
+                const target = endDate.getTime();
+                const difference = target - now;
+
+                if (difference > 0) {
+                    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+                    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+                    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+                    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+                    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                } else {
+                    // Oferta expirada
+                    offerSection.style.display = 'none';
+                }
+            }
+
+            // Inicializar y actualizar cada segundo
+            updateCountdown();
+            setInterval(updateCountdown, 1000);
+        }
+
+        // Inicializar contador cuando la página cargue
+        initOfferCountdown();
     </script>
 </body>
 </html>

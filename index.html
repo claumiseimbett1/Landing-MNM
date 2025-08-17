@@ -225,7 +225,7 @@
 
         .announcements-track {
             display: flex;
-            animation: slide 40s linear infinite;
+            animation: slide 25s linear infinite;
             white-space: nowrap;
         }
 
@@ -1054,7 +1054,7 @@
             }
 
             .announcements-track {
-                animation: slide 30s linear infinite;
+                animation: slide 20s linear infinite;
             }
 
             .enrollment-button {
@@ -1111,7 +1111,7 @@
             }
 
             .announcements-track {
-                animation: slide 25s linear infinite;
+                animation: slide 18s linear infinite;
             }
 
             /* Pausar animación al tocar en móvil */
@@ -1723,9 +1723,9 @@
 
             // Ajustar velocidad según el tamaño de pantalla
             if (window.innerWidth <= 480) {
-                announcementsTrack.style.animationDuration = '25s';
+                announcementsTrack.style.animationDuration = '18s';
             } else if (window.innerWidth <= 768) {
-                announcementsTrack.style.animationDuration = '30s';
+                announcementsTrack.style.animationDuration = '20s';
             }
         }
 
@@ -1733,11 +1733,11 @@
         window.addEventListener('resize', () => {
             const currentWidth = window.innerWidth;
             if (currentWidth <= 480) {
-                announcementsTrack.style.animationDuration = '25s';
+                announcementsTrack.style.animationDuration = '18s';
             } else if (currentWidth <= 768) {
-                announcementsTrack.style.animationDuration = '30s';
+                announcementsTrack.style.animationDuration = '20s';
             } else {
-                announcementsTrack.style.animationDuration = '40s';
+                announcementsTrack.style.animationDuration = '25s';
             }
         });
     </script>

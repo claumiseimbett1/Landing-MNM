@@ -1020,9 +1020,17 @@
                 font-size: 0.9rem;
             }
 
+            .announcements {
+                padding: 0.8rem 0;
+            }
+
             .announcement-item {
-                font-size: 1rem;
-                padding: 0 2rem;
+                font-size: 0.9rem;
+                padding: 0 1.5rem;
+            }
+
+            .announcements-track {
+                animation: slide 30s linear infinite;
             }
 
             .enrollment-button {
@@ -1063,6 +1071,68 @@
             .chatbot-button svg {
                 width: 35px;
                 height: 35px;
+            }
+        }
+
+        /* Optimización para pantallas muy pequeñas */
+        @media (max-width: 480px) {
+            .announcements {
+                padding: 0.5rem 0;
+            }
+
+            .announcement-item {
+                font-size: 0.8rem;
+                padding: 0 1rem;
+                line-height: 1.4;
+            }
+
+            .announcements-track {
+                animation: slide 25s linear infinite;
+            }
+
+            /* Pausar animación al tocar en móvil */
+            .announcements:active .announcements-track {
+                animation-play-state: paused;
+            }
+
+            .enrollment-section {
+                padding: 2rem 0;
+            }
+
+            .enrollment-text {
+                font-size: 0.9rem;
+                margin-bottom: 1rem;
+                padding: 0 1rem;
+            }
+
+            .enrollment-button {
+                font-size: 1rem;
+                padding: 1rem 1.5rem;
+                margin: 0 1rem;
+            }
+
+            .chatbot-title {
+                font-size: 1.8rem;
+            }
+
+            .chatbot-description {
+                font-size: 0.9rem;
+                padding: 0 1rem;
+            }
+
+            .chatbot-features {
+                margin: 1.5rem 0;
+                padding: 0 1rem;
+            }
+
+            .chatbot-feature {
+                padding: 1rem;
+            }
+
+            .chatbot-main-button {
+                font-size: 1rem;
+                padding: 1rem 1.5rem;
+                margin: 0 1rem;
             }
         }
     </style>
@@ -1597,6 +1667,55 @@
         });
 
         updateGallery();
+
+        // Optimización para anuncios en móviles
+        const announcementsSection = document.querySelector('.announcements');
+        const announcementsTrack = document.querySelector('.announcements-track');
+        let touchStartY = 0;
+        let touchEndY = 0;
+
+        // Detectar si es dispositivo móvil
+        const isMobile = window.innerWidth <= 768;
+
+        if (isMobile) {
+            // Pausar animación al tocar y mantener presionado
+            announcementsSection.addEventListener('touchstart', (e) => {
+                touchStartY = e.changedTouches[0].screenY;
+                announcementsTrack.style.animationPlayState = 'paused';
+            });
+
+            // Reanudar animación al soltar
+            announcementsSection.addEventListener('touchend', (e) => {
+                touchEndY = e.changedTouches[0].screenY;
+                // Solo reanudar si no fue un scroll vertical
+                if (Math.abs(touchStartY - touchEndY) < 50) {
+                    setTimeout(() => {
+                        announcementsTrack.style.animationPlayState = 'running';
+                    }, 1000);
+                } else {
+                    announcementsTrack.style.animationPlayState = 'running';
+                }
+            });
+
+            // Ajustar velocidad según el tamaño de pantalla
+            if (window.innerWidth <= 480) {
+                announcementsTrack.style.animationDuration = '25s';
+            } else if (window.innerWidth <= 768) {
+                announcementsTrack.style.animationDuration = '30s';
+            }
+        }
+
+        // Redimensionar ventana - ajustar animación
+        window.addEventListener('resize', () => {
+            const currentWidth = window.innerWidth;
+            if (currentWidth <= 480) {
+                announcementsTrack.style.animationDuration = '25s';
+            } else if (currentWidth <= 768) {
+                announcementsTrack.style.animationDuration = '30s';
+            } else {
+                announcementsTrack.style.animationDuration = '40s';
+            }
+        });
     </script>
 </body>
 </html>

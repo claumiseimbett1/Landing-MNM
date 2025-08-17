@@ -894,6 +894,7 @@
             .programs {
                 grid-template-columns: 1fr !important;
                 gap: 1.5rem;
+                display: grid !important;
             }
 
             .programs .program-card:nth-child(4),
@@ -905,8 +906,9 @@
 
         @media (max-width: 480px) {
             .programs {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr !important;
                 gap: 1rem;
+                display: grid !important;
             }
             
             .programs .program-card:nth-child(3) {

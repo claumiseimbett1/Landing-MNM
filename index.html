@@ -346,10 +346,13 @@
         }
 
         .offer-features {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            display: flex;
+            flex-direction: column;
             gap: 1rem;
             margin-top: 1.5rem;
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
         }
 
         .feature {
@@ -385,8 +388,8 @@
             }
 
             .offer-features {
-                grid-template-columns: 1fr;
                 padding: 0 1rem;
+                max-width: none;
             }
         }
 
@@ -499,9 +502,36 @@
         /* Qué Enseñamos */
         .programs {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
             margin-top: 2rem;
+        }
+
+        .programs .program-card:nth-child(4),
+        .programs .program-card:nth-child(5) {
+            grid-column: span 1;
+        }
+
+        .programs .program-card:nth-child(4) {
+            grid-column: 1 / 2;
+            grid-row: 2;
+        }
+
+        .programs .program-card:nth-child(5) {
+            grid-column: 3 / 4;
+            grid-row: 2;
+        }
+
+        @media (max-width: 768px) {
+            .programs {
+                grid-template-columns: 1fr;
+            }
+            
+            .programs .program-card:nth-child(4),
+            .programs .program-card:nth-child(5) {
+                grid-column: 1;
+                grid-row: auto;
+            }
         }
 
         .program-card {
@@ -588,6 +618,112 @@
         .teacher-role {
             color: #666;
             font-style: italic;
+        }
+
+        /* Testimonios */
+        .testimonials {
+            background: var(--gray-light);
+            padding: 4rem 0;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .testimonial-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            position: relative;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: -10px;
+            left: 20px;
+            font-size: 4rem;
+            color: var(--secondary-color);
+            font-family: Georgia, serif;
+            line-height: 1;
+        }
+
+        .testimonial-content {
+            margin-bottom: 1.5rem;
+        }
+
+        .stars {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: #ffd700;
+        }
+
+        .testimonial-content p {
+            font-style: italic;
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin: 0;
+            font-size: 1rem;
+        }
+
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+        }
+
+        .author-photo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            overflow: hidden;
+            flex-shrink: 0;
+        }
+
+        .author-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .author-info h4 {
+            margin: 0 0 0.25rem 0;
+            color: var(--primary-color);
+            font-size: 1rem;
+        }
+
+        .author-info span {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+                gap: 1.5rem;
+            }
+            
+            .testimonial-card {
+                padding: 1.5rem;
+            }
+            
+            .testimonial-card::before {
+                font-size: 3rem;
+                top: -5px;
+                left: 15px;
+            }
         }
 
         /* Nadador del Trimestre */
@@ -1456,6 +1592,7 @@
                 <li><a href="#escuela">Nuestra Escuela</a></li>
                 <li><a href="#programas">Programas</a></li>
                 <li><a href="#profesores">Profesores</a></li>
+                <li><a href="#testimonios">Testimonios</a></li>
                 <li><a href="#destacado">Nadador Destacado</a></li>
                 <li><a href="#galeria">Galería</a></li>
                 <li><a href="#asistente">Asistente Virtual</a></li>
@@ -1704,6 +1841,62 @@
                     <h3 class="teacher-name">Daniel del Castillo</h3>
                     <p class="teacher-role">Instructor de Nivel Básico</p>
                     <p>Licenciado en Educación Física</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonios -->
+    <section class="section testimonials" id="testimonios">
+        <div class="container">
+            <h2 class="section-title">Testimonios de Nuestra Familia MNM</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Mi hija empezó en MasterKids con 5 años y ahora nada con mucha confianza. Los instructores son increíbles y muy pacientes. ¡100% recomendado!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-photo">
+                            <img src="img/testimonial1.jpg" alt="María González" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjUiIGN5PSIyNSIgcj0iMjUiIGZpbGw9IiNlMGUwZTAiLz4KPHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxMCIgeT0iMTAiPgo8cGF0aCBkPSJNMTIgMTJDMTQuMjA5MSAxMiAxNiA5Ljc2MTQyIDE2IDcuNUMxNiA1LjIzODU4IDE0LjIwOTEgMyAxMiAzQzkuNzkwODYgMyA4IDUuMjM4NTggOCA3LjVDOCA5Ljc2MTQyIDkuNzkwODYgMTIgMTIgMTJaIiBmaWxsPSIjOTk5Ii8+CjxwYXRoIGQ9Ik0xMiAxNEMxNi40MTgzIDE0IDIwIDE2LjY4NjMgMjAgMjBWMjFINFYyMEM0IDE2LjY4NjMgNy41ODE3MiAxNCAxMiAxNFoiIGZpbGw9IiM5OTkiLz4KPC9zdmc+Cjwvc3ZnPgo='">
+                        </div>
+                        <div class="author-info">
+                            <h4>María González</h4>
+                            <span>Madre de Sofía (7 años)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Como adulto principiante tenía miedo al agua. En MNM me enseñaron con mucha paciencia y ahora disfruto nadar. Excelente metodología!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-photo">
+                            <img src="img/testimonial2.jpg" alt="Carlos Ruiz" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjUiIGN5PSIyNSIgcj0iMjUiIGZpbGw9IiNlMGUwZTAiLz4KPHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxMCIgeT0iMTAiPgo8cGF0aCBkPSJNMTIgMTJDMTQuMjA5MSAxMiAxNiA5Ljc2MTQyIDE2IDcuNUMxNiA1LjIzODU4IDE0LjIwOTEgMyAxMiAzQzkuNzkwODYgMyA4IDUuMjM4NTggOCA3LjVDOCA5Ljc2MTQyIDkuNzkwODYgMTIgMTIgMTJaIiBmaWxsPSIjOTk5Ii8+CjxwYXRoIGQ9Ik0xMiAxNEMxNi40MTgzIDE0IDIwIDE2LjY4NjMgMjAgMjBWMjFINFYyMEM0IDE2LjY4NjMgNy41ODE3MiAxNCAxMiAxNFoiIGZpbGw9IiM5OTkiLz4KPC9zdmc+Cjwvc3ZnPgo='">
+                        </div>
+                        <div class="author-info">
+                            <h4>Carlos Ruiz</h4>
+                            <span>Estudiante Adulto Master</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="testimonial-content">
+                        <div class="stars">⭐⭐⭐⭐⭐</div>
+                        <p>"Mi hijo participa en competencias gracias al excelente entrenamiento de MNM. Ha ganado varias medallas y se siente muy orgulloso. ¡Gracias!"</p>
+                    </div>
+                    <div class="testimonial-author">
+                        <div class="author-photo">
+                            <img src="img/testimonial3.jpg" alt="Ana Martínez" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNTAiIGhlaWdodD0iNTAiIHZpZXdCb3g9IjAgMCA1MCA1MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPGNpcmNsZSBjeD0iMjUiIGN5PSIyNSIgcj0iMjUiIGZpbGw9IiNlMGUwZTAiLz4KPHN2ZyB3aWR0aD0iMzAiIGhlaWdodD0iMzAiIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4PSIxMCIgeT0iMTAiPgo8cGF0aCBkPSJNMTIgMTJDMTQuMjA5MSAxMiAxNiA5Ljc2MTQyIDE2IDcuNUMxNiA1LjIzODU4IDE0LjIwOTEgMyAxMiAzQzkuNzkwODYgMyA4IDUuMjM4NTggOCA3LjVDOCA5Ljc2MTQyIDkuNzkwODYgMTIgMTIgMTJaIiBmaWxsPSIjOTk5Ii8+CjxwYXRoIGQ9Ik0xMiAxNEMxNi40MTgzIDE0IDIwIDE2LjY4NjMgMjAgMjBWMjFINFYyMEM0IDE2LjY4NjMgNy41ODE3MiAxNCAxMiAxNFoiIGZpbGw9IiM5OTkiLz4KPC9zdmc+Cjwvc3ZnPgo='">
+                        </div>
+                        <div class="author-info">
+                            <h4>Ana Martínez</h4>
+                            <span>Madre de Diego (12 años)</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

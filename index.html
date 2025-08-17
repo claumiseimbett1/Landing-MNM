@@ -1262,6 +1262,18 @@
             font-size: 0.95rem;
         }
 
+        .datos-estudiante h4 {
+            color: var(--primary-color);
+            margin: 1rem 0 0.5rem 0;
+            font-size: 1.1rem;
+            border-bottom: 2px solid var(--secondary-color);
+            padding-bottom: 0.3rem;
+        }
+
+        .datos-estudiante h4:first-child {
+            margin-top: 0;
+        }
+
         .datos-estudiante strong {
             color: var(--primary-color);
         }
@@ -2735,11 +2747,26 @@
             
             let html = '<div class="datos-estudiante">';
             
-            // Mostrar información básica
-            for (let i = 0; i < encabezados.length && i < datos.length; i++) {
-                if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
+            // Información básica del estudiante
+            html += '<h4>Información del Estudiante:</h4>';
+            html += `<p><strong>Nivel:</strong> ${datos[1] || 'N/A'}</p>`;
+            html += `<p><strong>Mes:</strong> ${datos[2] || 'N/A'}</p>`;
+            html += `<p><strong>Fecha de Evaluación:</strong> ${datos[3] || 'N/A'}</p>`;
+            html += `<p><strong>Nombre:</strong> ${datos[4] || 'N/A'}</p>`;
+            html += `<p><strong>Documento:</strong> ${datos[5] || 'N/A'}</p>`;
+            
+            // Notas de evaluación (columnas G a N, índices 6 a 13)
+            html += '<h4>Notas de Evaluación:</h4>';
+            for (let i = 6; i <= 13; i++) {
+                if (encabezados[i] && (datos[i] !== undefined && datos[i] !== null && datos[i] !== '')) {
                     html += `<p><strong>${encabezados[i]}:</strong> ${datos[i]}</p>`;
                 }
+            }
+            
+            // Nota de cambio de nivel (columna O, índice 14)
+            if (datos[14] !== undefined && datos[14] !== null && datos[14] !== '') {
+                html += '<h4>Evaluación de Nivel:</h4>';
+                html += `<p><strong>${encabezados[14] || 'Cambio de Nivel'}:</strong> ${datos[14]}</p>`;
             }
             
             html += '</div>';
@@ -2767,28 +2794,64 @@
             // Línea separadora
             doc.line(20, 50, 190, 50);
             
-            // Datos del estudiante
-            doc.setFontSize(12);
-            let yPosition = 65;
-            
             const datos = datosEncontrados.datos;
             const encabezados = datosEncontrados.encabezados;
+            let yPosition = 65;
             
-            for (let i = 0; i < encabezados.length && i < datos.length; i++) {
-                if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
+            // Información básica del estudiante
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "bold");
+            doc.text('Información del Estudiante:', 20, yPosition);
+            yPosition += 10;
+            
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+            doc.text(`Nivel: ${datos[1] || 'N/A'}`, 20, yPosition);
+            yPosition += 8;
+            doc.text(`Mes: ${datos[2] || 'N/A'}`, 20, yPosition);
+            yPosition += 8;
+            doc.text(`Fecha de Evaluación: ${datos[3] || 'N/A'}`, 20, yPosition);
+            yPosition += 8;
+            doc.text(`Nombre: ${datos[4] || 'N/A'}`, 20, yPosition);
+            yPosition += 8;
+            doc.text(`Documento: ${datos[5] || 'N/A'}`, 20, yPosition);
+            yPosition += 15;
+            
+            // Notas de evaluación (columnas G a N, índices 6 a 13)
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "bold");
+            doc.text('Notas de Evaluación:', 20, yPosition);
+            yPosition += 10;
+            
+            doc.setFontSize(12);
+            doc.setFont("helvetica", "normal");
+            for (let i = 6; i <= 13; i++) {
+                if (encabezados[i] && (datos[i] !== undefined && datos[i] !== null && datos[i] !== '')) {
                     const texto = `${encabezados[i]}: ${datos[i]}`;
-                    
-                    // Dividir texto largo en múltiples líneas
                     const lineas = doc.splitTextToSize(texto, 170);
                     doc.text(lineas, 20, yPosition);
-                    yPosition += lineas.length * 6;
+                    yPosition += lineas.length * 8;
                     
                     // Nueva página si es necesario
-                    if (yPosition > 270) {
+                    if (yPosition > 250) {
                         doc.addPage();
                         yPosition = 30;
                     }
                 }
+            }
+            
+            // Nota de cambio de nivel (columna O, índice 14)
+            if (datos[14] !== undefined && datos[14] !== null && datos[14] !== '') {
+                yPosition += 10;
+                doc.setFontSize(14);
+                doc.setFont("helvetica", "bold");
+                doc.text('Evaluación de Nivel:', 20, yPosition);
+                yPosition += 10;
+                
+                doc.setFontSize(12);
+                doc.setFont("helvetica", "normal");
+                const nombreCampo = encabezados[14] || 'Cambio de Nivel';
+                doc.text(`${nombreCampo}: ${datos[14]}`, 20, yPosition);
             }
             
             // Pie de página

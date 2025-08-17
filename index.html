@@ -2855,13 +2855,15 @@
                 for (let i = 6; i <= 12; i++) {
                     const nombreEvaluacion = nombresEvaluacion[i - 6];
                     if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
-                        html += `<p><strong>${nombreEvaluacion}:</strong> ${datos[i]}</p>`;
+                        const nota = typeof datos[i] === 'number' ? datos[i].toFixed(1) : datos[i];
+                        html += `<p><strong>${nombreEvaluacion}:</strong> ${nota}</p>`;
                     }
                 }
                 
                 // Pase de Nivel (columna N, índice 13)
                 if (datos[13] !== undefined && datos[13] !== null && datos[13] !== '') {
-                    html += `<p><strong>Pase de Nivel 4,7 ptos:</strong> ${datos[13]}</p>`;
+                    const paseNivel = typeof datos[13] === 'number' ? datos[13].toFixed(1) : datos[13];
+                    html += `<p><strong>Pase de Nivel 4,7 ptos:</strong> ${paseNivel}</p>`;
                 }
                 
                 // Nota de cambio de nivel (columna O, índice 14)
@@ -3017,7 +3019,8 @@
                     for (let i = 6; i <= 12; i++) {
                         const nombreEvaluacion = nombresEvaluacion[i - 6];
                         if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
-                            const texto = `${nombreEvaluacion}: ${datos[i]}`;
+                            const notaPDF = typeof datos[i] === 'number' ? datos[i].toFixed(1) : datos[i];
+                            const texto = `${nombreEvaluacion}: ${notaPDF}`;
                             const lineas = doc.splitTextToSize(texto, 170);
                             doc.text(lineas, 20, yPosition);
                             yPosition += lineas.length * 8;
@@ -3034,7 +3037,8 @@
                     
                     // Pase de Nivel (columna N, índice 13)
                     if (datos[13] !== undefined && datos[13] !== null && datos[13] !== '') {
-                        const texto = `Pase de Nivel 4,7 ptos: ${datos[13]}`;
+                        const paseNivelPDF = typeof datos[13] === 'number' ? datos[13].toFixed(1) : datos[13];
+                        const texto = `Pase de Nivel 4,7 ptos: ${paseNivelPDF}`;
                         const lineas = doc.splitTextToSize(texto, 170);
                         doc.text(lineas, 20, yPosition);
                         yPosition += lineas.length * 8;

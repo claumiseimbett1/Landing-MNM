@@ -263,12 +263,14 @@
 
         /* Sección de Ofertas Especiales */
         .special-offers {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            background: white;
             padding: 3rem 0;
             text-align: center;
             position: relative;
             overflow: hidden;
             display: none; /* Oculta por defecto - cambiar a 'block' para activar */
+            border-top: 3px solid var(--secondary-color);
+            border-bottom: 3px solid var(--secondary-color);
         }
 
         .special-offers.active {
@@ -282,7 +284,7 @@
             left: -50%;
             width: 200%;
             height: 200%;
-            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(222,222,60,0.1) 0%, transparent 70%);
             animation: rotate 8s linear infinite;
         }
 
@@ -297,20 +299,20 @@
         }
 
         .offers-title {
-            color: white;
+            color: var(--primary-color);
             font-size: 2.5rem;
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+            text-shadow: 2px 2px 4px rgba(222,222,60,0.3);
             animation: pulse-glow 2s ease-in-out infinite;
         }
 
         @keyframes pulse-glow {
-            0%, 100% { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 20px rgba(255,255,255,0.3); }
-            50% { text-shadow: 2px 2px 4px rgba(0,0,0,0.5), 0 0 30px rgba(255,255,255,0.6); }
+            0%, 100% { text-shadow: 2px 2px 4px rgba(222,222,60,0.3), 0 0 20px rgba(19,68,146,0.3); }
+            50% { text-shadow: 2px 2px 4px rgba(222,222,60,0.5), 0 0 30px rgba(19,68,146,0.5); }
         }
 
         .offers-description {
-            color: #fff;
+            color: var(--tertiary-color);
             font-size: 1.3rem;
             margin-bottom: 2rem;
             font-weight: bold;
@@ -325,13 +327,14 @@
         }
 
         .countdown-item {
-            background: rgba(255,255,255,0.9);
-            color: #e74c3c;
+            background: var(--primary-color);
+            color: white;
             padding: 1rem;
             border-radius: 10px;
             min-width: 80px;
             font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: 2px solid var(--secondary-color);
         }
 
         .countdown-number {

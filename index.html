@@ -1545,21 +1545,57 @@
             right: 30px;
             background: var(--primary-color);
             color: white;
-            padding: 1rem;
-            border-radius: 15px;
+            padding: 0.6rem 1rem;
+            border-radius: 25px;
             font-size: 0.8rem;
             box-shadow: 0 5px 15px rgba(0,0,0,0.3);
             z-index: 999;
-            max-width: 280px;
-            line-height: 1.4;
             border: 2px solid var(--secondary-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            font-weight: bold;
         }
 
-        .bubble-horarios h4 {
-            margin: 0 0 0.5rem 0;
+        .bubble-horarios.collapsed {
+            max-width: auto;
+            width: auto;
+        }
+
+        .bubble-horarios.expanded {
+            max-width: 280px;
+            width: 280px;
+            white-space: normal;
+            border-radius: 15px;
+            padding: 1rem;
+        }
+
+        .bubble-horarios .horarios-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin: 0;
             color: var(--secondary-color);
             font-size: 0.9rem;
-            text-align: center;
+        }
+
+        .bubble-horarios .horarios-content {
+            margin-top: 0.5rem;
+            line-height: 1.4;
+            display: none;
+        }
+
+        .bubble-horarios.expanded .horarios-content {
+            display: block;
+        }
+
+        .bubble-horarios .toggle-icon {
+            margin-left: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .bubble-horarios.expanded .toggle-icon {
+            transform: rotate(180deg);
         }
 
         @keyframes bounce {
@@ -2644,18 +2680,23 @@
         NatalIA
     </div>
     
-    <div class="bubble-horarios">
-        <h4>⏰ Nuestros Horarios</h4>
-        <p>
-            <strong>Martes y Jueves:</strong><br>
-            5:00 AM - 7:00 AM<br>
-            4:00 PM - 7:00 PM<br><br>
-            <strong>Miércoles y Viernes:</strong><br>
-            4:00 PM - 6:00 PM<br><br>
-            <strong>Sábados:</strong><br>
-            5:00 AM - 8:00 AM<br>
-            4:00 PM - 6:00 PM
-        </p>
+    <div class="bubble-horarios collapsed" id="bubbleHorarios">
+        <div class="horarios-header">
+            ⏰ Horarios
+            <span class="toggle-icon">▼</span>
+        </div>
+        <div class="horarios-content">
+            <p>
+                <strong>Martes y Jueves:</strong><br>
+                5:00 AM - 7:00 AM<br>
+                4:00 PM - 7:00 PM<br><br>
+                <strong>Miércoles y Viernes:</strong><br>
+                4:00 PM - 6:00 PM<br><br>
+                <strong>Sábados:</strong><br>
+                5:00 AM - 8:00 AM<br>
+                4:00 PM - 6:00 PM
+            </p>
+        </div>
     </div>
 
     <!-- Sección PQRS -->
@@ -2784,6 +2825,16 @@
         // Funcionalidad del menú hamburguesa
         const hamburger = document.getElementById('hamburger');
         const navMenu = document.getElementById('navMenu');
+
+        // Funcionalidad para toggle de burbuja de horarios
+        const bubbleHorarios = document.getElementById('bubbleHorarios');
+        
+        if (bubbleHorarios) {
+            bubbleHorarios.addEventListener('click', () => {
+                bubbleHorarios.classList.toggle('collapsed');
+                bubbleHorarios.classList.toggle('expanded');
+            });
+        }
 
         hamburger.addEventListener('click', () => {
             hamburger.classList.toggle('active');

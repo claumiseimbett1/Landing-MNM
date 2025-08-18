@@ -3530,21 +3530,34 @@
                 return;
             }
             
+            // Determinar puntaje requerido según el nivel
+            let puntajeRequerido;
+            const nivelNumero = resumen.nivel.toLowerCase();
+            if (nivelNumero.includes('i') && !nivelNumero.includes('ii')) {
+                puntajeRequerido = 4.7; // Nivel I
+            } else if (nivelNumero.includes('ii') && !nivelNumero.includes('iii')) {
+                puntajeRequerido = 4.7; // Nivel II  
+            } else if (nivelNumero.includes('iii')) {
+                puntajeRequerido = 4.9; // Nivel III
+            } else {
+                puntajeRequerido = 4.7; // Default
+            }
+            
+            // Convertir pase de nivel a número para comparar
+            const paseNivelNumerico = parseFloat(resumen.paseNivel);
+            let mensajeFinal;
+            
+            if (!isNaN(paseNivelNumerico) && paseNivelNumerico >= puntajeRequerido) {
+                mensajeFinal = `¡Felicitaciones, haz cambiado al siguiente nivel! 🎉🏆`;
+            } else {
+                mensajeFinal = `¡Sigue entrenando! 💪🏊‍♂️`;
+            }
+            
             let mensaje = `🏊‍♂️ *Montería Natación Master - Resultados*\n\n`;
             mensaje += `👤 *Estudiante:* ${resumen.nombre}\n`;
             mensaje += `📊 *Nivel:* ${resumen.nivel}\n`;
-            mensaje += `📅 *Fecha:* ${resumen.fecha}\n\n`;
-            
-            if (resumen.notas.length > 0) {
-                mensaje += `📋 *Últimas Evaluaciones:*\n`;
-                resumen.notas.forEach(nota => {
-                    mensaje += `• ${nota}\n`;
-                });
-                mensaje += `\n`;
-            }
-            
-            mensaje += `🎯 *Pase de Nivel:* ${resumen.paseNivel}\n\n`;
-            mensaje += `¡Sigue entrenando! 💪🏊‍♂️\n`;
+            mensaje += `🎯 *Pase de Nivel ${puntajeRequerido} ptos:* ${resumen.paseNivel}\n\n`;
+            mensaje += `${mensajeFinal}\n\n`;
             mensaje += `#MNM #Natacion #Resultados`;
             
             const mensajeCodificado = encodeURIComponent(mensaje);

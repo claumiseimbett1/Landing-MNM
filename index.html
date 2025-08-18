@@ -1598,6 +1598,14 @@
             transform: rotate(180deg);
         }
 
+        .horarios-mobile {
+            display: none;
+        }
+
+        .horarios-desktop {
+            display: inline;
+        }
+
         @keyframes bounce {
             0%, 20%, 50%, 80%, 100% {
                 transform: translateY(0);
@@ -1620,17 +1628,65 @@
             }
 
             .bubble-horarios {
-                right: 110px;
+                right: 120px;
                 bottom: 100px;
+                font-size: 0.65rem;
+                padding: 0.4rem 0.6rem;
+                border-radius: 20px;
+            }
+
+            .bubble-horarios .horarios-header {
+                font-size: 0.65rem;
+                white-space: nowrap;
+            }
+
+            .horarios-mobile {
+                display: inline;
+            }
+
+            .horarios-desktop {
+                display: none;
+            }
+
+            .bubble-horarios.expanded {
+                max-width: 180px;
+                width: 180px;
+                padding: 0.7rem;
+                right: 20px;
+                transform: translateX(-60px);
+            }
+
+            .bubble-horarios.expanded .horarios-header {
+                font-size: 0.75rem;
+            }
+
+            .bubble-horarios.expanded .horarios-content {
+                font-size: 0.65rem;
+                line-height: 1.3;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .bubble-horarios {
+                right: 90px;
+                font-size: 0.6rem;
+                padding: 0.3rem 0.5rem;
+            }
+
+            .bubble-horarios .horarios-header {
+                font-size: 0.6rem;
+            }
+
+            .bubble-natalia {
                 font-size: 0.7rem;
-                max-width: 80px;
                 padding: 0.5rem 0.8rem;
             }
 
             .bubble-horarios.expanded {
-                max-width: 200px;
-                width: 200px;
-                padding: 0.8rem;
+                max-width: 160px;
+                width: 160px;
+                right: 10px;
+                transform: translateX(-50px);
             }
         }
 
@@ -2688,19 +2744,20 @@
     
     <div class="bubble-horarios collapsed" id="bubbleHorarios">
         <div class="horarios-header">
-            ⏰ Horarios
+            <span class="horarios-mobile">⏰</span>
+            <span class="horarios-desktop">⏰ Horarios</span>
             <span class="toggle-icon">▼</span>
         </div>
         <div class="horarios-content">
             <p>
-                <strong>Martes y Jueves:</strong><br>
-                5:00 AM - 7:00 AM<br>
-                4:00 PM - 7:00 PM<br><br>
-                <strong>Miércoles y Viernes:</strong><br>
-                4:00 PM - 6:00 PM<br><br>
+                <strong>Mar-Jue:</strong><br>
+                5:00-7:00 AM<br>
+                4:00-7:00 PM<br><br>
+                <strong>Mié-Vie:</strong><br>
+                4:00-6:00 PM<br><br>
                 <strong>Sábados:</strong><br>
-                5:00 AM - 8:00 AM<br>
-                4:00 PM - 6:00 PM
+                5:00-8:00 AM<br>
+                4:00-6:00 PM
             </p>
         </div>
     </div>

@@ -1,0 +1,30 @@
+name: Claude Code
+
+on:
+  workflow_dispatch:
+    inputs:
+      task:
+        description: 'Task description for Claude'
+        required: true
+        type: string
+      branch:
+        description: 'Branch to work on (defaults to main)'
+        required: false
+        type: string
+        default: 'main'
+
+jobs:
+  claude-code:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.branch || 'main' }}
+          fetch-depth: 0
+
+      - name: Run Claude Code
+        uses: anthropics/claude-code-action@v1
+        with:
+          task: ${{ inputs.task }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}

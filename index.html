@@ -62,7 +62,7 @@
         }
 
         .nav-logo-left, .nav-logo-right {
-            height: 35px;
+            height: 50px;
             opacity: 0.8;
         }
 
@@ -1378,8 +1378,8 @@
         }
 
         .social-logo {
-            width: 80px;
-            height: 80px;
+            width: 100px;
+            height: 100px;
             margin: 0 auto 1rem;
             display: flex;
             align-items: center;
@@ -1394,8 +1394,8 @@
         }
 
         .social-logo svg {
-            width: 45px;
-            height: 45px;
+            width: 55px;
+            height: 55px;
             fill: var(--primary-color);
             transition: fill 0.3s;
         }
@@ -1755,7 +1755,7 @@
         }
 
         .footer-logo {
-            width: 150px;
+            width: 200px;
             margin-bottom: 1rem;
         }
 
@@ -3786,7 +3786,8 @@
         // Configuración del contador de ofertas especiales
         const offerConfig = {
             enabled: true, // Cambiar a false para ocultar
-            endDate: '2025-08-30', // Fecha fin de la oferta (YYYY-MM-DD)
+            startDate: '2025-01-01', // Fecha inicio de la oferta (YYYY-MM-DD)
+            endDate: '2025-12-31', // Fecha fin de la oferta (YYYY-MM-DD)
             title: '💸 ¡MATRÍCULA GRATIS! 💸',
             description: 'y obtén tu matrícula completamente GRATIS'
         };
@@ -3801,13 +3802,24 @@
                 return;
             }
 
-            // Establecer fecha fin en el HTML
+            const now = new Date();
+            const startDate = new Date(offerConfig.startDate);
             const endDate = new Date(offerConfig.endDate);
-            offerEndDateSpan.textContent = endDate.toLocaleDateString('es-ES', {
-                year: 'numeric',
-                month: 'long',
-                day: 'numeric'
-            });
+            
+            // Verificar si la oferta está en el período válido
+            if (now < startDate || now > endDate) {
+                offerSection.style.display = 'none';
+                return;
+            }
+
+            // Establecer fecha fin en el HTML
+            if (offerEndDateSpan) {
+                offerEndDateSpan.textContent = endDate.toLocaleDateString('es-ES', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+            }
 
             // Actualizar título si está configurado
             const titleElement = document.querySelector('.offer-title');
@@ -3817,9 +3829,9 @@
 
             // Función para actualizar el contador
             function updateCountdown() {
-                const now = new Date().getTime();
+                const currentTime = new Date().getTime();
                 const target = endDate.getTime();
-                const difference = target - now;
+                const difference = target - currentTime;
 
                 if (difference > 0) {
                     const days = Math.floor(difference / (1000 * 60 * 60 * 24));

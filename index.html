@@ -2231,7 +2231,7 @@
                 <div class="countdown-container">
                     <div class="countdown-timer">
                         <div class="time-unit">
-                            <span class="time-number" id="days">06</span>
+                            <span class="time-number" id="days">00</span>
                             <span class="time-label">Días</span>
                         </div>
                         <div class="time-unit">
@@ -3786,8 +3786,8 @@
         // Configuración del contador de ofertas especiales
         const offerConfig = {
             enabled: true, // Cambiar a false para ocultar
-            startDate: '2025-01-01', // Fecha inicio de la oferta (YYYY-MM-DD)
-            endDate: '2025-12-31', // Fecha fin de la oferta (YYYY-MM-DD)
+            startDate: 'auto', // 'auto' detecta fecha actual, o usa fecha específica (YYYY-MM-DD)
+            endDate: '2025-09-05', // 📌 CAMBIA SOLO ESTA FECHA (YYYY-MM-DD)
             title: '💸 ¡MATRÍCULA GRATIS! 💸',
             description: 'y obtén tu matrícula completamente GRATIS'
         };
@@ -3803,7 +3803,16 @@
             }
 
             const now = new Date();
-            const startDate = new Date(offerConfig.startDate);
+            
+            // Configurar fecha de inicio automática
+            let startDate;
+            if (offerConfig.startDate === 'auto') {
+                startDate = new Date();
+                startDate.setHours(0, 0, 0, 0); // Inicio del día de hoy
+            } else {
+                startDate = new Date(offerConfig.startDate);
+            }
+            
             const endDate = new Date(offerConfig.endDate);
             
             // Verificar si la oferta está en el período válido

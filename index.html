@@ -3286,23 +3286,27 @@
                     doc.text('Notas de Evaluación:', 20, yPosition);
                     yPosition += 10;
                     
-                    // Definir los nombres de las columnas de evaluación
-                    const nombresEvaluacion = [
-                        'AMBIENTACIÓN',
-                        'FLOTACIÓN DEFENSIVA', 
-                        'PATADA CROL',
-                        'PATADA ESPALDA',
-                        'ENS. CROL',
-                        'ENS ESPALDA',
-                        'SALTO'
-                    ];
-                    
                     doc.setFontSize(12);
                     doc.setFont("helvetica", "normal");
                     
-                    // Mostrar notas de evaluación (columnas G a M, índices 6 a 12)
-                    for (let i = 6; i <= 12; i++) {
-                        const nombreEvaluacion = nombresEvaluacion[i - 6];
+                    // Definir rangos de columnas según el nivel para PDF
+                    let columnaInicio = 6; // Columna G
+                    let columnaFin = 12;   // Columna M por defecto (Nivel 1 y 2)
+                    
+                    // Para Nivel 3, extender hasta columna S (índice 18)
+                    if (resultado.nivel === 'NIVEL 3') {
+                        columnaFin = 18; // Columna S
+                    }
+                    
+                    // Mostrar notas de evaluación leyendo nombres desde fila 2
+                    for (let i = columnaInicio; i <= columnaFin; i++) {
+                        // Leer el nombre de la evaluación desde la fila 2 del Excel
+                        const nombreEvaluacion = (function() {
+                            const sheet = workbook.Sheets[resultado.nivel];
+                            const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+                            return data[1] && data[1][i] ? data[1][i] : `Evaluación ${i - 5}`;
+                        })();
+                        
                         if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
                             const notaPDF = typeof datos[i] === 'number' ? datos[i].toFixed(1) : datos[i];
                             const texto = `${nombreEvaluacion}: ${notaPDF}`;

@@ -3129,9 +3129,16 @@
                 }
                 
                 // Mostrar notas de evaluación usando el rango correcto
-                // Usar los nombres reales de los encabezados del Excel
+                // Leer los nombres desde la fila 2 (data[1]) en las columnas correspondientes
                 for (let i = columnaInicio; i <= columnaFin; i++) {
-                    const nombreEvaluacion = encabezados[i] || `Evaluación ${i - 5}`;
+                    // Leer el nombre de la evaluación desde la fila 2 del Excel
+                    const nombreEvaluacion = (function() {
+                        // Buscar la fila 2 de la misma hoja para obtener el nombre
+                        const sheet = workbook.Sheets[resultado.nivel];
+                        const data = XLSX.utils.sheet_to_json(sheet, { header: 1 });
+                        return data[1] && data[1][i] ? data[1][i] : `Evaluación ${i - 5}`;
+                    })();
+                    
                     if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
                         const nota = typeof datos[i] === 'number' ? datos[i].toFixed(1) : datos[i];
                         html += `<p><strong>${nombreEvaluacion}:</strong> ${nota}</p>`;

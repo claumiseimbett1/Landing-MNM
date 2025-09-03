@@ -3119,20 +3119,19 @@
                 // Notas de evaluación con nombres específicos
                 html += '<h4>Notas de Evaluación:</h4>';
                 
-                // Definir los nombres de las columnas de evaluación
-                const nombresEvaluacion = [
-                    'AMBIENTACIÓN',
-                    'FLOTACIÓN DEFENSIVA', 
-                    'PATADA CROL',
-                    'PATADA ESPALDA',
-                    'ENS. CROL',
-                    'ENS ESPALDA',
-                    'SALTO'
-                ];
+                // Definir rangos de columnas según el nivel
+                let columnaInicio = 6; // Columna G
+                let columnaFin = 12;   // Columna M por defecto (Nivel 1 y 2)
                 
-                // Mostrar notas de evaluación (columnas G a M, índices 6 a 12)
-                for (let i = 6; i <= 12; i++) {
-                    const nombreEvaluacion = nombresEvaluacion[i - 6];
+                // Para Nivel 3, extender hasta columna S (índice 18)
+                if (resultado.nivel === 'NIVEL 3') {
+                    columnaFin = 18; // Columna S
+                }
+                
+                // Mostrar notas de evaluación usando el rango correcto
+                // Usar los nombres reales de los encabezados del Excel
+                for (let i = columnaInicio; i <= columnaFin; i++) {
+                    const nombreEvaluacion = encabezados[i] || `Evaluación ${i - 5}`;
                     if (datos[i] !== undefined && datos[i] !== null && datos[i] !== '') {
                         const nota = typeof datos[i] === 'number' ? datos[i].toFixed(1) : datos[i];
                         html += `<p><strong>${nombreEvaluacion}:</strong> ${nota}</p>`;

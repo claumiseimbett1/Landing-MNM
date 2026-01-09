@@ -257,44 +257,46 @@
             }
         }
 
+        /* Botón CTA con Efecto Ripple + Hover Glow */
         .cta-button {
             display: inline-block;
+            position: relative;
             background: var(--secondary-color);
             color: var(--tertiary-color);
             padding: 1rem 2rem;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 50px;
             font-weight: bold;
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(222, 222, 60, 0.3);
+            cursor: pointer;
         }
 
         .cta-button:hover {
-            transform: translateY(-2px) scale(1.05);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            transform: translateY(-3px) scale(1.05);
             background: #f0f03a;
+            box-shadow: 0 0 20px rgba(222, 222, 60, 0.6),
+                        0 0 40px rgba(222, 222, 60, 0.4),
+                        0 0 60px rgba(222, 222, 60, 0.2),
+                        0 8px 25px rgba(0, 0, 0, 0.3);
         }
 
-        .cta-button {
-            position: relative;
-            overflow: hidden;
-        }
-
-        .cta-button::before {
-            content: '';
+        /* Efecto Ripple */
+        .cta-button .ripple {
             position: absolute;
-            top: 50%;
-            left: 50%;
-            width: 0;
-            height: 0;
-            background: rgba(255,255,255,0.2);
             border-radius: 50%;
-            transform: translate(-50%, -50%);
-            transition: width 0.3s, height 0.3s;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
         }
 
-        .cta-button:hover::before {
-            width: 300px;
-            height: 300px;
+        @keyframes ripple-animation {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
         }
 
         /* Sección de Anuncios Deslizantes */
@@ -478,8 +480,10 @@
             text-align: center;
         }
 
+        /* Botón Enrollment con Efecto Ripple + Hover Glow */
         .enrollment-button {
             display: inline-block;
+            position: relative;
             background: var(--secondary-color);
             color: var(--tertiary-color);
             padding: 1.5rem 3rem;
@@ -488,15 +492,30 @@
             font-weight: bold;
             font-size: 1.5rem;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(222, 222, 60, 0.3);
             text-transform: uppercase;
             letter-spacing: 1px;
+            overflow: hidden;
+            cursor: pointer;
         }
 
         .enrollment-button:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
             background: #f0f03a;
+            box-shadow: 0 0 25px rgba(222, 222, 60, 0.7),
+                        0 0 50px rgba(222, 222, 60, 0.5),
+                        0 0 75px rgba(222, 222, 60, 0.3),
+                        0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Efecto Ripple */
+        .enrollment-button .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
         }
 
         .enrollment-text {
@@ -590,7 +609,9 @@
             color: #555;
         }
 
+        /* Botón PQRS con Efecto Ripple + Hover Glow */
         .pqrs-submit-btn {
+            position: relative;
             background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
             color: white;
             border: none;
@@ -603,12 +624,27 @@
             align-items: center;
             gap: 0.5rem;
             margin: 2rem auto 0;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(19, 68, 146, 0.3);
         }
 
         .pqrs-submit-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 0 25px rgba(222, 222, 60, 0.7),
+                        0 0 50px rgba(222, 222, 60, 0.5),
+                        0 0 75px rgba(222, 222, 60, 0.3),
+                        0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Efecto Ripple */
+        .pqrs-submit-btn .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
         }
 
         .btn-icon {
@@ -1271,20 +1307,40 @@
             font-size: 1rem;
         }
 
+        /* Botón Submit con Efecto Ripple + Hover Glow */
         .submit-button {
             width: 100%;
+            position: relative;
             background: var(--primary-color);
             color: white;
             padding: 1rem;
             border: none;
-            border-radius: 5px;
+            border-radius: 50px;
             font-size: 1rem;
+            font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(19, 68, 146, 0.3);
         }
 
         .submit-button:hover {
             background: var(--tertiary-color);
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(26, 61, 112, 0.6),
+                        0 0 40px rgba(26, 61, 112, 0.4),
+                        0 0 60px rgba(26, 61, 112, 0.2),
+                        0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Efecto Ripple */
+        .submit-button .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
         }
 
         /* Estilos para botones de compartir */
@@ -1535,8 +1591,10 @@
             font-size: 0.9rem;
         }
 
+        /* Botón Chatbot Main con Efecto Ripple + Hover Glow */
         .chatbot-main-button {
             display: inline-block;
+            position: relative;
             background: var(--secondary-color);
             color: var(--tertiary-color);
             padding: 1.5rem 3rem;
@@ -1545,16 +1603,31 @@
             font-weight: bold;
             font-size: 1.3rem;
             transition: all 0.3s ease;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+            box-shadow: 0 10px 30px rgba(222, 222, 60, 0.3);
             text-transform: uppercase;
             letter-spacing: 1px;
             margin-top: 1rem;
+            overflow: hidden;
+            cursor: pointer;
         }
 
         .chatbot-main-button:hover {
             transform: translateY(-5px) scale(1.05);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
             background: #f0f03a;
+            box-shadow: 0 0 25px rgba(222, 222, 60, 0.7),
+                        0 0 50px rgba(222, 222, 60, 0.5),
+                        0 0 75px rgba(222, 222, 60, 0.3),
+                        0 15px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        /* Efecto Ripple */
+        .chatbot-main-button .ripple {
+            position: absolute;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.6);
+            transform: scale(0);
+            animation: ripple-animation 0.6s linear;
+            pointer-events: none;
         }
 
         /* Chatbot Flotante Mejorado */
@@ -4100,6 +4173,45 @@ ${formData.get('mensaje')}
                 });
             });
         }
+
+        // Función para crear efecto Ripple en botones
+        function createRipple(event) {
+            const button = event.currentTarget;
+            
+            // Solo aplicar si es un botón con efecto ripple
+            if (!button.classList.contains('cta-button') && 
+                !button.classList.contains('enrollment-button') && 
+                !button.classList.contains('submit-button') && 
+                !button.classList.contains('chatbot-main-button') && 
+                !button.classList.contains('pqrs-submit-btn')) {
+                return;
+            }
+            
+            const ripple = document.createElement('span');
+            const rect = button.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            const x = event.clientX - rect.left - size / 2;
+            const y = event.clientY - rect.top - size / 2;
+
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = x + 'px';
+            ripple.style.top = y + 'px';
+            ripple.classList.add('ripple');
+
+            button.appendChild(ripple);
+
+            setTimeout(() => {
+                ripple.remove();
+            }, 600);
+        }
+
+        // Aplicar efecto ripple a todos los botones
+        document.addEventListener('DOMContentLoaded', function() {
+            // Botones con clase específica
+            document.querySelectorAll('.cta-button, .enrollment-button, .submit-button, .chatbot-main-button, .pqrs-submit-btn').forEach(button => {
+                button.addEventListener('click', createRipple);
+            });
+        });
     </script>
 </body>
 </html>

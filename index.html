@@ -84,6 +84,21 @@
             top: 0;
             z-index: 1000;
             box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+
+        /* Header Dinámico - Cambia al hacer scroll */
+        .header.scrolled {
+            padding: 0.5rem 0;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            background: rgba(255, 255, 255, 0.98);
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+        }
+
+        .header.scrolled .nav-logo-left,
+        .header.scrolled .nav-logo-right {
+            height: 40px;
         }
 
         .nav-container {
@@ -655,8 +670,23 @@
 
 
         /* Secciones */
+        /* Secciones con Scroll Animations */
         .section {
             padding: 4rem 0;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Hero section no necesita animación de entrada */
+        .hero {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .container {
@@ -693,15 +723,29 @@
         .info-card {
             background: white;
             padding: 2rem;
-            border-radius: 10px;
+            border-radius: 15px;
             box-shadow: 0 3px 10px rgba(0,0,0,0.1);
             text-align: center;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .info-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .info-card:hover {
             transform: translateY(-5px);
             border: 2px solid var(--secondary-color);
+            box-shadow: 0 0 20px rgba(222, 222, 60, 0.5),
+                        0 0 40px rgba(222, 222, 60, 0.3),
+                        0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .info-card h3 {
@@ -750,14 +794,28 @@
             background: var(--tertiary-color);
             color: var(--text-light);
             padding: 2rem;
-            border-radius: 10px;
+            border-radius: 15px;
             text-align: center;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .program-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .program-card:hover {
             transform: scale(1.05);
             border: 2px solid var(--secondary-color);
+            box-shadow: 0 0 20px rgba(222, 222, 60, 0.5),
+                        0 0 40px rgba(222, 222, 60, 0.3),
+                        0 10px 30px rgba(0, 0, 0, 0.3);
         }
 
         .program-icon {
@@ -794,11 +852,24 @@
 
         .teacher-card {
             text-align: center;
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
+            position: relative;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .teacher-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .teacher-card:hover {
             transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(222, 222, 60, 0.4),
+                        0 0 40px rgba(222, 222, 60, 0.2),
+                        0 15px 35px rgba(0, 0, 0, 0.2);
         }
 
         .teacher-photo {
@@ -850,13 +921,25 @@
             padding: 2rem;
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.3s ease;
             position: relative;
+            overflow: hidden;
+            transform-style: preserve-3d;
+            perspective: 1000px;
+            opacity: 0;
+            transform: translateY(30px);
+        }
+
+        .testimonial-card.visible {
+            opacity: 1;
+            transform: translateY(0);
         }
 
         .testimonial-card:hover {
             transform: translateY(-5px);
-            box-shadow: 0 8px 30px rgba(0,0,0,0.15);
+            box-shadow: 0 0 20px rgba(222, 222, 60, 0.5),
+                        0 0 40px rgba(222, 222, 60, 0.3),
+                        0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
         .testimonial-card::before {
@@ -1576,6 +1659,7 @@
             background: rgba(255,255,255,0.1);
             padding: 1.5rem;
             border-radius: 15px;
+            -webkit-backdrop-filter: blur(10px);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255,255,255,0.2);
         }
@@ -2181,6 +2265,58 @@
             .enrollment-section {
                 padding: 2rem 0;
             }
+
+        /* Botón Back to Top */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+            color: white;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(100px);
+            transition: all 0.3s ease;
+            z-index: 999;
+        }
+
+        .back-to-top.visible {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .back-to-top:hover {
+            transform: translateY(-5px) scale(1.1);
+            box-shadow: 0 0 20px rgba(19, 68, 146, 0.6),
+                        0 0 40px rgba(19, 68, 146, 0.4),
+                        0 8px 25px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(135deg, var(--tertiary-color), var(--primary-color));
+        }
+
+        .back-to-top:active {
+            transform: translateY(-3px) scale(1.05);
+        }
+
+        @media (max-width: 768px) {
+            .back-to-top {
+                width: 45px;
+                height: 45px;
+                bottom: 20px;
+                right: 20px;
+                font-size: 1.3rem;
+            }
+        }
 
             .enrollment-text {
                 font-size: 0.9rem;
@@ -4210,6 +4346,105 @@ ${formData.get('mensaje')}
             // Botones con clase específica
             document.querySelectorAll('.cta-button, .enrollment-button, .submit-button, .chatbot-main-button, .pqrs-submit-btn').forEach(button => {
                 button.addEventListener('click', createRipple);
+            });
+        });
+
+        // ===== EFECTOS MODERNOS DE ALTO IMPACTO =====
+
+        // 1. Header Dinámico - Cambia al hacer scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('.header');
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // 2. Scroll Animations - Fade-in al entrar en viewport
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observar secciones
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            // Observar cards individuales
+            const cards = document.querySelectorAll('.info-card, .program-card, .teacher-card, .testimonial-card');
+            cards.forEach((card, index) => {
+                // Delay escalonado para animación más suave
+                card.style.transitionDelay = `${index * 0.1}s`;
+                observer.observe(card);
+            });
+        });
+
+        // 3. Tilt 3D Effect en Cards
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.program-card, .info-card, .teacher-card, .testimonial-card');
+            
+            cards.forEach(card => {
+                card.addEventListener('mousemove', function(e) {
+                    if (!card.classList.contains('visible')) return;
+                    
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    
+                    const rotateX = (y - centerY) / 15;
+                    const rotateY = (centerX - x) / 15;
+                    
+                    // Aplicar transform solo si la card es visible
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px) scale(1.02)`;
+                });
+                
+                card.addEventListener('mouseleave', function() {
+                    if (card.classList.contains('visible')) {
+                        card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0) scale(1)';
+                    }
+                });
+            });
+        });
+
+        // 4. Botón Back to Top
+        document.addEventListener('DOMContentLoaded', function() {
+            const backToTopButton = document.createElement('button');
+            backToTopButton.className = 'back-to-top';
+            backToTopButton.innerHTML = '↑';
+            backToTopButton.setAttribute('aria-label', 'Volver arriba');
+            backToTopButton.setAttribute('title', 'Volver arriba');
+            document.body.appendChild(backToTopButton);
+
+            // Mostrar/ocultar botón Back to Top
+            window.addEventListener('scroll', function() {
+                if (window.scrollY > 300) {
+                    backToTopButton.classList.add('visible');
+                } else {
+                    backToTopButton.classList.remove('visible');
+                }
+            });
+
+            // Scroll suave al hacer clic
+            backToTopButton.addEventListener('click', function() {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
             });
         });
     </script>

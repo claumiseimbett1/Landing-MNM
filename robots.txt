@@ -2,7 +2,7 @@ User-agent: *
 Allow: /
 
 # Sitemap
-Sitemap: https://clubnatacionmnm.com/sitemap.xml
+Sitemap: https://monterianatacionmaster.netlify.app/sitemap.xml
 
 # Disallow certain files
 Disallow: *.css$

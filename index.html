@@ -314,6 +314,65 @@
             }
         }
 
+        /* Sección Destacada - Seguimiento Digital */
+        .featured-highlight {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--tertiary-color) 100%);
+            padding: 3rem 2rem;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-highlight::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+            animation: shine 3s infinite;
+        }
+
+        @keyframes shine {
+            0% { left: -100%; }
+            100% { left: 100%; }
+        }
+
+        .featured-highlight-content {
+            position: relative;
+            z-index: 1;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .featured-highlight h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            color: var(--secondary-color);
+        }
+
+        .featured-highlight p {
+            font-size: 1.4rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .featured-highlight .highlight-badge {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--tertiary-color);
+            padding: 0.5rem 1.5rem;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 1rem;
+            box-shadow: 0 4px 15px rgba(222, 222, 60, 0.4);
+        }
+
         /* Sección de Anuncios Deslizantes */
         .announcements {
             background: var(--secondary-color);
@@ -2089,6 +2148,25 @@
                 font-size: 1.2rem;
             }
 
+            .featured-highlight {
+                padding: 2rem 1rem;
+            }
+
+            .featured-highlight h2 {
+                font-size: 1.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .featured-highlight p {
+                font-size: 1.1rem;
+                line-height: 1.6;
+            }
+
+            .featured-highlight .highlight-badge {
+                font-size: 0.9rem;
+                padding: 0.4rem 1rem;
+            }
+
             .swimmer-content {
                 grid-template-columns: 1fr;
                 text-align: center;
@@ -2235,6 +2313,25 @@
                 display: flex;
                 animation: mobileSlide 24s linear infinite !important;
                 width: 1200vw;
+            }
+
+            .featured-highlight {
+                padding: 1.5rem 0.8rem;
+            }
+
+            .featured-highlight h2 {
+                font-size: 1.5rem;
+                margin-bottom: 0.8rem;
+            }
+
+            .featured-highlight p {
+                font-size: 1rem;
+                line-height: 1.5;
+            }
+
+            .featured-highlight .highlight-badge {
+                font-size: 0.85rem;
+                padding: 0.3rem 0.8rem;
             }
 
             .announcement-item {
@@ -2547,6 +2644,15 @@
         </div>
     </section>
 
+    <!-- Sección Destacada - Seguimiento Digital -->
+    <section class="featured-highlight">
+        <div class="featured-highlight-content">
+            <h2>🌟 Único en Montería</h2>
+            <p><strong>Montería Natación Master</strong> es el único club de natación en Montería con <strong>seguimiento digital anual de notas y avances</strong>, garantizando transparencia y control en la inversión deportiva.</p>
+            <span class="highlight-badge">📊 Inscripciones abiertas para enero 2026</span>
+        </div>
+    </section>
+
     <!-- Anuncios del Mes -->
     <section class="announcements">
         <div class="announcements-track">
@@ -2643,9 +2749,10 @@
     <!-- Sección de Inscripción -->
     <section class="enrollment-section">
         <div class="container">
-            <p class="enrollment-text">¿Listo para comenzar tu aventura acuática?</p>
+            <p class="enrollment-text"><strong>Montería Natación Master</strong> es el único club de natación en Montería con seguimiento digital anual de notas y avances, garantizando transparencia y control en la inversión deportiva.</p>
+            <p class="enrollment-text">¡Inscripciones abiertas para enero 2026! ¿Listo para comenzar tu aventura acuática?</p>
             <a href="https://wa.me/573144809367?text=Hola,%20quiero%20información%20sobre%20las%20clases%20de%20natación" target="_blank" rel="noopener noreferrer" class="enrollment-button">
-                ¡Escribe por WhatsAPP y Reserva Ya - Últimos Cupos!
+                ¡Inscripciones Abiertas para Enero 2026 - Reserva tu Cupo!
             </a>
         </div>
     </section>
@@ -2887,7 +2994,7 @@
                     <img src="img/nadador-destacado.jpg" alt="Nadador del Trimestre">
                 </div>
                 <div class="swimmer-info">
-                    <span class="achievement-badge">⭐ Abril - Junio 2025</span>
+                    <span class="achievement-badge">⭐ Enero - Marzo 2026</span>
                     <h3>Susana Hoyos</h3>
                     <p><strong>Categoría:</strong> Infantil</p>
                     <p><strong>Logros:</strong></p>
@@ -3325,7 +3432,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2025 Montería Natación Master. Todos los derechos reservados.</p>
+                <p>&copy; 2026 Montería Natación Master. Todos los derechos reservados.</p>
             </div>
         </div>
     </footer>
@@ -4176,7 +4283,7 @@
         const offerConfig = {
             enabled: true, // Cambiar a false para ocultar
             startDate: 'auto', // 'auto' detecta fecha actual, o usa fecha específica (YYYY-MM-DD)
-            endDate: '2025-09-05', // 📌 CAMBIA SOLO ESTA FECHA (YYYY-MM-DD)
+            endDate: '2026-01-31', // 📌 CAMBIA SOLO ESTA FECHA (YYYY-MM-DD)
             title: '💸 ¡MATRÍCULA GRATIS! 💸',
             description: 'y obtén tu matrícula completamente GRATIS'
         };

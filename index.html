@@ -3545,7 +3545,7 @@
         // Cargar archivo Excel al iniciar
         async function cargarArchivoExcel() {
             try {
-                const response = await fetch('./documentos/EVALUACIONES MNM 2025.xlsx');
+                const response = await fetch('./documentos/EVALUACIONES MNM 2026.xlsx');
                 const arrayBuffer = await response.arrayBuffer();
                 workbook = XLSX.read(arrayBuffer, { type: 'array' });
                 console.log('Archivo Excel cargado correctamente');

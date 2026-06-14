@@ -64,12 +64,20 @@
     <style>
         body{margin:0;font-family:system-ui,-apple-system,sans-serif;color:#134492}
         .header{background:#fff;position:fixed;top:0;width:100%;z-index:1000;padding:1rem 0;box-shadow:0 2px 5px rgba(0,0,0,.1)}
+        .nav-logo-left,.nav-logo-right{object-fit:contain;width:auto}
         .hero{margin-top:60px;position:relative;height:70vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
         .video-container{position:absolute;inset:0;background:#134492}
         .video-container video{width:100%;height:100%;object-fit:cover;opacity:0}
         .video-container video.is-visible{opacity:1;transition:opacity .8s ease}
         .hero-content{position:relative;z-index:2;text-align:center;color:#fff;padding:2rem 2.5rem;background:rgba(13,42,92,.72);border-radius:18px;max-width:920px;margin:0 1rem;box-shadow:0 8px 32px rgba(0,0,0,.35)}
         .hero h1{font-size:3rem;margin-bottom:1rem;text-shadow:2px 2px 4px rgba(0,0,0,.5)}
+        @media (max-width:768px){
+            .nav-container{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:0 1rem}
+            .nav-logos{display:flex;align-items:center;gap:.5rem;flex:1;min-width:0;position:static;transform:none;width:auto;padding:0}
+            .nav-logo-left,.nav-logo-right{height:36px;max-height:36px}
+            .hamburger{display:flex;flex-shrink:0;margin-left:auto}
+            .hero{margin-top:70px}
+        }
     </style>
     <!-- Schema.org Structured Data (JSON-LD) -->
     <script type="application/ld+json">
@@ -207,8 +215,8 @@
     <header class="header">
         <nav class="nav-container">
             <div class="nav-logos">
-                <span class="nav-logo-left" role="img" aria-label="Montería Natación Master"></span>
-                <span class="nav-logo-right" role="img" aria-label="MNM Kids"></span>
+                <img src="logo/MNM.webp" alt="Logo Montería Natación Master" class="nav-logo-left" decoding="async">
+                <img src="logo/MNMKIDS.webp" alt="Logo MNM Kids" class="nav-logo-right" decoding="async">
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -994,7 +1002,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <img src="logo/LOGO-AMARILLO.webp" alt="Montería Natación Master" class="footer-logo" width="200" height="80" loading="lazy" decoding="async">
+                    <img src="logo/LOGO-AMARILLO.webp" alt="Montería Natación Master" class="footer-logo" loading="lazy" decoding="async">
                     <p>Formando nadadores integrales desde 2018</p>
                 </div>
                 <div class="footer-section">

@@ -197,8 +197,8 @@
     <header class="header">
         <nav class="nav-container">
             <div class="nav-logos">
-                <img src="logo/MNM.webp" alt="Logo Izquierdo" class="nav-logo-left" loading="lazy" decoding="async">
-                <img src="logo/MNMKIDS.webp" alt="Logo Derecho" class="nav-logo-right" loading="lazy" decoding="async">
+                <span class="nav-logo-left" role="img" aria-label="Montería Natación Master"></span>
+                <span class="nav-logo-right" role="img" aria-label="MNM Kids"></span>
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -225,7 +225,7 @@
     <!-- Hero Section con Video -->
     <section class="hero" id="inicio">
         <div class="video-container">
-            <video autoplay muted loop playsinline preload="auto" id="heroVideo"></video>
+            <video autoplay muted loop playsinline preload="auto" fetchpriority="high" id="heroVideo"></video>
             <script>
             (function () {
                 var video = document.getElementById('heroVideo');

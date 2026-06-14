@@ -42,10 +42,14 @@
             backdrop-filter: blur(10px);
         }
 
-        .header.scrolled .nav-logo-left,
+        .header.scrolled .nav-logo-left {
+            height: 40px;
+            width: 53px;
+        }
+
         .header.scrolled .nav-logo-right {
             height: 40px;
-            width: auto;
+            width: 45px;
         }
 
         .nav-container {
@@ -71,15 +75,32 @@
             padding: 0 20px;
         }
 
-        .nav-logo-left, .nav-logo-right {
-            display: block;
-            height: 50px;
-            width: auto;
-            max-width: 120px;
-            object-fit: contain;
-            object-position: center;
+        .nav-logo-left,
+        .nav-logo-right {
+            display: none;
             flex-shrink: 0;
             opacity: 0.8;
+        }
+
+        @media (min-width: 769px) {
+            .nav-logo-left,
+            .nav-logo-right {
+                display: block;
+                height: 50px;
+                background-repeat: no-repeat;
+                background-position: center;
+                background-size: contain;
+            }
+
+            .nav-logo-left {
+                width: 67px;
+                background-image: url('/logo/MNM.webp');
+            }
+
+            .nav-logo-right {
+                width: 56px;
+                background-image: url('/logo/MNMKIDS.webp');
+            }
         }
 
         .nav-menu {

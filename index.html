@@ -61,6 +61,16 @@
     <!-- End Google Tag Manager -->
     <link rel="preload" href="/css/styles.min.css" as="style">
     <link rel="stylesheet" href="/css/styles.min.css">
+    <style>
+        body{margin:0;font-family:system-ui,-apple-system,sans-serif;color:#134492}
+        .header{background:#fff;position:fixed;top:0;width:100%;z-index:1000;padding:1rem 0;box-shadow:0 2px 5px rgba(0,0,0,.1)}
+        .hero{margin-top:60px;position:relative;height:70vh;display:flex;align-items:center;justify-content:center;overflow:hidden}
+        .video-container{position:absolute;inset:0;background:#134492}
+        .video-container video{width:100%;height:100%;object-fit:cover;opacity:0}
+        .video-container video.is-visible{opacity:1;transition:opacity .8s ease}
+        .hero-content{position:relative;z-index:2;text-align:center;color:#fff;padding:2rem 2.5rem;background:rgba(13,42,92,.72);border-radius:18px;max-width:920px;margin:0 1rem;box-shadow:0 8px 32px rgba(0,0,0,.35)}
+        .hero h1{font-size:3rem;margin-bottom:1rem;text-shadow:2px 2px 4px rgba(0,0,0,.5)}
+    </style>
     <!-- Schema.org Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
@@ -225,19 +235,7 @@
     <!-- Hero Section con Video -->
     <section class="hero" id="inicio">
         <div class="video-container">
-            <video autoplay muted loop playsinline preload="auto" fetchpriority="high" id="heroVideo"></video>
-            <script>
-            (function () {
-                var video = document.getElementById('heroVideo');
-                if (!video) return;
-                var source = document.createElement('source');
-                source.type = 'video/mp4';
-                source.src = window.matchMedia('(max-width: 768px)').matches
-                    ? 'video/natacion-banner-mobile.mp4'
-                    : 'video/natacion-banner.mp4';
-                video.appendChild(source);
-            })();
-            </script>
+            <video muted loop playsinline preload="none" id="heroVideo"></video>
             <div class="video-overlay"></div>
         </div>
         <div class="hero-content">
@@ -1060,20 +1058,31 @@
             return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         }
 
-        if (heroVideo && videoOverlay) {
-            const showOverlay = () => videoOverlay.classList.add('is-visible');
+        function initHeroVideoDeferred() {
+            if (!heroVideo || !shouldLoadHeroVideo()) return;
 
-            if (shouldLoadHeroVideo()) {
-                heroVideo.play().catch(() => {});
-            } else {
-                heroVideo.removeAttribute('autoplay');
-                heroVideo.pause();
-            }
+            const source = document.createElement('source');
+            source.type = 'video/mp4';
+            source.src = window.matchMedia('(max-width: 768px)').matches
+                ? 'video/natacion-banner-mobile.mp4'
+                : 'video/natacion-banner.mp4';
+            heroVideo.appendChild(source);
+            heroVideo.load();
 
-            if (heroVideo.readyState >= 2) {
-                showOverlay();
+            const showVideo = () => {
+                heroVideo.classList.add('is-visible');
+                if (videoOverlay) videoOverlay.classList.add('is-visible');
+            };
+
+            heroVideo.addEventListener('loadeddata', showVideo, { once: true });
+            heroVideo.play().catch(() => {});
+        }
+
+        if (heroVideo) {
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(initHeroVideoDeferred, { timeout: 3500 });
             } else {
-                heroVideo.addEventListener('loadeddata', showOverlay, { once: true });
+                window.addEventListener('load', () => setTimeout(initHeroVideoDeferred, 1500));
             }
         }
 

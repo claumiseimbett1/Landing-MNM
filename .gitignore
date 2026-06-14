@@ -1,3 +1,16 @@
+# Videos originales / backups (solo locales)
 video/natacion-banner-original.mp4
 video/natacion-banner-compressed.mp4
 video/IMG_9315.MP4
+
+# Informes Lighthouse (generados localmente)
+lighthouse*.json
+
+# Imágenes fuente; el sitio publica .webp
+img/*.jpg
+img/*.jpeg
+img/*.png
+
+# Logos PNG redundantes (se usa MNM.png para favicon/OG; el resto es .webp)
+logo/MNMKIDS.png
+logo/LOGO-AMARILLO.png

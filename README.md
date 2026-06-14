@@ -1,109 +1,136 @@
-# Montería Natación Master - Landing Page
+# Club Montería Natación Master — Landing Page
 
-Landing page oficial del Club Montería Natación Master, una escuela de natación ubicada en Montería, Córdoba, Colombia.
+Sitio web oficial del club de natación en Montería, Córdoba (Colombia).
 
-## 🏊‍♂️ Descripción
+**Producción:** [monterianatacionmaster.netlify.app](https://monterianatacionmaster.netlify.app)
 
-Sitio web responsivo que presenta la información del club de natación, sus programas, profesores, galería de fotos y opciones de contacto. Diseñado con HTML, CSS y JavaScript vanilla para garantizar un rendimiento óptimo.
+## Descripción
 
-## ✨ Características
+Landing estática, responsiva y optimizada para rendimiento. Presenta programas, profesores, galería, ubicación, PQRS, consulta de notas y contacto. Construida con HTML, CSS y JavaScript vanilla, desplegada en Netlify.
 
-- **Diseño Responsivo**: Optimizado para dispositivos móviles, tablets y escritorio
-- **Video Hero**: Sección principal con video de fondo
-- **Menú Hamburguesa**: Navegación móvil intuitiva
-- **Galería Interactiva**: Visualización de fotos con animaciones 3D
-- **Formulario de Contacto**: Sección para descarga de notas (en construcción)
-- **Integración con Redes Sociales**: Enlaces directos a WhatsApp, Instagram y Facebook
-- **Chatbot**: Enlace a asistente virtual SwimmIA
+## Características
 
-## 🏗️ Estructura del Proyecto
+- Diseño responsivo con menú hamburguesa accesible
+- Hero con video en escritorio; en móvil fondo azul (mejor rendimiento)
+- Imágenes en WebP con carga diferida
+- Consulta de notas con verificación por correo (EmailJS)
+- Formulario PQRS (Formspree)
+- Asistente virtual NatalIA (enlace externo)
+- Galería, testimonios, nadador del trimestre
+- SEO: meta tags, JSON-LD, `sitemap.xml`, `robots.txt`
+- Google Tag Manager (carga diferida)
+- Cabeceras de caché en `netlify.toml`
+
+## Estructura del proyecto
 
 ```
 Landing-MNM/
-├── index.html          # Página principal
-├── video/              # Videos del sitio
-│   └── natacion-banner.mp4
-├── img/                # Imágenes de la galería y contenido
-│   ├── galeria1.jpg
-│   ├── galeria2.jpg
-│   ├── profesor1.png
-│   ├── profesor2.png
-│   └── ...
-├── logo/               # Logos del club
-│   ├── MNM.png
-│   ├── MNMKIDS.png
-│   └── LOGO-AMARILLO.png
-└── README.md           # Documentación del proyecto
+├── index.html              # Página principal
+├── css/
+│   ├── styles.css          # Estilos fuente
+│   └── styles.min.css      # Estilos minificados (producción)
+├── js/
+│   └── app.js              # Lógica del sitio (menú, notas, PQRS, etc.)
+├── img/                    # Imágenes WebP
+├── logo/                   # Logos (WebP + MNM.png para favicon/OG)
+├── video/
+│   ├── natacion-banner.mp4         # Hero escritorio
+│   └── natacion-banner-mobile.mp4  # Hero móvil (no se carga por defecto)
+├── documentos/
+│   ├── EVALUACIONES MNM 2025.xlsx
+│   └── EVALUACIONES MNM 2026.xlsx  # Datos para consulta de notas
+├── scripts/                # Utilidades de mantenimiento (Python)
+│   ├── optimize-images.py
+│   ├── compress-video.py
+│   ├── extract-css.py
+│   └── extract-js.py
+├── netlify.toml
+├── robots.txt
+├── sitemap.xml
+└── README.md
 ```
 
-## 🎯 Secciones
+## Secciones del sitio
 
-1. **Inicio**: Hero section con video y mensaje principal
-2. **Nuestra Escuela**: Misión, visión y valores
-3. **Programas**: Tipos de natación que se enseñan
-4. **Profesores**: Equipo de instructores
-5. **Nadador Destacado**: Reconocimiento trimestral
-6. **Programas Especiales**: Competencias, clases del mar y estímulos
-7. **Galería**: Fotos de entrenamientos y competencias
-8. **Descargas**: Formulario para notas (en desarrollo)
-9. **Contacto**: Información de contacto y redes sociales
+| Sección | Descripción |
+|---------|-------------|
+| Inicio | Hero, vacacionales, CTA WhatsApp |
+| Escuela | Misión, visión y valores |
+| Programas | Adultos, niños, competitivo, Master |
+| Profesores | Equipo de instructores |
+| Testimonios | Opiniones de nadadores y familias |
+| Nadador del trimestre | Reconocimiento destacado |
+| Ubicación | Horarios y mapa (carga diferida) |
+| Galería | Fotos del club |
+| Asistente virtual | NatalIA |
+| Descargas | Consulta de notas por documento |
+| PQRS | Peticiones, quejas y sugerencias |
+| Contacto | Redes y pie de página |
 
-## 🚀 Instalación y Uso
+## Consulta de notas
 
-1. Clona el repositorio:
+1. El usuario ingresa documento y correo.
+2. Se envía un código de verificación por EmailJS.
+3. Tras validar el código, se busca el documento en `documentos/EVALUACIONES MNM 2026.xlsx`.
+4. Se muestran las notas y se puede generar PDF o compartir.
+
+> **Importante:** el archivo Excel debe estar en el repositorio (o en el deploy de Netlify) para que la consulta funcione en producción.
+
+## Desarrollo local
+
 ```bash
-git clone [URL_DEL_REPOSITORIO]
-```
-
-2. Navega al directorio del proyecto:
-```bash
+git clone https://github.com/claumiseimbett1/Landing-MNM.git
 cd Landing-MNM
+python -m http.server 8765
 ```
 
-3. Abre `index.html` en tu navegador web preferido
+Abre `http://localhost:8765` en el navegador.
 
-No se requieren dependencias adicionales ni proceso de build.
+No hay proceso de build obligatorio. El sitio sirve los archivos estáticos directamente.
 
-## 📱 Características Técnicas
+## Despliegue
 
-- **HTML5 Semántico**: Estructura accesible y SEO-friendly
-- **CSS3 Moderno**: Variables CSS, Grid, Flexbox, animaciones
-- **JavaScript Vanilla**: Sin dependencias externas
-- **Optimización Móvil**: Media queries responsive
-- **Animaciones Suaves**: Transiciones CSS y efectos hover
+El sitio se despliega automáticamente en **Netlify** al hacer push a la rama `main`.
 
-## 🎨 Paleta de Colores
+```bash
+git add .
+git commit -m "Descripción del cambio"
+git push
+```
 
-- **Azul Primario**: #134492
-- **Amarillo Secundario**: #dede3c
-- **Azul Terciario**: #1a3d70
-- **Texto Claro**: #ffffff
-- **Texto Oscuro**: #333333
-- **Gris Claro**: #f5f5f5
+## Scripts de mantenimiento
 
-## 📞 Contacto
+| Script | Uso |
+|--------|-----|
+| `scripts/optimize-images.py` | Convertir imágenes a WebP y redimensionar |
+| `scripts/compress-video.py` | Comprimir videos del hero |
+| `scripts/extract-css.py` | Extraer CSS inline y regenerar `.min.css` |
+| `scripts/extract-js.py` | Extraer JS inline a `js/app.js` |
 
-- **Ubicación**: Piscina de la Villaolímpica, Montería, Córdoba
-- **Teléfono**: (+57) 314 4809367
-- **Email**: monteriamaster@gmail.com
-- **Instagram**: @club_natacion_mnm
-- **Facebook**: /MNMClubNatacion
+Tras editar `css/styles.css`, regenera el minificado:
 
-## 🔧 Mantenimiento
+```bash
+python -c "import re; from pathlib import Path; css=Path('css/styles.css').read_text(encoding='utf-8'); m=re.sub(r'/\*.*?\*/','',css,flags=re.DOTALL); m=re.sub(r'\s+',' ',m); m=re.sub(r'\s*([{}:;,>+~])\s*',r'\1',m).strip(); Path('css/styles.min.css').write_text(m,encoding='utf-8')"
+```
 
-### Actualizaciones Recientes
-- Optimización del menú móvil para evitar superposición con imágenes
-- Ajuste del tamaño de fuente en navegación móvil
+## Paleta de colores
 
-### Para Desarrolladores
-- El sitio utiliza CSS puro sin frameworks
-- Las imágenes deben optimizarse para web antes de subir
-- Los videos deben estar en formato MP4 para compatibilidad
+| Variable | Color |
+|----------|-------|
+| Primario | `#134492` |
+| Secundario | `#dede3c` |
+| Terciario | `#1a3d70` |
 
-## 📄 Licencia
+## Contacto del club
 
-© 2025 Montería Natación Master. Todos los derechos reservados.
+- **Ubicación:** Piscina Villaolímpica, Montería, Córdoba
+- **Teléfono / WhatsApp:** (+57) 314 480 9367
+- **Email:** monteriamaster@gmail.com
+- **Instagram:** [@club_natacion_mnm](https://instagram.com/club_natacion_mnm)
+- **Facebook:** [MNMClubNatacion](https://web.facebook.com/MNMClubNatacion)
 
-## 🤝 Contribuciones
+## Licencia
 
-Este es un proyecto privado del Club Montería Natación Master. Para contribuciones o sugerencias, contacta directamente al club.
+© 2025–2026 Club Montería Natación Master. Todos los derechos reservados.
+
+Proyecto privado del club. Para cambios o sugerencias, contactar directamente al club.

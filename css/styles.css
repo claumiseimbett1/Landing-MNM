@@ -45,6 +45,7 @@
         .header.scrolled .nav-logo-left,
         .header.scrolled .nav-logo-right {
             height: 40px;
+            width: auto;
         }
 
         .nav-container {
@@ -71,6 +72,8 @@
 
         .nav-logo-left, .nav-logo-right {
             height: 50px;
+            width: auto;
+            object-fit: contain;
             opacity: 0.8;
         }
 

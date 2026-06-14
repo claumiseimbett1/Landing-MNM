@@ -41,12 +41,23 @@
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/logo/MNM.png">
     
-    <!-- Google Tag Manager -->
-    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    })(window,document,'script','dataLayer','GTM-WV86WF3R');</script>
+    <!-- Google Tag Manager (carga diferida para no bloquear el render) -->
+    <script>
+    function loadGTM() {
+        (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-WV86WF3R');
+    }
+    window.addEventListener('load', function() {
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(loadGTM, { timeout: 4000 });
+        } else {
+            setTimeout(loadGTM, 2000);
+        }
+    });
+    </script>
     <!-- End Google Tag Manager -->
     <style>
         * {
@@ -418,11 +429,12 @@
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
+            left: 0;
             width: 100%;
             height: 100%;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.15), transparent);
             animation: shine 3s infinite;
+            will-change: transform;
         }
 
         .featured-highlight::after {
@@ -437,8 +449,8 @@
         }
 
         @keyframes shine {
-            0% { left: -100%; }
-            100% { left: 100%; }
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(200%); }
         }
 
         .featured-highlight-content {
@@ -2607,11 +2619,6 @@
             }
         }
     </style>
-    <!-- Librerías para manejar Excel y PDF -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <!-- EmailJS para envío de emails gratis -->
-    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
     <!-- Schema.org Structured Data (JSON-LD) -->
     <script type="application/ld+json">
     {
@@ -2738,15 +2745,6 @@
     }
     </script>
 
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5P1JFJP1Y2"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-5P1JFJP1Y2');
-</script>
 </head>
 <body>
     <!-- Google Tag Manager (noscript) -->
@@ -2757,8 +2755,8 @@
     <header class="header">
         <nav class="nav-container">
             <div class="nav-logos">
-                <img src="logo/MNM.png" alt="Logo Izquierdo" class="nav-logo-left">
-                <img src="logo/MNMKIDS.png" alt="Logo Derecho" class="nav-logo-right">
+                <img src="logo/MNM.webp" alt="Logo Izquierdo" class="nav-logo-left" width="200" height="50" decoding="async">
+                <img src="logo/MNMKIDS.webp" alt="Logo Derecho" class="nav-logo-right" width="200" height="50" decoding="async" loading="lazy">
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -2785,11 +2783,11 @@
     <!-- Hero Section con Video -->
     <section class="hero" id="inicio">
         <div class="video-container">
-            <video autoplay muted loop id="heroVideo">
-                <source src="video/natacion-banner.mp4" type="video/mp4">
+            <video autoplay muted loop playsinline preload="none" poster="video/hero-poster.webp" id="heroVideo">
+                <source data-src="video/natacion-banner.mp4" type="video/mp4">
                 Tu navegador no soporta el elemento de video.
             </video>
-            <div class="video-overlay"></div>
+            <div class="video-overlay is-visible"></div>
         </div>
         <div class="hero-content">
             <h1>Club Montería Natación Master</h1>
@@ -3072,7 +3070,7 @@
             <div class="teachers-grid">
                 <div class="teacher-card">
                     <div class="teacher-photo">
-                        <img src="img/profesor1.png" alt="Profesor Raul">
+                        <img src="img/profesor1.webp" alt="Profesor Raul" width="200" height="200" loading="lazy" decoding="async">
                     </div>
                     <h3 class="teacher-name">Raúl Vicuña</h3>
                     <p class="teacher-role">Director Deportivo - Entrenador Deportivo</p>
@@ -3080,7 +3078,7 @@
                 </div>
                 <div class="teacher-card">
                     <div class="teacher-photo">
-                        <img src="img/profesor2.png" alt="Profesor Yassir">
+                        <img src="img/profesor2.webp" alt="Profesor Yassir" width="200" height="200" loading="lazy" decoding="async">
                     </div>
                     <h3 class="teacher-name">Yassir Burgos</h3>
                     <p class="teacher-role">Instructor de Nivel Básico e Intermedio</p>
@@ -3089,7 +3087,7 @@
                 <div class="teacher-card teacher-card--disabled" aria-hidden="true">
                     <!-- Daniel del Castillo - profesor inhabilitado temporalmente -->
                     <div class="teacher-photo">
-                        <img src="img/profesor3.png" alt="Profesor Daniel">
+                        <img src="img/profesor3.webp" alt="Profesor Daniel" width="200" height="200" loading="lazy" decoding="async">
                     </div>
                     <h3 class="teacher-name">Daniel del Castillo</h3>
                     <p class="teacher-role">Instructor de Nivel Básico</p>
@@ -3149,7 +3147,7 @@
             <h2 class="section-title">Nadador del Trimestre</h2>
             <div class="swimmer-content">
                 <div class="swimmer-photo">
-                    <img src="img/nadador-trimestre.png" alt="Nadador del Trimestre">
+                    <img src="img/nadador-trimestre.webp" alt="Nadador del Trimestre" width="240" height="300" loading="lazy" decoding="async">
                 </div>
                 <div class="swimmer-info">
                     <span class="achievement-badge">⭐ Mayo 2026</span>
@@ -3232,28 +3230,28 @@
             <div class="gallery-container">
                 <div class="gallery-track">
                     <div class="gallery-card">
-                        <img src="img/galeria1.jpg" alt="Entrenamiento de natación">
+                        <img src="img/galeria1.webp" alt="Entrenamiento de natación" width="800" height="600" loading="lazy" decoding="async">
                     </div>
                     <div class="gallery-card">
-                        <img src="img/galeria2.jpg" alt="Competencia local">
+                        <img src="img/galeria2.webp" alt="Competencia local" width="800" height="600" loading="lazy" decoding="async">
                     </div>
                     <div class="gallery-card">
-                        <img src="img/galeria3.jpg" alt="Competencia Masterkids">
+                        <img src="img/galeria3.webp" alt="Competencia Masterkids" width="800" height="1066" loading="lazy" decoding="async">
                     </div>
                     <div class="gallery-card">
-                        <img src="img/galeria4.jpg" alt="Premiación">
+                        <img src="img/galeria4.webp" alt="Premiación" width="800" height="600" loading="lazy" decoding="async">
                     </div>
                     <div class="gallery-card">
-                        <img src="img/galeria5.jpg" alt="Clase del mar">
+                        <img src="img/galeria5.webp" alt="Clase del mar" width="800" height="1066" loading="lazy" decoding="async">
                     </div>
                     <div class="gallery-card">
-                        <img src="img/galeria6.jpg" alt="Nuestras boyas para nado en el mar">
+                        <img src="img/galeria6.webp" alt="Nuestras boyas para nado en el mar" width="800" height="1064" loading="lazy" decoding="async">
                     </div>
                     <div class="gallery-card">
-                        <img src="img/galeria7.jpg" alt="Nuestra bandera">
+                        <img src="img/galeria7.webp" alt="Nuestra bandera" width="800" height="1422" loading="lazy" decoding="async">
                     </div>
                     <div class="gallery-card">
-                        <img src="img/galeria8.png" alt="Nuestros elementos institucionales">
+                        <img src="img/galeria8.webp" alt="Nuestros elementos institucionales" width="800" height="1000" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -3267,28 +3265,28 @@
             <div class="gallery-mobile-container">
                 <div class="gallery-mobile-track">
                     <div class="gallery-mobile-card">
-                        <img src="img/galeria1.jpg" alt="Entrenamiento de natación">
+                        <img src="img/galeria1.webp" alt="Entrenamiento de natación" width="800" height="600" loading="lazy" decoding="async">
                     </div>
                     <div class="gallery-mobile-card">
-                        <img src="img/galeria2.jpg" alt="Competencia local">
+                        <img src="img/galeria2.webp" alt="Competencia local" width="800" height="600" loading="lazy" decoding="async">
                     </div>
                     <div class="gallery-mobile-card">
-                        <img src="img/galeria3.jpg" alt="Competencia Masterkids">
+                        <img src="img/galeria3.webp" alt="Competencia Masterkids" width="800" height="1066" loading="lazy" decoding="async">
                     </div>
                     <div class="gallery-mobile-card">
-                        <img src="img/galeria4.jpg" alt="Premiación">
+                        <img src="img/galeria4.webp" alt="Premiación" width="800" height="600" loading="lazy" decoding="async">
                     </div>
                     <div class="gallery-mobile-card">
-                        <img src="img/galeria5.jpg" alt="Clase del mar">
+                        <img src="img/galeria5.webp" alt="Clase del mar" width="800" height="1066" loading="lazy" decoding="async">
                     </div>
                     <div class="gallery-mobile-card">
-                        <img src="img/galeria6.jpg" alt="Nuestras boyas para nado en el mar">
+                        <img src="img/galeria6.webp" alt="Nuestras boyas para nado en el mar" width="800" height="1064" loading="lazy" decoding="async">
                     </div>
                     <div class="gallery-mobile-card">
-                        <img src="img/galeria7.jpg" alt="Nuestra bandera">
+                        <img src="img/galeria7.webp" alt="Nuestra bandera" width="800" height="1422" loading="lazy" decoding="async">
                     </div>
                     <div class="gallery-mobile-card">
-                        <img src="img/galeria8.png" alt="Nuestros elementos institucionales">
+                        <img src="img/galeria8.webp" alt="Nuestros elementos institucionales" width="800" height="1000" loading="lazy" decoding="async">
                     </div>
                 </div>
             </div>
@@ -3547,7 +3545,7 @@
         <div class="container">
             <div class="footer-content">
                 <div class="footer-section">
-                    <img src="logo/LOGO-AMARILLO.png" alt="Montería Natación Master" class="footer-logo">
+                    <img src="logo/LOGO-AMARILLO.webp" alt="Montería Natación Master" class="footer-logo" width="200" height="80" loading="lazy" decoding="async">
                     <p>Formando nadadores integrales desde 2018</p>
                 </div>
                 <div class="footer-section">
@@ -3603,13 +3601,30 @@
         const heroVideo = document.getElementById('heroVideo');
         const videoOverlay = document.querySelector('.video-overlay');
 
-        if (heroVideo && videoOverlay) {
-            const showOverlay = () => videoOverlay.classList.add('is-visible');
+        function shouldLoadHeroVideo() {
+            const conn = navigator.connection;
+            if (conn && (conn.saveData || conn.effectiveType === 'slow-2g' || conn.effectiveType === '2g')) {
+                return false;
+            }
+            return !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        }
 
-            if (heroVideo.readyState >= 2) {
-                showOverlay();
+        function initHeroVideo() {
+            if (!heroVideo || !shouldLoadHeroVideo()) return;
+
+            const source = heroVideo.querySelector('source[data-src]');
+            if (!source) return;
+
+            source.src = source.dataset.src;
+            heroVideo.load();
+            heroVideo.play().catch(() => {});
+        }
+
+        if (heroVideo && videoOverlay) {
+            if ('requestIdleCallback' in window) {
+                requestIdleCallback(initHeroVideo, { timeout: 3000 });
             } else {
-                heroVideo.addEventListener('loadeddata', showOverlay);
+                window.addEventListener('load', () => setTimeout(initHeroVideo, 1500));
             }
         }
 
@@ -3646,6 +3661,42 @@
             });
         });
 
+        // Carga diferida de librerías pesadas (Excel, PDF, Email)
+        const loadedLibs = { xlsx: false, jspdf: false, emailjs: false };
+
+        function loadScript(src) {
+            return new Promise((resolve, reject) => {
+                const script = document.createElement('script');
+                script.src = src;
+                script.async = true;
+                script.onload = resolve;
+                script.onerror = reject;
+                document.body.appendChild(script);
+            });
+        }
+
+        async function ensureXlsx() {
+            if (!loadedLibs.xlsx) {
+                await loadScript('https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js');
+                loadedLibs.xlsx = true;
+            }
+        }
+
+        async function ensureJsPdf() {
+            if (!loadedLibs.jspdf) {
+                await loadScript('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+                loadedLibs.jspdf = true;
+            }
+        }
+
+        async function ensureEmailJs() {
+            if (!loadedLibs.emailjs) {
+                await loadScript('https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js');
+                emailjs.init(EMAIL_PUBLIC_KEY);
+                loadedLibs.emailjs = true;
+            }
+        }
+
         // Variables globales para el manejo de Excel
         let workbook = null;
         let datosEncontrados = null;
@@ -3659,9 +3710,6 @@
         const EMAIL_TEMPLATE_ID = 'template_d138evr'; // ✅ Template ID configurado
         const EMAIL_PUBLIC_KEY = '1ErOYdfGE3oKzXbzr'; // ✅ Public Key configurado
         
-        // Inicializar EmailJS
-        emailjs.init(EMAIL_PUBLIC_KEY);
-
         // Generar código de verificación de 6 dígitos
         function generarCodigoVerificacion() {
             return Math.floor(100000 + Math.random() * 900000).toString();
@@ -3670,6 +3718,7 @@
         // Enviar código de verificación por email
         async function enviarCodigoVerificacion(email, codigo) {
             try {
+                await ensureEmailJs();
                 const templateParams = {
                     to_email: email,
                     codigo_verificacion: codigo,
@@ -3687,6 +3736,7 @@
         // Cargar archivo Excel al iniciar
         async function cargarArchivoExcel() {
             try {
+                await ensureXlsx();
                 const response = await fetch('./documentos/EVALUACIONES MNM 2026.xlsx');
                 const arrayBuffer = await response.arrayBuffer();
                 workbook = XLSX.read(arrayBuffer, { type: 'array' });
@@ -3811,9 +3861,10 @@
         }
 
         // Generar PDF con los datos
-        function generarPDF() {
+        async function generarPDF() {
             if (!datosEncontrados || datosEncontrados.length === 0) return;
 
+            await ensureJsPdf();
             const { jsPDF } = window.jspdf;
             const doc = new jsPDF();
             
@@ -4014,6 +4065,7 @@
         // Manejo del formulario principal - enviar código de verificación
         document.getElementById('downloadForm').addEventListener('submit', async function(e) {
             e.preventDefault();
+            await ensureEmailJs();
             
             const documento = document.getElementById('documento').value.trim();
             const email = document.getElementById('email').value.trim();
@@ -4338,9 +4390,6 @@
             document.body.appendChild(modal);
             textarea.select();
         }
-
-        // Cargar Excel al iniciar la página
-        window.addEventListener('load', cargarArchivoExcel);
 
         // Animación de la galería tipo baraja
         const galleryTrack = document.querySelector('.gallery-track');

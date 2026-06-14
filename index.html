@@ -243,7 +243,12 @@
             z-index: 2;
             text-align: center;
             color: var(--text-light);
-            padding: 2rem;
+            padding: 2rem 2.5rem;
+            background: rgba(13, 42, 92, 0.72);
+            border-radius: 18px;
+            max-width: 920px;
+            margin: 0 1rem;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.35);
         }
 
         .hero h1 {
@@ -254,19 +259,29 @@
 
         .hero p {
             font-size: 1.5rem;
-            margin-bottom: 2rem;
+            margin-bottom: 0.75rem;
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.9);
+            line-height: 1.4;
         }
 
         .hero .hero-highlight {
             display: inline-block;
             background: linear-gradient(90deg, #ffe066, var(--secondary-color), #ffd24d);
             background-size: 200% 200%;
-            color: var(--tertiary-color);
-            padding: 0.15rem 0.5rem;
-            border-radius: 6px;
-            font-weight: 700;
-            box-shadow: 0 0 12px rgba(255, 224, 102, 0.6);
+            color: #0d2a5c;
+            padding: 0.35rem 0.75rem;
+            border-radius: 8px;
+            font-weight: 800;
+            font-size: 1.35rem;
+            line-height: 1.35;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.45);
             animation: hero-highlight-shine 4s ease infinite;
+            text-shadow: none;
+        }
+
+        .hero .hero-info {
+            font-size: 1.15rem;
+            font-weight: 600;
         }
 
         @keyframes hero-highlight-shine {
@@ -281,21 +296,49 @@
         /* Ajustar tamaño de texto del banner en móvil */
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.2rem;
+                font-size: 2rem;
             }
             
             .hero p {
-                font-size: 1.2rem;
+                font-size: 1.05rem;
+            }
+
+            .hero .hero-highlight {
+                display: block;
+                font-size: 1rem;
+                padding: 0.45rem 0.65rem;
+                margin: 0.25rem auto;
+                max-width: 100%;
+            }
+
+            .hero .hero-info {
+                font-size: 0.95rem;
+            }
+
+            .hero-content {
+                padding: 1.25rem 1rem;
+                margin: 0 0.75rem;
             }
         }
 
         @media (max-width: 480px) {
             .hero h1 {
-                font-size: 1.8rem;
+                font-size: 1.65rem;
             }
             
             .hero p {
+                font-size: 0.95rem;
+            }
+
+            .hero .hero-highlight {
+                font-size: 0.92rem;
+            }
+
+            .cta-button.cta-whatsapp {
                 font-size: 1rem;
+                padding: 0.85rem 1.25rem;
+                width: 100%;
+                max-width: 320px;
             }
         }
 
@@ -323,6 +366,38 @@
                         0 0 40px rgba(222, 222, 60, 0.4),
                         0 0 60px rgba(222, 222, 60, 0.2),
                         0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button.cta-whatsapp {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: #ffffff;
+            font-size: 1.15rem;
+            letter-spacing: 0.02em;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+            animation: cta-whatsapp-pulse 2.6s ease-in-out infinite;
+            margin-top: 0.5rem;
+        }
+
+        .cta-button.cta-whatsapp:hover {
+            background: linear-gradient(135deg, #2ee06a, #25D366);
+            color: #ffffff;
+            box-shadow: 0 0 24px rgba(37, 211, 102, 0.65),
+                        0 8px 25px rgba(0, 0, 0, 0.3);
+        }
+
+        @keyframes cta-whatsapp-pulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+                transform: translateY(0);
+            }
+            50% {
+                box-shadow: 0 0 28px rgba(37, 211, 102, 0.7);
+                transform: translateY(-2px);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.45);
+                transform: translateY(0);
+            }
         }
 
         /* Efecto Ripple */
@@ -2278,7 +2353,11 @@
 
             .cta-button {
                 padding: 0.8rem 1.5rem;
-                font-size: 0.9rem;
+                font-size: 0.95rem;
+            }
+
+            .cta-button.cta-whatsapp {
+                font-size: 1rem;
             }
 
             .announcements {
@@ -2732,9 +2811,9 @@
             <p>Clases para niños y adultos</p>
             <p><span class="hero-highlight">Vacacionales en junio — ¡Comienza ya!</span></p>
             <p><span class="hero-highlight">Convierte la natación de una opción en tu gran pasión</span></p>
-            <p>Piscina Villaolimpica Montería, carril 7</p>
-            <p>Inspirados en la excelencia #Sabemosdenatación</p>
-            <a href="https://chatbootmnm.streamlit.app/" target="_blank" rel="noopener noreferrer" class="cta-button">💬 Chat Asistente Virtual</a>
+            <p class="hero-info">Piscina Villaolimpica Montería, carril 7</p>
+            <p class="hero-info">Inspirados en la excelencia #Sabemosdenatación</p>
+            <a href="https://wa.me/573144809367?text=Hola,%20quiero%20información%20sobre%20los%20vacacionales%20de%20junio.%20%C2%A1Comienza%20ya!" target="_blank" rel="noopener noreferrer" class="cta-button cta-whatsapp">📱 Escríbenos por WhatsApp</a>
         </div>
     </section>
 

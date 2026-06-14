@@ -40,6 +40,7 @@
     
     <!-- Favicon -->
     <link rel="icon" type="image/png" href="/logo/MNM.png">
+    <link rel="preload" as="image" href="/video/hero-poster.webp" fetchpriority="high">
     
     <!-- Google Tag Manager (carga diferida para no bloquear el render) -->
     <script>
@@ -2784,7 +2785,7 @@
     <section class="hero" id="inicio">
         <div class="video-container">
             <video autoplay muted loop playsinline preload="none" poster="video/hero-poster.webp" id="heroVideo">
-                <source data-src="video/natacion-banner.mp4" type="video/mp4">
+                <source data-src-mobile="video/natacion-banner-mobile.mp4" data-src-desktop="video/natacion-banner.mp4" type="video/mp4">
                 Tu navegador no soporta el elemento de video.
             </video>
             <div class="video-overlay is-visible"></div>
@@ -3612,10 +3613,11 @@
         function initHeroVideo() {
             if (!heroVideo || !shouldLoadHeroVideo()) return;
 
-            const source = heroVideo.querySelector('source[data-src]');
+            const source = heroVideo.querySelector('source[data-src-mobile]');
             if (!source) return;
 
-            source.src = source.dataset.src;
+            const isMobile = window.matchMedia('(max-width: 768px)').matches;
+            source.src = isMobile ? source.dataset.srcMobile : source.dataset.srcDesktop;
             heroVideo.load();
             heroVideo.play().catch(() => {});
         }

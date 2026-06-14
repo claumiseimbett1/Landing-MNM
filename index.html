@@ -59,8 +59,8 @@
     });
     </script>
     <!-- End Google Tag Manager -->
-    <link rel="preload" href="/css/styles.min.css" as="style">
-    <link rel="stylesheet" href="/css/styles.min.css">
+    <link rel="preload" href="/css/styles.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/css/styles.min.css"></noscript>
     <style>
         body{margin:0;font-family:system-ui,-apple-system,sans-serif;color:#134492}
         .header{background:#fff;position:fixed;top:0;width:100%;z-index:1000;padding:1rem 0;box-shadow:0 2px 5px rgba(0,0,0,.1)}
@@ -79,131 +79,6 @@
             .hero{margin-top:70px}
         }
     </style>
-    <!-- Schema.org Structured Data (JSON-LD) -->
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "SportsActivityLocation",
-      "@id": "https://monterianatacionmaster.netlify.app/#organization",
-      "name": "Club Montería Natación Master",
-      "alternateName": ["MNM", "Clases de natación para adultos Montería", "Clases de natación niños Montería", "Piscinas abiertas en Montería", "Natación Montería"],
-      "url": "https://monterianatacionmaster.netlify.app",
-      "logo": "https://monterianatacionmaster.netlify.app/logo/MNM.png",
-      "image": "https://monterianatacionmaster.netlify.app/logo/MNM.png",
-      "description": "Clases de natación para adultos y clases de natación niños en Montería. Club Montería Natación Master en la Piscina Villaolímpica. Vacacionales de junio.",
-      "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "Villaolímpica",
-        "addressLocality": "Montería",
-        "addressRegion": "Córdoba",
-        "addressCountry": "CO"
-      },
-      "geo": {
-        "@type": "GeoCoordinates",
-        "latitude": "8.7500",
-        "longitude": "-75.8814"
-      },
-      "telephone": "+57-314-480-9367",
-      "email": "monteriamaster@gmail.com",
-      "openingHoursSpecification": [
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": [
-            "Monday",
-            "Tuesday",
-            "Wednesday",
-            "Thursday",
-            "Friday"
-          ],
-          "opens": "06:00",
-          "closes": "20:00"
-        },
-        {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": "Saturday",
-          "opens": "07:00",
-          "closes": "18:00"
-        }
-      ],
-      "priceRange": "$$",
-      "sport": "Swimming",
-      "amenityFeature": [
-        {
-          "@type": "LocationFeatureSpecification",
-          "name": "Piscinas abiertas en Montería",
-          "value": true
-        },
-        {
-          "@type": "LocationFeatureSpecification",
-          "name": "Instructores certificados",
-          "value": true
-        },
-        {
-          "@type": "LocationFeatureSpecification",
-          "name": "Clases de natación para adultos y niños",
-          "value": true
-        }
-      ],
-      "hasOfferCatalog": {
-        "@type": "OfferCatalog",
-        "name": "Programas de Natación",
-        "itemListElement": [
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Vacacionales Junio",
-              "description": "Vacacionales en junio en Piscina Montería. ¡Comienza ya y convierte la natación de una opción en tu gran pasión!"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Clases de Natación Niños",
-              "description": "Clases de natación niños en Montería desde los 5 años. Programa MasterKids con instructores certificados."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Clases de Natación para Adultos",
-              "description": "Clases de natación para adultos en Montería. Curso de natación en la Piscina Villaolímpica para principiantes y avanzados."
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Natación Competitiva",
-              "description": "Programa de entrenamiento competitivo"
-            }
-          },
-          {
-            "@type": "Offer",
-            "itemOffered": {
-              "@type": "Service",
-              "name": "Natación Básica",
-              "description": "Clases de natación básica para todas las edades"
-            }
-          }
-        ]
-      },
-      "sameAs": [
-        "https://www.instagram.com/club_natacion_mnm",
-        "https://www.facebook.com/clubnatacionmnm"
-      ],
-      "areaServed": {
-        "@type": "City",
-        "name": "Montería",
-        "containedIn": {
-          "@type": "State",
-          "name": "Córdoba"
-        }
-      }
-    }
-    </script>
 
 </head>
 <body>
@@ -215,8 +90,8 @@
     <header class="header">
         <nav class="nav-container">
             <div class="nav-logos">
-                <img src="logo/MNM.webp" alt="Logo Montería Natación Master" class="nav-logo-left" decoding="async">
-                <img src="logo/MNMKIDS.webp" alt="Logo MNM Kids" class="nav-logo-right" decoding="async">
+                <img src="logo/MNM.webp" alt="Logo Montería Natación Master" class="nav-logo-left" decoding="async" fetchpriority="low">
+                <img src="logo/MNMKIDS.webp" alt="Logo MNM Kids" class="nav-logo-right" decoding="async" fetchpriority="low">
             </div>
             <div class="hamburger" id="hamburger">
                 <span></span>
@@ -416,12 +291,13 @@
                     </div>
                 </div>
                 <div class="map-container">
-                    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3939.6!2d-75.8698349!3d8.7635487!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e5a2f002feef1d3%3A0xff58a156ceaf0c86!2sPiscina%20Ol%C3%ADmpica!5e0!3m2!1ses!2sco!4v1692000000000!5m2!1ses!2sco" 
+                    <iframe class="lazy-map"
+                           data-src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3939.6!2d-75.8698349!3d8.7635487!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8e5a2f002feef1d3%3A0xff58a156ceaf0c86!2sPiscina%20Ol%C3%ADmpica!5e0!3m2!1ses!2sco!4v1692000000000!5m2!1ses!2sco" 
                            width="100%" 
                            height="400" 
                            style="border:0;" 
+                           title="Mapa Piscina Villaolímpica Montería"
                            allowfullscreen="" 
-                           loading="lazy" 
                            referrerpolicy="no-referrer-when-downgrade">
                     </iframe>
                 </div>
@@ -1050,6 +926,76 @@
         </div>
     </footer>
 
+    <!-- Schema.org Structured Data (JSON-LD) -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SportsActivityLocation",
+      "@id": "https://monterianatacionmaster.netlify.app/#organization",
+      "name": "Club Montería Natación Master",
+      "alternateName": ["MNM", "Clases de natación para adultos Montería", "Clases de natación niños Montería", "Piscinas abiertas en Montería", "Natación Montería"],
+      "url": "https://monterianatacionmaster.netlify.app",
+      "logo": "https://monterianatacionmaster.netlify.app/logo/MNM.png",
+      "image": "https://monterianatacionmaster.netlify.app/logo/MNM.png",
+      "description": "Clases de natación para adultos y clases de natación niños en Montería. Club Montería Natación Master en la Piscina Villaolímpica. Vacacionales de junio.",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Villaolímpica",
+        "addressLocality": "Montería",
+        "addressRegion": "Córdoba",
+        "addressCountry": "CO"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": "8.7500",
+        "longitude": "-75.8814"
+      },
+      "telephone": "+57-314-480-9367",
+      "email": "monteriamaster@gmail.com",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "06:00",
+          "closes": "20:00"
+        },
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": "Saturday",
+          "opens": "07:00",
+          "closes": "18:00"
+        }
+      ],
+      "priceRange": "$$",
+      "sport": "Swimming",
+      "amenityFeature": [
+        {"@type": "LocationFeatureSpecification", "name": "Piscinas abiertas en Montería", "value": true},
+        {"@type": "LocationFeatureSpecification", "name": "Instructores certificados", "value": true},
+        {"@type": "LocationFeatureSpecification", "name": "Clases de natación para adultos y niños", "value": true}
+      ],
+      "hasOfferCatalog": {
+        "@type": "OfferCatalog",
+        "name": "Programas de Natación",
+        "itemListElement": [
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Vacacionales Junio", "description": "Vacacionales en junio en Piscina Montería. ¡Comienza ya y convierte la natación de una opción en tu gran pasión!"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Clases de Natación Niños", "description": "Clases de natación niños en Montería desde los 5 años. Programa MasterKids con instructores certificados."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Clases de Natación para Adultos", "description": "Clases de natación para adultos en Montería. Curso de natación en la Piscina Villaolímpica para principiantes y avanzados."}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Natación Competitiva", "description": "Programa de entrenamiento competitivo"}},
+          {"@type": "Offer", "itemOffered": {"@type": "Service", "name": "Natación Básica", "description": "Clases de natación básica para todas las edades"}}
+        ]
+      },
+      "sameAs": [
+        "https://www.instagram.com/club_natacion_mnm",
+        "https://www.facebook.com/clubnatacionmnm"
+      ],
+      "areaServed": {
+        "@type": "City",
+        "name": "Montería",
+        "containedIn": {"@type": "State", "name": "Córdoba"}
+      }
+    }
+    </script>
+
     <script>
         // Funcionalidad del menú hamburguesa
         const hamburger = document.getElementById('hamburger');
@@ -1091,6 +1037,29 @@
                 requestIdleCallback(initHeroVideoDeferred, { timeout: 3500 });
             } else {
                 window.addEventListener('load', () => setTimeout(initHeroVideoDeferred, 1500));
+            }
+        }
+
+        const lazyMap = document.querySelector('.lazy-map');
+        if (lazyMap && lazyMap.dataset.src) {
+            const loadMap = () => {
+                if (!lazyMap.dataset.loaded) {
+                    lazyMap.src = lazyMap.dataset.src;
+                    lazyMap.dataset.loaded = '1';
+                }
+            };
+            if ('IntersectionObserver' in window) {
+                const mapObserver = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            loadMap();
+                            observer.disconnect();
+                        }
+                    });
+                }, { rootMargin: '200px' });
+                mapObserver.observe(lazyMap);
+            } else {
+                loadMap();
             }
         }
 

@@ -71,7 +71,6 @@
         const promoPopup = document.getElementById('promoPopup');
         const promoPopupClose = document.getElementById('promoPopupClose');
         const promoPopupOverlay = document.getElementById('promoPopupOverlay');
-        const promoPopupSeguimiento = document.getElementById('promoPopupSeguimiento');
         const bubbleHorarios = document.getElementById('bubbleHorarios');
         const PROMO_POPUP_KEY = 'mnm-promo-popup-closed';
 
@@ -107,7 +106,6 @@
 
         promoPopupClose?.addEventListener('click', cerrarPromoPopup);
         promoPopupOverlay?.addEventListener('click', cerrarPromoPopup);
-        promoPopupSeguimiento?.addEventListener('click', cerrarPromoPopup);
         bubbleHorarios?.addEventListener('click', abrirPromoPopup);
 
         document.addEventListener('keydown', (e) => {

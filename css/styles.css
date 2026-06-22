@@ -2132,14 +2132,14 @@
         }
 
         .promo-popup-btn-primary {
-            background: #25d366;
-            color: #fff;
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.4);
+            background: var(--secondary-color);
+            color: var(--tertiary-color);
+            box-shadow: 0 4px 15px rgba(222, 222, 60, 0.3);
         }
 
-        .promo-popup-btn-secondary {
-            background: var(--primary-color);
-            color: var(--text-light);
+        .promo-popup-btn-primary:hover {
+            background: #f0f03a;
+            box-shadow: 0 6px 20px rgba(222, 222, 60, 0.5);
         }
 
         body.promo-popup-open {
@@ -3041,13 +3041,14 @@
         }
 
         .promo-popup-btn-primary {
-            background: #25d366;
-            color: white;
+            background: var(--secondary-color);
+            color: var(--tertiary-color);
+            box-shadow: 0 4px 15px rgba(222, 222, 60, 0.3);
         }
 
-        .promo-popup-btn-secondary {
-            background: var(--primary-color);
-            color: white;
+        .promo-popup-btn-primary:hover {
+            background: #f0f03a;
+            box-shadow: 0 6px 20px rgba(222, 222, 60, 0.5);
         }
 
         @media (max-width: 480px) {

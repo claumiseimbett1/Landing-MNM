@@ -1599,13 +1599,22 @@
         }
 
         .whatsapp-button {
-            background: linear-gradient(135deg, #25D366, #128C7E);
+            background: var(--secondary-color);
+            color: var(--tertiary-color);
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(222, 222, 60, 0.3);
+        }
+
+        .whatsapp-button svg path {
+            fill: var(--tertiary-color);
         }
 
         .whatsapp-button:hover {
-            background: linear-gradient(135deg, #128C7E, #075E54);
+            background: #f0f03a;
             transform: translateY(-2px);
-            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+            box-shadow: 0 0 20px rgba(222, 222, 60, 0.6),
+                        0 0 40px rgba(222, 222, 60, 0.4),
+                        0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
         .instagram-button {
@@ -2121,14 +2130,16 @@
             text-align: center;
             padding: 0.85rem 1rem;
             border-radius: 50px;
-            font-weight: 700;
+            font-weight: bold;
             font-size: 0.9rem;
             text-decoration: none;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.3s ease;
+            overflow: hidden;
+            cursor: pointer;
         }
 
         .promo-popup-btn:hover {
-            transform: translateY(-2px);
+            transform: translateY(-3px) scale(1.02);
         }
 
         .promo-popup-btn-primary {
@@ -2139,7 +2150,9 @@
 
         .promo-popup-btn-primary:hover {
             background: #f0f03a;
-            box-shadow: 0 6px 20px rgba(222, 222, 60, 0.5);
+            box-shadow: 0 0 20px rgba(222, 222, 60, 0.6),
+                        0 0 40px rgba(222, 222, 60, 0.4),
+                        0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
         body.promo-popup-open {
@@ -3029,15 +3042,15 @@
             text-align: center;
             padding: 0.85rem 1.25rem;
             border-radius: 50px;
-            font-weight: 700;
+            font-weight: bold;
             text-decoration: none;
             font-size: 0.95rem;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .promo-popup-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+            transform: translateY(-3px) scale(1.02);
         }
 
         .promo-popup-btn-primary {
@@ -3048,7 +3061,9 @@
 
         .promo-popup-btn-primary:hover {
             background: #f0f03a;
-            box-shadow: 0 6px 20px rgba(222, 222, 60, 0.5);
+            box-shadow: 0 0 20px rgba(222, 222, 60, 0.6),
+                        0 0 40px rgba(222, 222, 60, 0.4),
+                        0 8px 25px rgba(0, 0, 0, 0.2);
         }
 
         @media (max-width: 480px) {

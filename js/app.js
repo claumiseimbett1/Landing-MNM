@@ -67,15 +67,56 @@
             }
         }
 
-        // Funcionalidad para toggle de burbuja de horarios
+        // Popup promocional (horarios, promo mañana, matrícula junio/julio)
+        const promoPopup = document.getElementById('promoPopup');
+        const promoPopupClose = document.getElementById('promoPopupClose');
+        const promoPopupOverlay = document.getElementById('promoPopupOverlay');
+        const promoPopupSeguimiento = document.getElementById('promoPopupSeguimiento');
         const bubbleHorarios = document.getElementById('bubbleHorarios');
-        
-        if (bubbleHorarios) {
-            bubbleHorarios.addEventListener('click', () => {
-                bubbleHorarios.classList.toggle('collapsed');
-                bubbleHorarios.classList.toggle('expanded');
-            });
+        const PROMO_POPUP_KEY = 'mnm-promo-popup-closed';
+
+        function cerrarPromoPopup() {
+            if (!promoPopup) return;
+            promoPopup.classList.remove('is-visible');
+            promoPopup.setAttribute('aria-hidden', 'true');
+            document.body.classList.remove('promo-popup-open');
+            document.body.style.overflow = '';
+            sessionStorage.setItem(PROMO_POPUP_KEY, '1');
         }
+
+        function abrirPromoPopup() {
+            if (!promoPopup) return;
+            promoPopup.classList.add('is-visible');
+            promoPopup.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('promo-popup-open');
+            document.body.style.overflow = 'hidden';
+            promoPopupClose?.focus();
+        }
+
+        function initPromoPopup() {
+            if (!promoPopup || sessionStorage.getItem(PROMO_POPUP_KEY)) return;
+
+            const mostrar = () => setTimeout(abrirPromoPopup, 1200);
+
+            if (document.readyState === 'complete') {
+                mostrar();
+            } else {
+                window.addEventListener('load', mostrar, { once: true });
+            }
+        }
+
+        promoPopupClose?.addEventListener('click', cerrarPromoPopup);
+        promoPopupOverlay?.addEventListener('click', cerrarPromoPopup);
+        promoPopupSeguimiento?.addEventListener('click', cerrarPromoPopup);
+        bubbleHorarios?.addEventListener('click', abrirPromoPopup);
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && promoPopup?.classList.contains('is-visible')) {
+                cerrarPromoPopup();
+            }
+        });
+
+        initPromoPopup();
 
         function setMenuOpen(isOpen) {
             hamburger.classList.toggle('active', isOpen);
@@ -947,9 +988,9 @@
         const offerConfig = {
             enabled: true, // Cambiar a false para ocultar
             startDate: 'auto', // 'auto' detecta fecha actual, o usa fecha específica (YYYY-MM-DD)
-            endDate: '2026-06-30', // 📌 CAMBIA SOLO ESTA FECHA (YYYY-MM-DD)
+            endDate: '2026-07-31', // 📌 CAMBIA SOLO ESTA FECHA (YYYY-MM-DD)
             title: '💸 ¡MATRÍCULA GRATIS! 💸',
-            description: 'y obtén tu matrícula completamente GRATIS'
+            description: 'Matrícula GRATIS en junio y julio (aplican condiciones). Promo en horario de mañana. ¡Comienza ya!'
         };
 
         // Función para inicializar el contador

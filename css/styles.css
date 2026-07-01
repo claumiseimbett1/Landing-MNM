@@ -1599,22 +1599,13 @@
         }
 
         .whatsapp-button {
-            background: var(--secondary-color);
-            color: var(--tertiary-color);
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(222, 222, 60, 0.3);
-        }
-
-        .whatsapp-button svg path {
-            fill: var(--tertiary-color);
+            background: linear-gradient(135deg, #25D366, #128C7E);
         }
 
         .whatsapp-button:hover {
-            background: #f0f03a;
+            background: linear-gradient(135deg, #128C7E, #075E54);
             transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(222, 222, 60, 0.6),
-                        0 0 40px rgba(222, 222, 60, 0.4),
-                        0 8px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
         }
 
         .instagram-button {
@@ -2124,35 +2115,44 @@
             padding: 0 1.5rem 1.5rem;
         }
 
+        .promo-popup-actions .cta-button {
+            flex: 1;
+            width: 100%;
+            margin-top: 0;
+            text-align: center;
+            box-sizing: border-box;
+            background: #dede3c !important;
+            color: #1a3d70 !important;
+            box-shadow: 0 4px 15px rgba(222, 222, 60, 0.3) !important;
+        }
+
+        .promo-popup-actions .cta-button:hover {
+            background: #f0f03a !important;
+            color: #1a3d70 !important;
+            box-shadow: 0 0 20px rgba(222, 222, 60, 0.6),
+                        0 0 40px rgba(222, 222, 60, 0.4),
+                        0 8px 25px rgba(0, 0, 0, 0.2) !important;
+        }
+
         .promo-popup-btn {
             flex: 1;
             min-width: 140px;
             text-align: center;
             padding: 0.85rem 1rem;
             border-radius: 50px;
-            font-weight: bold;
+            font-weight: 700;
             font-size: 0.9rem;
             text-decoration: none;
-            transition: all 0.3s ease;
-            overflow: hidden;
-            cursor: pointer;
+            background: var(--secondary-color);
+            color: var(--primary-color);
+            box-shadow: 0 4px 15px rgba(19, 68, 146, 0.25);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .promo-popup-btn:hover {
-            transform: translateY(-3px) scale(1.02);
-        }
-
-        .promo-popup-btn-primary {
-            background: var(--secondary-color);
-            color: var(--tertiary-color);
-            box-shadow: 0 4px 15px rgba(222, 222, 60, 0.3);
-        }
-
-        .promo-popup-btn-primary:hover {
+            transform: translateY(-2px);
             background: #f0f03a;
-            box-shadow: 0 0 20px rgba(222, 222, 60, 0.6),
-                        0 0 40px rgba(222, 222, 60, 0.4),
-                        0 8px 25px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 6px 20px rgba(19, 68, 146, 0.35);
         }
 
         body.promo-popup-open {
@@ -3037,33 +3037,48 @@
             padding: 0 1.5rem 1.5rem;
         }
 
+        .promo-popup-actions .cta-button {
+            width: 100%;
+            margin-top: 0;
+            text-align: center;
+            box-sizing: border-box;
+            background: #dede3c !important;
+            color: #1a3d70 !important;
+            box-shadow: 0 4px 15px rgba(222, 222, 60, 0.3) !important;
+        }
+
+        .promo-popup-actions .cta-button:hover {
+            background: #f0f03a !important;
+            color: #1a3d70 !important;
+            box-shadow: 0 0 20px rgba(222, 222, 60, 0.6),
+                        0 0 40px rgba(222, 222, 60, 0.4),
+                        0 8px 25px rgba(0, 0, 0, 0.2) !important;
+        }
+
         .promo-popup-btn {
             display: block;
             text-align: center;
             padding: 0.85rem 1.25rem;
             border-radius: 50px;
-            font-weight: bold;
+            font-weight: 700;
             text-decoration: none;
             font-size: 0.95rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
 
         .promo-popup-btn:hover {
-            transform: translateY(-3px) scale(1.02);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
         }
 
         .promo-popup-btn-primary {
-            background: var(--secondary-color);
-            color: var(--tertiary-color);
-            box-shadow: 0 4px 15px rgba(222, 222, 60, 0.3);
+            background: #25d366;
+            color: white;
         }
 
-        .promo-popup-btn-primary:hover {
-            background: #f0f03a;
-            box-shadow: 0 0 20px rgba(222, 222, 60, 0.6),
-                        0 0 40px rgba(222, 222, 60, 0.4),
-                        0 8px 25px rgba(0, 0, 0, 0.2);
+        .promo-popup-btn-secondary {
+            background: var(--primary-color);
+            color: white;
         }
 
         @media (max-width: 480px) {

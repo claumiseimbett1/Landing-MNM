@@ -67,7 +67,7 @@
             }
         }
 
-        // Popup promocional (horarios, promo mañana, matrícula junio/julio)
+        // Popup promocional (horarios, matrícula $0 julio)
         const promoPopup = document.getElementById('promoPopup');
         const promoPopupClose = document.getElementById('promoPopupClose');
         const promoPopupOverlay = document.getElementById('promoPopupOverlay');
@@ -985,10 +985,10 @@
         // Configuración del contador de ofertas especiales
         const offerConfig = {
             enabled: true, // Cambiar a false para ocultar
-            startDate: 'auto', // 'auto' detecta fecha actual, o usa fecha específica (YYYY-MM-DD)
-            endDate: '2026-07-31', // 📌 CAMBIA SOLO ESTA FECHA (YYYY-MM-DD)
-            title: '💸 ¡MATRÍCULA GRATIS! 💸',
-            description: 'Matrícula GRATIS en junio y julio (aplican condiciones). Promo en horario de mañana. ¡Comienza ya!'
+            startDate: '2026-07-01', // Inicio de la promo de julio
+            endDate: '2026-07-31', // Fin de la promo de julio
+            title: '💸 ¡MATRÍCULA $0 EN JULIO! 💸',
+            description: '¡Ven y entrena con nosotros! Matrícula $0 en julio para grupo familiar y tarifa especial para nuevos y antiguos. Válido hasta el 31 de julio de 2026 (no incluye póliza de seguro).'
         };
 
         // Función para inicializar el contador
@@ -1033,6 +1033,11 @@
             const titleElement = document.querySelector('.offer-title');
             if (titleElement && offerConfig.title) {
                 titleElement.textContent = offerConfig.title;
+            }
+
+            const descriptionElement = document.querySelector('.offer-description');
+            if (descriptionElement && offerConfig.description) {
+                descriptionElement.textContent = offerConfig.description;
             }
 
             // Función para actualizar el contador

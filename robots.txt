@@ -1,52 +1,12 @@
-# robots.txt para Club Montería Natación Master
+# Club Montería Natación Master
 # https://monterianatacionmaster.netlify.app
 
-# Permitir todos los bots
 User-agent: *
 Allow: /
 
-# Bloquear archivos y directorios específicos
+# No indexar archivos internos
 Disallow: /documentos/
+Disallow: /scripts/
 Disallow: /instructivos-md/
-Disallow: /*.xlsx$
-Disallow: /*.xls$
-Disallow: /backup/
-Disallow: /img/temp/
 
-# Permitir recursos importantes
-Allow: /img/
-Allow: /logo/
-Allow: /video/
-Allow: /*.css$
-Allow: /*.js$
-Allow: /*.jpg$
-Allow: /*.png$
-Allow: /*.mp4$
-
-# Sitemap
 Sitemap: https://monterianatacionmaster.netlify.app/sitemap.xml
-
-# Crawl delay para evitar sobrecarga del servidor
-Crawl-delay: 1
-
-# Configuración específica para bots principales
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
-
-User-agent: Bingbot
-Allow: /
-Crawl-delay: 1
-
-User-agent: Googlebot-Image
-Allow: /img/
-Allow: /logo/
-
-User-agent: FacebookExternalHit
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: LinkedInBot
-Allow: /

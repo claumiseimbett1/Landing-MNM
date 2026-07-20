@@ -67,7 +67,7 @@
             }
         }
 
-        // Popup promocional (horarios, matrícula $0 julio)
+        // Popup promocional (horarios, matrícula gratis agosto)
         const promoPopup = document.getElementById('promoPopup');
         const promoPopupClose = document.getElementById('promoPopupClose');
         const promoPopupOverlay = document.getElementById('promoPopupOverlay');
@@ -985,10 +985,10 @@
         // Configuración del contador de ofertas especiales
         const offerConfig = {
             enabled: true, // Cambiar a false para ocultar
-            startDate: '2026-07-01', // Inicio de la promo de julio
-            endDate: '2026-07-31', // Fin de la promo de julio
-            title: '💸 ¡MATRÍCULA $0 EN JULIO! 💸',
-            description: '¡Ven y entrena con nosotros! Matrícula $0 en julio para grupo familiar y tarifa especial para nuevos y antiguos. Válido hasta el 31 de julio de 2026 (no incluye póliza de seguro).'
+            startDate: 'auto', // Visible desde ahora para expectativas de agosto
+            endDate: '2026-08-31', // Fin de la promo de agosto
+            title: '💸 ¡MATRÍCULA GRATIS + TARIFAS EN OFF! 💸',
+            description: '¡Ven y entrena con nosotros! Matrícula gratis en agosto y tarifas en off para nuevos y antiguos. Válido hasta el 31 de agosto de 2026 (no incluye póliza de seguro).'
         };
 
         // Función para inicializar el contador

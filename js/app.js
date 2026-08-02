@@ -994,12 +994,20 @@
         // Función para inicializar el contador
         function initOfferCountdown() {
             const offerSection = document.querySelector('.special-offers');
+            if (!offerSection) return;
+
             const offerEndDateSpan = document.getElementById('offer-end-date');
-            
+
             if (!offerConfig.enabled) {
-                offerSection.style.display = 'none';
+                offerSection.classList.add('hidden');
+                offerSection.setAttribute('hidden', '');
+                offerSection.setAttribute('aria-hidden', 'true');
                 return;
             }
+
+            offerSection.classList.remove('hidden');
+            offerSection.removeAttribute('hidden');
+            offerSection.setAttribute('aria-hidden', 'false');
 
             const now = new Date();
             
@@ -1016,7 +1024,9 @@
             
             // Verificar si la oferta está en el período válido
             if (now < startDate || now > endDate) {
-                offerSection.style.display = 'none';
+                offerSection.classList.add('hidden');
+                offerSection.setAttribute('hidden', '');
+                offerSection.setAttribute('aria-hidden', 'true');
                 return;
             }
 
@@ -1052,13 +1062,19 @@
                     const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
                     const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-                    document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+                    const daysEl = document.getElementById('days');
+                    const hoursEl = document.getElementById('hours');
+                    const minutesEl = document.getElementById('minutes');
+                    const secondsEl = document.getElementById('seconds');
+                    if (daysEl) daysEl.textContent = days.toString().padStart(2, '0');
+                    if (hoursEl) hoursEl.textContent = hours.toString().padStart(2, '0');
+                    if (minutesEl) minutesEl.textContent = minutes.toString().padStart(2, '0');
+                    if (secondsEl) secondsEl.textContent = seconds.toString().padStart(2, '0');
                 } else {
                     // Oferta expirada
-                    offerSection.style.display = 'none';
+                    offerSection.classList.add('hidden');
+                    offerSection.setAttribute('hidden', '');
+                    offerSection.setAttribute('aria-hidden', 'true');
                 }
             }
 

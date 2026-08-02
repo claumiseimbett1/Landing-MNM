@@ -516,13 +516,13 @@
             text-align: center;
             position: relative;
             overflow: hidden;
-            display: block;
             border-top: 3px solid var(--secondary-color);
             border-bottom: 3px solid var(--secondary-color);
         }
 
-        .special-offers.hidden {
-            display: none;
+        .special-offers.hidden,
+        .special-offers[hidden] {
+            display: none !important;
         }
 
         .offer-content {

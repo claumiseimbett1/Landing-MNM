@@ -988,7 +988,7 @@
             startDate: 'auto', // Visible desde ahora para expectativas de agosto
             endDate: '2026-08-31', // Fin de la promo de agosto
             title: '💸 ¡MATRÍCULA GRATIS + TARIFAS EN OFF! 💸',
-            description: '¡Ven y entrena con nosotros! Matrícula gratis en agosto y tarifas en off para nuevos y antiguos. Válido hasta el 31 de agosto de 2026 (no incluye póliza de seguro).'
+            description: '¡Ven y entrena con nosotros! Matrícula gratis y tarifas en off en agosto para 3 veces por semana. Plan ticket 7:00 AM para que entrenes temprano en horario de mañana. ¡Cupos limitados! Válido hasta el 31 de agosto de 2026 (aplican condiciones — no incluye póliza de seguro).'
         };
 
         // Función para inicializar el contador

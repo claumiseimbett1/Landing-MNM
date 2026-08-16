@@ -525,6 +525,97 @@
             display: none !important;
         }
 
+        .pricing-section {
+            background: var(--gray-light);
+            text-align: center;
+        }
+
+        .pricing-intro {
+            max-width: 720px;
+            margin: 0 auto 2rem;
+            font-size: 1.1rem;
+            color: var(--primary-color);
+        }
+
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            max-width: 860px;
+            margin: 0 auto 2rem;
+        }
+
+        .pricing-card {
+            background: #fff;
+            border-radius: 18px;
+            padding: 1.75rem 1.5rem;
+            text-align: left;
+            box-shadow: 0 8px 24px rgba(19, 68, 146, 0.1);
+            border: 2px solid transparent;
+        }
+
+        .pricing-card--highlight {
+            border-color: var(--secondary-color);
+            box-shadow: 0 8px 28px rgba(222, 222, 60, 0.35);
+            position: relative;
+        }
+
+        .pricing-badge {
+            display: inline-block;
+            background: var(--secondary-color);
+            color: var(--tertiary-color);
+            font-weight: 800;
+            font-size: 0.8rem;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            padding: 0.3rem 0.7rem;
+            border-radius: 999px;
+            margin-bottom: 0.75rem;
+        }
+
+        .pricing-card h3 {
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+
+        .pricing-deadline {
+            margin: -0.5rem 0 1rem;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--tertiary-color);
+        }
+
+        .pricing-card ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .pricing-card li {
+            display: flex;
+            justify-content: space-between;
+            gap: 1rem;
+            padding: 0.65rem 0;
+            border-bottom: 1px solid #eee;
+            color: var(--text-dark);
+        }
+
+        .pricing-card li:last-child {
+            border-bottom: none;
+        }
+
+        .pricing-card li strong {
+            color: var(--primary-color);
+            white-space: nowrap;
+        }
+
+        .pricing-note {
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            color: #666;
+        }
+
         .offer-content {
             position: relative;
             z-index: 2;
@@ -634,6 +725,15 @@
 
             .offer-features {
                 padding: 0 1rem;
+            }
+
+            .pricing-grid {
+                grid-template-columns: 1fr;
+                padding: 0 0.5rem;
+            }
+
+            .pricing-card li {
+                font-size: 0.95rem;
             }
         }
 

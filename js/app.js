@@ -172,6 +172,12 @@
             }
         }
 
+        // Configuración EmailJS — actualizar tras reconectar en dashboard.emailjs.com
+        const EMAIL_SERVICE_ID = 'service_p9syk98';
+        const EMAIL_TEMPLATE_ID = 'template_d138evr';
+        const EMAIL_PUBLIC_KEY = '1ErOYdfGE3oKzXbzr';
+        const WHATSAPP_NOTAS_URL = 'https://wa.me/573144809367?text=Hola,%20quiero%20consultar%20mis%20notas%20de%20natación.%20Mi%20documento%20es:%20';
+
         async function ensureEmailJs() {
             if (!loadedLibs.emailjs) {
                 await loadScript('https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js');
@@ -180,20 +186,11 @@
             }
         }
 
-        // Variables globales para el manejo de Excel
+        // Variables globales para Excel y verificación por email
         let workbook = null;
         let datosEncontrados = null;
-        
-        // Variables para verificación por email
         let codigoVerificacion = null;
         let datosFormulario = null;
-        
-        // Configuración EmailJS — actualizar tras reconectar en dashboard.emailjs.com
-        // Si creas servicio SMTP (recomendado), pega aquí el nuevo Service ID.
-        const EMAIL_SERVICE_ID = 'service_p9syk98';
-        const EMAIL_TEMPLATE_ID = 'template_d138evr';
-        const EMAIL_PUBLIC_KEY = '1ErOYdfGE3oKzXbzr';
-        const WHATSAPP_NOTAS_URL = 'https://wa.me/573144809367?text=Hola,%20quiero%20consultar%20mis%20notas%20de%20natación.%20Mi%20documento%20es:%20';
         
         // Generar código de verificación de 6 dígitos
         function generarCodigoVerificacion() {
@@ -205,45 +202,31 @@
             try {
                 await ensureEmailJs();
 
-                const codigoInput = document.getElementById('codigoVerificacionHidden');
-                const toEmailInput = document.querySelector('#downloadForm input[name="to_email"]');
-                if (codigoInput) codigoInput.value = codigo;
-                if (toEmailInput) toEmailInput.value = email;
-
-                const templateParams = {
-                    to_email: email,
-                    email: email,
-                    user_email: email,
-                    reply_to: email,
-                    codigo_verificacion: codigo,
-                    codigo: codigo,
-                    message: codigo,
-                    institucion: 'Montería Natación Master'
-                };
-
-                const sendOptions = { publicKey: EMAIL_PUBLIC_KEY };
-
-                try {
-                    await emailjs.sendForm(
-                        EMAIL_SERVICE_ID,
-                        EMAIL_TEMPLATE_ID,
-                        document.getElementById('downloadForm'),
-                        sendOptions
-                    );
-                    return { ok: true };
-                } catch (formError) {
-                    console.warn('sendForm falló, intentando send directo:', formError);
-                    await emailjs.send(
-                        EMAIL_SERVICE_ID,
-                        EMAIL_TEMPLATE_ID,
-                        templateParams,
-                        sendOptions
-                    );
-                    return { ok: true };
+                const emailLimpio = email.trim();
+                if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(emailLimpio)) {
+                    return { ok: false, error: 'Correo inválido' };
                 }
+
+                await emailjs.send(
+                    EMAIL_SERVICE_ID,
+                    EMAIL_TEMPLATE_ID,
+                    {
+                        to_email: emailLimpio,
+                        email: emailLimpio,
+                        user_email: emailLimpio,
+                        reply_to: emailLimpio,
+                        codigo_verificacion: codigo,
+                        codigo: codigo,
+                        message: `Tu código de verificación es: ${codigo}`,
+                        institucion: 'Montería Natación Master',
+                        documento: datosFormulario?.documento || ''
+                    },
+                    { publicKey: EMAIL_PUBLIC_KEY }
+                );
+                return { ok: true };
             } catch (error) {
                 console.error('Error enviando email:', error);
-                const detalle = error?.text || error?.message || '';
+                const detalle = error?.text || error?.message || String(error);
                 return { ok: false, error: detalle };
             }
         }

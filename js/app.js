@@ -174,8 +174,8 @@
 
         async function ensureEmailJs() {
             if (!loadedLibs.emailjs) {
-                await loadScript('https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js');
-                emailjs.init(EMAIL_PUBLIC_KEY);
+                await loadScript('https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js');
+                emailjs.init({ publicKey: EMAIL_PUBLIC_KEY });
                 loadedLibs.emailjs = true;
             }
         }
@@ -202,18 +202,66 @@
         async function enviarCodigoVerificacion(email, codigo) {
             try {
                 await ensureEmailJs();
+
+                const codigoInput = document.getElementById('codigoVerificacionHidden');
+                const toEmailInput = document.querySelector('#downloadForm input[name="to_email"]');
+                if (codigoInput) codigoInput.value = codigo;
+                if (toEmailInput) toEmailInput.value = email;
+
                 const templateParams = {
                     to_email: email,
+                    email: email,
+                    user_email: email,
+                    reply_to: email,
                     codigo_verificacion: codigo,
+                    codigo: codigo,
+                    message: codigo,
                     institucion: 'Montería Natación Master'
                 };
 
-                await emailjs.send(EMAIL_SERVICE_ID, EMAIL_TEMPLATE_ID, templateParams);
-                return true;
+                const sendOptions = { publicKey: EMAIL_PUBLIC_KEY };
+
+                try {
+                    await emailjs.sendForm(
+                        EMAIL_SERVICE_ID,
+                        EMAIL_TEMPLATE_ID,
+                        document.getElementById('downloadForm'),
+                        sendOptions
+                    );
+                    return { ok: true };
+                } catch (formError) {
+                    console.warn('sendForm falló, intentando send directo:', formError);
+                    await emailjs.send(
+                        EMAIL_SERVICE_ID,
+                        EMAIL_TEMPLATE_ID,
+                        templateParams,
+                        sendOptions
+                    );
+                    return { ok: true };
+                }
             } catch (error) {
                 console.error('Error enviando email:', error);
-                return false;
+                const detalle = error?.text || error?.message || '';
+                return { ok: false, error: detalle };
             }
+        }
+
+        function mensajeErrorEnvioCodigo(errorDetalle) {
+            const detalle = (errorDetalle || '').toLowerCase();
+
+            if (detalle.includes('invalid grant') || detalle.includes('reconnect')) {
+                return 'El servicio de correo del club está desconectado. Escríbenos por WhatsApp al +57 314 480 9367 para recibir tus notas.';
+            }
+
+            if (detalle.includes('too many requests') || detalle.includes('429')) {
+                return 'Demasiados intentos seguidos. Espera un minuto e intenta de nuevo.';
+            }
+
+            if (detalle.includes('forbidden') || detalle.includes('403')) {
+                return 'No se pudo enviar el correo desde esta página. Escríbenos por WhatsApp al +57 314 480 9367.';
+            }
+
+            return 'No pudimos enviar el código. Verifica tu correo e intenta de nuevo, o escríbenos por WhatsApp al +57 314 480 9367.';
         }
 
         // Cargar archivo Excel al iniciar
@@ -582,14 +630,14 @@
             btn.disabled = true;
             
             try {
-                const enviado = await enviarCodigoVerificacion(email, codigoVerificacion);
+                const resultado = await enviarCodigoVerificacion(email, codigoVerificacion);
                 
-                if (enviado) {
+                if (resultado.ok) {
                     // Mostrar formulario de verificación
                     document.getElementById('verificationForm').style.display = 'block';
                     alert('Código enviado a tu correo electrónico. Revisa también la carpeta de spam.');
                 } else {
-                    alert('Error enviando el código. Verifica tu email e intenta nuevamente.');
+                    alert(mensajeErrorEnvioCodigo(resultado.error));
                 }
             } catch (error) {
                 alert('Error enviando el código. Intenta nuevamente.');
@@ -667,12 +715,12 @@
             btn.disabled = true;
             
             try {
-                const enviado = await enviarCodigoVerificacion(datosFormulario.email, codigoVerificacion);
+                const resultado = await enviarCodigoVerificacion(datosFormulario.email, codigoVerificacion);
                 
-                if (enviado) {
+                if (resultado.ok) {
                     alert('Código reenviado a tu correo electrónico.');
                 } else {
-                    alert('Error reenviando el código. Intenta nuevamente.');
+                    alert(mensajeErrorEnvioCodigo(resultado.error));
                 }
             } catch (error) {
                 alert('Error reenviando el código. Intenta nuevamente.');

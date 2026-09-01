@@ -188,10 +188,12 @@
         let codigoVerificacion = null;
         let datosFormulario = null;
         
-        // Configuración EmailJS - Montería Natación Master
-        const EMAIL_SERVICE_ID = 'service_ecnn46l'; // ✅ Service ID configurado
-        const EMAIL_TEMPLATE_ID = 'template_d138evr'; // ✅ Template ID configurado
-        const EMAIL_PUBLIC_KEY = '1ErOYdfGE3oKzXbzr'; // ✅ Public Key configurado
+        // Configuración EmailJS — actualizar tras reconectar en dashboard.emailjs.com
+        // Si creas servicio SMTP (recomendado), pega aquí el nuevo Service ID.
+        const EMAIL_SERVICE_ID = 'service_p9syk98';
+        const EMAIL_TEMPLATE_ID = 'template_d138evr';
+        const EMAIL_PUBLIC_KEY = '1ErOYdfGE3oKzXbzr';
+        const WHATSAPP_NOTAS_URL = 'https://wa.me/573144809367?text=Hola,%20quiero%20consultar%20mis%20notas%20de%20natación.%20Mi%20documento%20es:%20';
         
         // Generar código de verificación de 6 dígitos
         function generarCodigoVerificacion() {
@@ -249,8 +251,12 @@
         function mensajeErrorEnvioCodigo(errorDetalle) {
             const detalle = (errorDetalle || '').toLowerCase();
 
-            if (detalle.includes('invalid grant') || detalle.includes('reconnect')) {
-                return 'El servicio de correo del club está desconectado. Escríbenos por WhatsApp al +57 314 480 9367 para recibir tus notas.';
+            if (detalle.includes('invalid grant') || detalle.includes('reconnect') || detalle.includes('412')) {
+                return 'El correo del club está desconectado (error Gmail). Usa el botón de WhatsApp abajo para pedir tus notas, o intenta más tarde.';
+            }
+
+            if (detalle.includes('service id not found') || detalle.includes('template id')) {
+                return 'El servicio de correo está en configuración. Usa WhatsApp para pedir tus notas mientras se restablece.';
             }
 
             if (detalle.includes('too many requests') || detalle.includes('429')) {
@@ -258,10 +264,18 @@
             }
 
             if (detalle.includes('forbidden') || detalle.includes('403')) {
-                return 'No se pudo enviar el correo desde esta página. Escríbenos por WhatsApp al +57 314 480 9367.';
+                return 'No se pudo enviar el correo desde esta página. Usa WhatsApp para pedir tus notas.';
             }
 
-            return 'No pudimos enviar el código. Verifica tu correo e intenta de nuevo, o escríbenos por WhatsApp al +57 314 480 9367.';
+            return 'No pudimos enviar el código por correo. Usa WhatsApp para pedir tus notas o intenta más tarde.';
+        }
+
+        function abrirWhatsAppNotas() {
+            const documento = document.getElementById('documento')?.value.trim() || '';
+            const mensaje = documento
+                ? `${WHATSAPP_NOTAS_URL}${encodeURIComponent(documento)}`
+                : WHATSAPP_NOTAS_URL;
+            window.open(mensaje, '_blank', 'noopener,noreferrer');
         }
 
         // Cargar archivo Excel al iniciar
@@ -592,6 +606,9 @@
                 doc.save(nombreArchivo);
             }
         }
+
+        // Fallback WhatsApp cuando EmailJS/Gmail falla
+        document.getElementById('btnWhatsAppNotas')?.addEventListener('click', abrirWhatsAppNotas);
 
         // Manejo del formulario principal - enviar código de verificación
         document.getElementById('downloadForm').addEventListener('submit', async function(e) {

@@ -1229,6 +1229,18 @@ ${formData.get('mensaje')}
         });
 
         // ===== EFECTOS MODERNOS DE ALTO IMPACTO =====
+        const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        if (!prefersReducedMotion) {
+            document.documentElement.classList.add('js-motion');
+        }
+
+        // Hero: entrada escalonada del contenido
+        const heroSection = document.querySelector('.hero');
+        if (heroSection) {
+            requestAnimationFrame(() => {
+                setTimeout(() => heroSection.classList.add('is-ready'), prefersReducedMotion ? 0 : 180);
+            });
+        }
 
         // 1. Header Dinámico - Cambia al hacer scroll
         window.addEventListener('scroll', function() {
@@ -1238,7 +1250,7 @@ ${formData.get('mensaje')}
             } else {
                 header.classList.remove('scrolled');
             }
-        });
+        }, { passive: true });
 
         // 2. Scroll Animations - Fade-in al entrar en viewport
         const observerOptions = {
@@ -1256,22 +1268,30 @@ ${formData.get('mensaje')}
 
         // Observar secciones
         document.addEventListener('DOMContentLoaded', function() {
+            if (prefersReducedMotion) {
+                document.querySelectorAll('.section, .info-card, .program-card, .teacher-card, .testimonial-card, .pricing-card').forEach(el => {
+                    el.classList.add('visible');
+                });
+                return;
+            }
+
             const sections = document.querySelectorAll('.section');
             sections.forEach(section => {
                 observer.observe(section);
             });
 
-            // Observar cards individuales
-            const cards = document.querySelectorAll('.info-card, .program-card, .teacher-card, .testimonial-card');
+            // Observar cards individuales (incluye planes)
+            const cards = document.querySelectorAll('.info-card, .program-card, .teacher-card, .testimonial-card, .pricing-card');
             cards.forEach((card, index) => {
-                // Delay escalonado para animación más suave
-                card.style.transitionDelay = `${index * 0.1}s`;
+                card.style.transitionDelay = `${(index % 6) * 0.08}s`;
                 observer.observe(card);
             });
         });
 
         // 3. Tilt 3D Effect en Cards
         document.addEventListener('DOMContentLoaded', function() {
+            if (prefersReducedMotion || window.matchMedia('(pointer: coarse)').matches) return;
+
             const cards = document.querySelectorAll('.program-card, .info-card, .teacher-card, .testimonial-card');
             
             cards.forEach(card => {
@@ -1288,7 +1308,6 @@ ${formData.get('mensaje')}
                     const rotateX = (y - centerY) / 15;
                     const rotateY = (centerX - x) / 15;
                     
-                    // Aplicar transform solo si la card es visible
                     card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px) scale(1.02)`;
                 });
                 
@@ -1309,20 +1328,18 @@ ${formData.get('mensaje')}
             backToTopButton.setAttribute('title', 'Volver arriba');
             document.body.appendChild(backToTopButton);
 
-            // Mostrar/ocultar botón Back to Top
             window.addEventListener('scroll', function() {
                 if (window.scrollY > 300) {
                     backToTopButton.classList.add('visible');
                 } else {
                     backToTopButton.classList.remove('visible');
                 }
-            });
+            }, { passive: true });
 
-            // Scroll suave al hacer clic
             backToTopButton.addEventListener('click', function() {
                 window.scrollTo({
                     top: 0,
-                    behavior: 'smooth'
+                    behavior: prefersReducedMotion ? 'auto' : 'smooth'
                 });
             });
         });

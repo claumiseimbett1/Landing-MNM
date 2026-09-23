@@ -67,12 +67,12 @@
             }
         }
 
-        // Popup promocional (horarios, matrícula gratis agosto)
+        // Popup promocional (octubre: semana vacacional + pronto pago)
         const promoPopup = document.getElementById('promoPopup');
         const promoPopupClose = document.getElementById('promoPopupClose');
         const promoPopupOverlay = document.getElementById('promoPopupOverlay');
         const bubbleHorarios = document.getElementById('bubbleHorarios');
-        const PROMO_POPUP_KEY = 'mnm-promo-popup-closed';
+        const PROMO_POPUP_KEY = 'mnm-promo-popup-oct2026';
 
         function cerrarPromoPopup() {
             if (!promoPopup) return;
@@ -1032,11 +1032,11 @@
 
         // Configuración del contador de ofertas especiales
         const offerConfig = {
-            enabled: false, // Cambiar a true para mostrar
-            startDate: 'auto', // Visible desde ahora para expectativas de agosto
-            endDate: '2026-08-31', // Fin de la promo de agosto
-            title: '💸 ¡MATRÍCULA GRATIS + TARIFAS EN OFF! 💸',
-            description: '¡Ven y entrena con nosotros! Matrícula gratis y tarifas en off en agosto para 3 veces por semana. Plan ticket 7:00 AM para que entrenes temprano en horario de mañana. ¡Cupos limitados! Válido hasta el 31 de agosto de 2026 (aplican condiciones).'
+            enabled: false, // Contador oculto; la promo de octubre va en el popup y en #planes
+            startDate: 'auto',
+            endDate: '2026-10-12',
+            title: '👶 ¡SEMANA VACACIONAL NIÑOS! 👶',
+            description: '4 clases por $100.000 solo para niños hasta 12 años. Exclusivo del 5 al 12 de octubre. También matrícula gratis y pronto pago antes del 5 de octubre.'
         };
 
         // Función para inicializar el contador

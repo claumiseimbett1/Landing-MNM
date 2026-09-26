@@ -3225,6 +3225,33 @@
             }
         }
 
+        /* Fondo de marca */
+        .enrollment-section {
+            background:
+                radial-gradient(ellipse at center, rgba(19, 68, 146, 0.88) 0%, rgba(19, 68, 146, 0.88) 35%, rgba(19, 68, 146, 0.25) 100%),
+                url('../img/fondo-mnm.webp') center / cover no-repeat;
+            padding: 4.5rem 0;
+        }
+
+        .enrollment-text {
+            max-width: 760px;
+            margin-left: auto;
+            margin-right: auto;
+            font-weight: 600;
+        }
+
+        .promo-popup-header {
+            background:
+                radial-gradient(ellipse at center, rgba(19, 68, 146, 0.9) 0%, rgba(19, 68, 146, 0.85) 40%, rgba(19, 68, 146, 0.35) 100%),
+                url('../img/fondo-mnm.webp') center / cover no-repeat;
+        }
+
+        @media (max-width: 768px) {
+            .enrollment-section {
+                padding: 3rem 0;
+            }
+        }
+
         /* ===== Efectos modernos adicionales ===== */
         html.js-motion .hero:not(.is-ready) .hero-content > * {
             opacity: 0;

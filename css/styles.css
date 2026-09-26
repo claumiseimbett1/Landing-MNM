@@ -538,11 +538,23 @@
         }
 
         .pricing-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 1.5rem;
             max-width: 1100px;
             margin: 0 auto 2rem;
+        }
+
+        .pricing-grid > .pricing-card {
+            flex: 0 1 calc((100% - 3rem) / 3);
+            min-width: 280px;
+        }
+
+        @media (max-width: 960px) {
+            .pricing-grid > .pricing-card {
+                flex-basis: calc((100% - 1.5rem) / 2);
+            }
         }
 
         .pricing-card {
@@ -746,8 +758,12 @@
             }
 
             .pricing-grid {
-                grid-template-columns: 1fr;
                 padding: 0 0.5rem;
+            }
+
+            .pricing-grid > .pricing-card {
+                flex-basis: 100%;
+                min-width: 0;
             }
 
             .pricing-card li {
@@ -3381,6 +3397,161 @@
             bottom: 0;
             height: 10px;
             background: url('../img/fondo-mnm.webp') center / cover no-repeat;
+        }
+
+        /* Evento: Relevos MNM */
+        .event-section {
+            background: var(--gray-light);
+        }
+
+        .event-card {
+            display: flex;
+            align-items: stretch;
+            max-width: 980px;
+            margin: 0 auto;
+            border-radius: 22px;
+            overflow: hidden;
+            box-shadow: 0 16px 40px rgba(19, 68, 146, 0.25);
+            background:
+                linear-gradient(90deg, rgba(19, 68, 146, 0.93) 0%, rgba(19, 68, 146, 0.88) 60%, rgba(19, 68, 146, 0.55) 100%),
+                url('../img/fondo-mnm.webp') center / cover no-repeat;
+            color: #fff;
+        }
+
+        .event-date {
+            flex: 0 0 170px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: var(--secondary-color);
+            color: var(--tertiary-color);
+            padding: 1.5rem 1rem;
+            line-height: 1;
+        }
+
+        .event-date-day {
+            font-size: 4.5rem;
+            font-weight: 900;
+        }
+
+        .event-date-month {
+            font-size: 1.6rem;
+            font-weight: 800;
+            letter-spacing: 0.12em;
+            margin-top: 0.35rem;
+        }
+
+        .event-date-year {
+            font-size: 1rem;
+            font-weight: 700;
+            margin-top: 0.4rem;
+            opacity: 0.8;
+        }
+
+        .event-info {
+            padding: 2rem 2.25rem;
+            text-align: left;
+        }
+
+        .event-kicker {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.35);
+            padding: 0.3rem 0.8rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
+        }
+
+        .event-title {
+            font-size: 2.1rem;
+            line-height: 1.15;
+            margin-bottom: 0.75rem;
+            color: #fff;
+        }
+
+        .event-text {
+            font-size: 1.05rem;
+            line-height: 1.55;
+            margin-bottom: 1rem;
+        }
+
+        .event-text strong {
+            color: var(--secondary-color);
+        }
+
+        .event-facts {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem 1.25rem;
+            margin-bottom: 1.25rem;
+            font-weight: 600;
+        }
+
+        .event-info .cta-button {
+            margin-top: 0;
+        }
+
+        .promo-popup-event {
+            background: linear-gradient(90deg, rgba(19, 68, 146, 0.94), rgba(19, 68, 146, 0.8)), url('../img/fondo-mnm.webp') center / cover no-repeat;
+            color: #fff;
+            padding: 0.85rem 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .promo-popup-event strong {
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .promo-popup-event p {
+            font-size: 0.88rem;
+            line-height: 1.4;
+            margin: 0;
+        }
+
+        .promo-popup-event p strong {
+            display: inline;
+            color: var(--secondary-color);
+        }
+
+        @media (max-width: 768px) {
+            .event-card {
+                flex-direction: column;
+            }
+
+            .event-date {
+                flex: none;
+                flex-direction: row;
+                gap: 0.6rem;
+                padding: 1rem;
+            }
+
+            .event-date-day {
+                font-size: 2.6rem;
+            }
+
+            .event-date-month,
+            .event-date-year {
+                margin-top: 0;
+            }
+
+            .event-info {
+                padding: 1.5rem 1.25rem;
+                text-align: center;
+            }
+
+            .event-title {
+                font-size: 1.6rem;
+            }
+
+            .event-facts {
+                justify-content: center;
+            }
         }
 
         @media (min-width: 1024px) and (hover: hover) {

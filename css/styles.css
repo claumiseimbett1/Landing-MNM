@@ -3246,6 +3246,45 @@
                 url('../img/fondo-mnm.webp') center / cover no-repeat;
         }
 
+        .featured-highlight {
+            background:
+                linear-gradient(90deg, rgba(19, 68, 146, 0.35) 0%, rgba(19, 68, 146, 0.9) 25%, rgba(19, 68, 146, 0.9) 75%, rgba(19, 68, 146, 0.35) 100%),
+                url('../img/fondo-mnm.webp') center / cover no-repeat;
+        }
+
+        .pricing-section {
+            background:
+                linear-gradient(180deg, rgba(19, 68, 146, 0.72) 0%, rgba(26, 61, 112, 0.82) 100%),
+                url('../img/fondo-mnm.webp') center / cover no-repeat;
+        }
+
+        .pricing-section .section-title,
+        .pricing-section .pricing-intro {
+            color: #fff;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+        }
+
+        .pricing-section .pricing-intro strong {
+            color: var(--secondary-color);
+        }
+
+        .pricing-section .pricing-card {
+            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.28);
+        }
+
+        .footer {
+            background:
+                linear-gradient(180deg, rgba(26, 61, 112, 0.94) 0%, rgba(26, 61, 112, 0.86) 100%),
+                url('../img/fondo-mnm.webp') center / cover no-repeat;
+        }
+
+        @media (min-width: 1024px) and (hover: hover) {
+            .pricing-section,
+            .enrollment-section {
+                background-attachment: scroll, fixed;
+            }
+        }
+
         @media (max-width: 768px) {
             .enrollment-section {
                 padding: 3rem 0;
@@ -3352,5 +3391,10 @@
 
             .section-title::after {
                 width: 88px !important;
+            }
+
+            .pricing-section,
+            .enrollment-section {
+                background-attachment: scroll !important;
             }
         }

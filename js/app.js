@@ -1036,7 +1036,7 @@
             startDate: 'auto',
             endDate: '2026-10-12',
             title: '👶 ¡SEMANA VACACIONAL NIÑOS! 👶',
-            description: '4 clases por $100.000 solo para niños de 5 a 12 años. Exclusivo del 5 al 12 de octubre. También matrícula gratis y pronto pago antes del 5 de octubre.'
+            description: '4 clases por $100.000 solo para niños de 6 a 12 años. Exclusivo del 5 al 12 de octubre. También matrícula gratis y pronto pago antes del 5 de octubre.'
         };
 
         // Función para inicializar el contador

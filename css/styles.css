@@ -3399,6 +3399,242 @@
             background: url('../img/fondo-mnm.webp') center / cover no-repeat;
         }
 
+        /* Niveles */
+        .levels-section {
+            background: #fff;
+            text-align: center;
+        }
+
+        .levels-intro {
+            max-width: 720px;
+            margin: -1.5rem auto 2.5rem;
+            font-size: 1.1rem;
+            color: var(--text-dark);
+        }
+
+        .levels-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.75rem;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .level-card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            text-align: left;
+            box-shadow: 0 10px 28px rgba(19, 68, 146, 0.14);
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .level-card:hover {
+            transform: translateY(-6px);
+            border-color: var(--secondary-color);
+            box-shadow: 0 16px 36px rgba(19, 68, 146, 0.22);
+        }
+
+        .level-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            min-height: 92px;
+            padding: 1.25rem 1.5rem;
+            color: #fff;
+            background:
+                linear-gradient(135deg, rgba(19, 68, 146, 0.9), rgba(26, 61, 112, 0.72)),
+                url('../img/fondo-mnm.webp') center / cover no-repeat;
+        }
+
+        .level-card:nth-child(2) .level-header { background-position: center, 25% 35%; }
+        .level-card:nth-child(3) .level-header { background-position: center, 75% 70%; }
+        .level-card:nth-child(4) .level-header { background-position: center, 40% 90%; }
+
+        .level-card--top .level-header {
+            background:
+                linear-gradient(135deg, rgba(19, 68, 146, 0.9) 0%, rgba(26, 61, 112, 0.7) 60%, rgba(222, 222, 60, 0.45) 100%),
+                url('../img/fondo-mnm.webp') 40% 90% / cover no-repeat;
+        }
+
+        .level-number {
+            font-size: 1.55rem;
+            font-weight: 900;
+            letter-spacing: 0.01em;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+        }
+
+        .level-meter {
+            display: inline-flex;
+            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .level-meter i {
+            display: block;
+            width: 9px;
+            border-radius: 3px;
+            background: rgba(255, 255, 255, 0.35);
+        }
+
+        .level-meter i:nth-child(1) { height: 12px; }
+        .level-meter i:nth-child(2) { height: 19px; }
+        .level-meter i:nth-child(3) { height: 26px; }
+        .level-meter i:nth-child(4) { height: 33px; }
+
+        .level-meter i.on {
+            background: var(--secondary-color);
+        }
+
+        .level-body {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .level-body h3 {
+            color: var(--primary-color);
+            font-size: 1.25rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .level-body p {
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin-bottom: 1.1rem;
+        }
+
+        .level-tags {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.45rem;
+            margin-top: auto;
+        }
+
+        .level-tags li {
+            background: rgba(19, 68, 146, 0.08);
+            color: var(--primary-color);
+            font-size: 0.82rem;
+            font-weight: 700;
+            padding: 0.3rem 0.7rem;
+            border-radius: 999px;
+        }
+
+        .level-card--top {
+            border-color: var(--secondary-color);
+        }
+
+        .level-card--top .level-tags li {
+            background: rgba(222, 222, 60, 0.35);
+            color: var(--tertiary-color);
+        }
+
+        .levels-cta {
+            margin-top: 2.5rem;
+        }
+
+        .levels-cta p {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+        }
+
+        .program-link {
+            display: inline-block;
+            margin-top: 0.85rem;
+            color: var(--secondary-color);
+            font-weight: 800;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.25s ease;
+        }
+
+        .program-link:hover {
+            border-color: var(--secondary-color);
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 0.75rem;
+            margin-top: 0.5rem;
+        }
+
+        .hero-actions .cta-button {
+            margin-top: 0;
+        }
+
+        .cta-button.cta-outline {
+            background: transparent;
+            color: #fff;
+            border: 2px solid var(--secondary-color);
+            box-shadow: none;
+            animation: none;
+        }
+
+        .cta-button.cta-outline:hover {
+            background: var(--secondary-color);
+            color: var(--tertiary-color);
+        }
+
+        .bubble-niveles {
+            position: fixed;
+            left: 24px;
+            bottom: 30px;
+            z-index: 999;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            padding: 0.7rem 1.1rem;
+            border-radius: 999px;
+            background: var(--secondary-color);
+            color: var(--tertiary-color);
+            font-weight: 800;
+            font-size: 0.95rem;
+            text-decoration: none;
+            border: 2px solid var(--primary-color);
+            box-shadow: 0 6px 18px rgba(19, 68, 146, 0.35);
+            transition: transform 0.25s ease, opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .bubble-niveles:hover {
+            transform: translateY(-3px);
+        }
+
+        .bubble-niveles.is-hidden {
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(12px);
+        }
+
+        @media (max-width: 768px) {
+            .levels-grid {
+                grid-template-columns: 1fr;
+                max-width: 560px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .levels-intro {
+                margin-top: -1rem;
+                font-size: 1rem;
+            }
+
+            .bubble-niveles {
+                left: 16px;
+                bottom: 20px;
+                padding: 0.55rem 0.9rem;
+                font-size: 0.85rem;
+            }
+        }
+
         /* Evento: Relevos MNM */
         .event-section {
             background: var(--gray-light);

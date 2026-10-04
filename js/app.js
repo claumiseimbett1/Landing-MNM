@@ -1036,7 +1036,7 @@
             startDate: 'auto',
             endDate: '2026-10-12',
             title: '👶 ¡SEMANA VACACIONAL NIÑOS! 👶',
-            description: '4 clases por $100.000 solo para niños hasta 12 años. Exclusivo del 5 al 12 de octubre. También matrícula gratis y pronto pago antes del 5 de octubre.'
+            description: '4 clases por $100.000 solo para niños de 5 a 12 años. Exclusivo del 5 al 12 de octubre. También matrícula gratis y pronto pago antes del 5 de octubre.'
         };
 
         // Función para inicializar el contador
@@ -1232,6 +1232,15 @@ ${formData.get('mensaje')}
         const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
         if (!prefersReducedMotion) {
             document.documentElement.classList.add('js-motion');
+        }
+
+        // Botón flotante "Niveles": se oculta mientras la sección está en pantalla
+        const bubbleNiveles = document.getElementById('bubbleNiveles');
+        const nivelesSection = document.getElementById('niveles');
+        if (bubbleNiveles && nivelesSection && 'IntersectionObserver' in window) {
+            new IntersectionObserver(([entry]) => {
+                bubbleNiveles.classList.toggle('is-hidden', entry.isIntersecting);
+            }, { threshold: 0.2 }).observe(nivelesSection);
         }
 
         // Hero: entrada escalonada del contenido

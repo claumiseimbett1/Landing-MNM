@@ -67,12 +67,12 @@
             }
         }
 
-        // Popup promocional (octubre: semana vacacional + pronto pago)
+        // Popup promocional (pronto pago mensual + Relevos MNM)
         const promoPopup = document.getElementById('promoPopup');
         const promoPopupClose = document.getElementById('promoPopupClose');
         const promoPopupOverlay = document.getElementById('promoPopupOverlay');
         const bubbleHorarios = document.getElementById('bubbleHorarios');
-        const PROMO_POPUP_KEY = 'mnm-promo-popup-oct2026-relevos';
+        const PROMO_POPUP_KEY = 'mnm-promo-popup-nov2026-relevos';
 
         function cerrarPromoPopup() {
             if (!promoPopup) return;
@@ -1032,11 +1032,11 @@
 
         // Configuración del contador de ofertas especiales
         const offerConfig = {
-            enabled: false, // Contador oculto; la promo de octubre va en el popup y en #planes
+            enabled: false, // Contador oculto; las promos van en el popup y en #planes
             startDate: 'auto',
-            endDate: '2026-10-12',
-            title: '👶 ¡SEMANA VACACIONAL NIÑOS! 👶',
-            description: '4 clases por $100.000 solo para niños de 6 a 12 años. Exclusivo del 5 al 12 de octubre. También matrícula gratis y pronto pago antes del 5 de octubre.'
+            endDate: '2026-11-05',
+            title: '💸 ¡PRONTO PAGO + MATRÍCULA GRATIS! 💸',
+            description: 'Paga en los primeros 5 días de cada mes: 2 veces por semana $165.000 y 3 veces por semana $195.000. Matrícula gratis.'
         };
 
         // Función para inicializar el contador

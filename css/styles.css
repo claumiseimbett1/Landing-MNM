@@ -542,19 +542,13 @@
             flex-wrap: wrap;
             justify-content: center;
             gap: 1.5rem;
-            max-width: 1100px;
+            max-width: 880px;
             margin: 0 auto 2rem;
         }
 
         .pricing-grid > .pricing-card {
-            flex: 0 1 calc((100% - 3rem) / 3);
+            flex: 0 1 calc((100% - 1.5rem) / 2);
             min-width: 280px;
-        }
-
-        @media (max-width: 960px) {
-            .pricing-grid > .pricing-card {
-                flex-basis: calc((100% - 1.5rem) / 2);
-            }
         }
 
         .pricing-card {
@@ -3742,6 +3736,68 @@
             color: var(--secondary-color);
         }
 
+        .promo-popup-event-link {
+            display: inline-block;
+            margin-top: 0.5rem;
+            color: var(--secondary-color);
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .promo-popup-event-link:hover {
+            text-decoration: underline;
+        }
+
+        .promo-popup-logo {
+            display: block;
+            width: 84px;
+            height: auto;
+            margin: 0 auto 0.6rem;
+        }
+
+        .event-date-weekday {
+            font-size: 1.1rem;
+            font-weight: 800;
+            letter-spacing: 0.15em;
+            margin-bottom: 0.35rem;
+        }
+
+        .event-logo {
+            display: block;
+            width: 150px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
+
+        .event-actions {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 0.75rem 1.25rem;
+        }
+
+        .event-link {
+            color: #fff;
+            font-weight: 700;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+
+        .event-link:hover {
+            color: var(--secondary-color);
+        }
+
+        .announcement-link {
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .announcement-link .announcement-subtitle {
+            text-decoration: underline;
+            text-underline-offset: 2px;
+        }
+
         @media (max-width: 768px) {
             .event-card {
                 flex-direction: column;
@@ -3773,6 +3829,20 @@
             }
 
             .event-facts {
+                justify-content: center;
+            }
+
+            .event-date-weekday {
+                margin-bottom: 0;
+                font-size: 1rem;
+            }
+
+            .event-logo {
+                width: 120px;
+                margin: 0 auto 1rem;
+            }
+
+            .event-actions {
                 justify-content: center;
             }
         }

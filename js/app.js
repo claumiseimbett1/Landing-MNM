@@ -116,6 +116,14 @@
 
         initPromoPopup();
 
+        // Pronto pago solo aplica del 1 al 5 de cada mes (hora de Colombia)
+        const diaColombia = Number(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Bogota', day: 'numeric' }).format(new Date()));
+        if (diaColombia <= 5) {
+            document.querySelectorAll('a[data-wa-pronto]').forEach(link => {
+                link.href = `${link.href.split('?')[0]}?text=${encodeURIComponent(link.dataset.waPronto)}`;
+            });
+        }
+
         function setMenuOpen(isOpen) {
             hamburger.classList.toggle('active', isOpen);
             navMenu.classList.toggle('active', isOpen);

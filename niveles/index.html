@@ -181,7 +181,7 @@
             <div class="container">
                 <p class="enrollment-text">Clases para niños desde 6 años y adultos en la Piscina Villaolímpica de Montería.</p>
                 <div class="levels-page-actions">
-                    <a href="https://wa.me/573144809367?text=Hola,%20vi%20los%20niveles%20de%20natación%20y%20quiero%20inscribirme." target="_blank" rel="noopener noreferrer" class="enrollment-button">¡Quiero empezar a nadar!</a>
+                    <a href="https://wa.me/573144809367?text=Hola,%20vi%20los%20niveles%20de%20natación%20y%20quiero%20inscribirme%20con%20matrícula%20gratis." data-wa-pronto="Hola, vi los niveles de natación y quiero inscribirme con matrícula gratis y pronto pago de este mes." target="_blank" rel="noopener noreferrer" class="enrollment-button">¡Quiero empezar a nadar!</a>
                     <a href="/#planes" class="enrollment-button">Ver planes y tarifas</a>
                 </div>
             </div>
@@ -281,6 +281,14 @@
             navMenu.querySelectorAll('a').forEach(function (link) {
                 link.addEventListener('click', function () { setMenuOpen(false); });
             });
+
+            // Pronto pago solo aplica del 1 al 5 de cada mes (hora de Colombia)
+            var diaColombia = Number(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Bogota', day: 'numeric' }).format(new Date()));
+            if (diaColombia <= 5) {
+                document.querySelectorAll('a[data-wa-pronto]').forEach(function (link) {
+                    link.href = link.href.split('?')[0] + '?text=' + encodeURIComponent(link.dataset.waPronto);
+                });
+            }
         })();
     </script>
 </body>

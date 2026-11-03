@@ -116,9 +116,16 @@
 
         initPromoPopup();
 
-        // Pronto pago solo aplica del 1 al 5 de cada mes (hora de Colombia)
-        const diaColombia = Number(new Intl.DateTimeFormat('en-US', { timeZone: 'America/Bogota', day: 'numeric' }).format(new Date()));
-        if (diaColombia <= 5) {
+        // Pronto pago vigente hasta el 5 de noviembre de 2026 (hora de Colombia)
+        const partesColombia = new Intl.DateTimeFormat('en-US', {
+            timeZone: 'America/Bogota',
+            year: 'numeric',
+            month: 'numeric',
+            day: 'numeric'
+        }).formatToParts(new Date());
+        const parteColombia = (tipo) => Number(partesColombia.find((p) => p.type === tipo).value);
+        const prontoPagoVigente = parteColombia('year') === 2026 && parteColombia('month') === 11 && parteColombia('day') <= 5;
+        if (prontoPagoVigente) {
             document.querySelectorAll('a[data-wa-pronto]').forEach(link => {
                 link.href = `${link.href.split('?')[0]}?text=${encodeURIComponent(link.dataset.waPronto)}`;
             });
@@ -1044,7 +1051,7 @@
             startDate: 'auto',
             endDate: '2026-11-05',
             title: '💸 ¡PRONTO PAGO + MATRÍCULA GRATIS! 💸',
-            description: 'Paga en los primeros 5 días de cada mes: 2 veces por semana $165.000 y 3 veces por semana $195.000. Matrícula gratis.'
+            description: 'Paga hasta el 5 de noviembre: 2 veces por semana $165.000 y 3 veces por semana $195.000. Matrícula gratis.'
         };
 
         // Función para inicializar el contador

@@ -1032,7 +1032,7 @@
 
         // Configuración del contador de ofertas especiales
         const offerConfig = {
-            enabled: false, // Contador oculto; las promos van en el popup y en #planes
+            enabled: false, // Contador oculto; las promos van en el popup y en #vacacionales
             startDate: 'auto',
             endDate: '2026-11-05',
             title: '☀️ ¡YA ABRIMOS VACACIONALES! ☀️',

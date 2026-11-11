@@ -181,7 +181,7 @@
             <div class="container">
                 <p class="enrollment-text">Clases para niños desde 6 años y adultos en la Piscina Villaolímpica de Montería.</p>
                 <div class="levels-page-actions">
-                    <a href="https://wa.me/573144809367?text=Hola,%20vi%20los%20niveles%20de%20natación%20y%20quiero%20inscribirme%20con%20matrícula%20gratis." data-wa-pronto="Hola, vi los niveles de natación y quiero inscribirme con matrícula gratis y pronto pago hasta el 5 de noviembre." target="_blank" rel="noopener noreferrer" class="enrollment-button">¡Quiero empezar a nadar!</a>
+                    <a href="https://wa.me/573144809367?text=Hola,%20vi%20los%20niveles%20de%20natación%20y%20quiero%20inscribirme%20con%20matrícula%20gratis." target="_blank" rel="noopener noreferrer" class="enrollment-button">¡Quiero empezar a nadar!</a>
                     <a href="/#planes" class="enrollment-button">Ver planes y tarifas</a>
                 </div>
             </div>
@@ -282,17 +282,6 @@
                 link.addEventListener('click', function () { setMenuOpen(false); });
             });
 
-            // Pronto pago vigente hasta el 5 de noviembre de 2026 (hora de Colombia)
-            var partesColombia = new Intl.DateTimeFormat('en-US', { timeZone: 'America/Bogota', year: 'numeric', month: 'numeric', day: 'numeric' }).formatToParts(new Date());
-            var parteColombia = function (tipo) {
-                return Number(partesColombia.find(function (p) { return p.type === tipo; }).value);
-            };
-            var prontoPagoVigente = parteColombia('year') === 2026 && parteColombia('month') === 11 && parteColombia('day') <= 5;
-            if (prontoPagoVigente) {
-                document.querySelectorAll('a[data-wa-pronto]').forEach(function (link) {
-                    link.href = link.href.split('?')[0] + '?text=' + encodeURIComponent(link.dataset.waPronto);
-                });
-            }
         })();
     </script>
 </body>

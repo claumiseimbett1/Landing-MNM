@@ -2058,7 +2058,7 @@
             transform: translateY(-5px);
         }
 
-        /* Popup promocional */
+        /* Popup promocional (base; estilos finales más abajo) */
         .promo-popup {
             position: fixed;
             inset: 0;
@@ -2082,27 +2082,27 @@
         .promo-popup-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(13, 42, 92, 0.72);
-            backdrop-filter: blur(4px);
+            background: rgba(10, 28, 64, 0.7);
+            backdrop-filter: blur(8px);
         }
 
         .promo-popup-content {
             position: relative;
             z-index: 1;
             width: 100%;
-            max-width: 520px;
+            max-width: 420px;
             max-height: 90vh;
             overflow-y: auto;
             background: #fff;
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-            border: 3px solid var(--secondary-color);
-            animation: promo-popup-in 0.4s ease;
+            border-radius: 24px;
+            box-shadow: 0 24px 64px rgba(10, 28, 64, 0.35);
+            border: none;
+            animation: promo-popup-in 0.45s cubic-bezier(0.22, 1, 0.36, 1);
         }
 
         @keyframes promo-popup-in {
             from {
-                transform: translateY(24px) scale(0.96);
+                transform: translateY(28px) scale(0.97);
                 opacity: 0;
             }
             to {
@@ -2113,64 +2113,58 @@
 
         .promo-popup-close {
             position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            width: 36px;
-            height: 36px;
-            border: none;
+            top: 0.85rem;
+            right: 0.85rem;
+            width: 34px;
+            height: 34px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
             border-radius: 50%;
-            background: rgba(19, 68, 146, 0.1);
-            color: var(--primary-color);
-            font-size: 1.5rem;
+            background: rgba(255, 255, 255, 0.14);
+            color: #fff;
+            font-size: 1.35rem;
             line-height: 1;
             cursor: pointer;
             transition: background 0.2s ease;
+            z-index: 3;
         }
 
         .promo-popup-close:hover {
-            background: rgba(19, 68, 146, 0.2);
+            background: rgba(255, 255, 255, 0.28);
         }
 
         .promo-popup-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+            background: linear-gradient(160deg, #0d2a5c 0%, var(--primary-color) 48%, var(--tertiary-color) 100%);
             color: var(--text-light);
-            padding: 1.75rem 1.5rem 1.25rem;
-            border-radius: 17px 17px 0 0;
+            padding: 1.85rem 1.5rem 1.4rem;
+            border-radius: 24px 24px 0 0;
             text-align: center;
         }
 
         .promo-popup-badge {
-            display: inline-block;
-            background: var(--secondary-color);
-            color: var(--tertiary-color);
-            font-weight: 800;
-            font-size: 0.85rem;
-            padding: 0.4rem 0.9rem;
-            border-radius: 50px;
-            margin-bottom: 0.75rem;
+            display: none;
         }
 
         .promo-popup-header h2 {
-            font-size: 1.35rem;
-            margin-bottom: 0.35rem;
+            font-size: 1.55rem;
+            margin-bottom: 0.4rem;
         }
 
         .promo-popup-subtitle {
-            font-size: 0.95rem;
-            opacity: 0.95;
+            font-size: 0.92rem;
+            opacity: 0.9;
         }
 
         .promo-popup-body {
-            padding: 1.25rem 1.5rem;
+            padding: 1.25rem 1.35rem 0.35rem;
             color: var(--primary-color);
         }
 
         .promo-popup-highlight {
-            background: linear-gradient(90deg, #fff9c4, #fef9e0);
-            border-left: 4px solid var(--secondary-color);
-            padding: 0.85rem 1rem;
-            border-radius: 0 10px 10px 0;
-            margin-bottom: 1rem;
+            background: linear-gradient(180deg, #fffdf0 0%, #faf7e0 100%);
+            border: 1px solid rgba(222, 222, 60, 0.55);
+            padding: 1rem;
+            border-radius: 16px;
+            margin-bottom: 0.9rem;
         }
 
         .promo-popup-highlight strong {
@@ -2185,62 +2179,35 @@
 
         .promo-popup-offer {
             text-align: center;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            background: var(--gray-light);
-            border-radius: 10px;
+            padding: 0.15rem 0.15rem 0.85rem;
+            margin-bottom: 0;
+            background: transparent;
+            border-radius: 0;
+            font-size: 0.8rem;
+            color: rgba(19, 68, 146, 0.78);
         }
 
         .promo-popup-offer p {
             margin: 0;
-            font-size: 1rem;
+            font-size: inherit;
         }
 
         .promo-conditions {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             color: #666;
             font-weight: normal;
         }
 
-        .promo-popup-horarios h3 {
-            font-size: 1rem;
-            margin-bottom: 0.5rem;
-            color: var(--primary-color);
-        }
-
-        .promo-popup-horarios ul {
-            list-style: none;
-            padding: 0;
-            margin: 0 0 1rem;
-        }
-
-        .promo-popup-horarios li {
-            padding: 0.35rem 0;
-            font-size: 0.9rem;
-            border-bottom: 1px solid #eee;
-        }
-
-        .promo-popup-horarios li:last-child {
-            border-bottom: none;
-        }
-
+        .promo-popup-horarios,
         .promo-popup-seguimiento {
-            background: rgba(19, 68, 146, 0.06);
-            padding: 0.85rem 1rem;
-            border-radius: 10px;
-            font-size: 0.9rem;
-            line-height: 1.5;
-        }
-
-        .promo-popup-seguimiento p {
-            margin: 0;
+            display: none;
         }
 
         .promo-popup-actions {
             display: flex;
             flex-wrap: wrap;
             gap: 0.75rem;
-            padding: 0 1.5rem 1.5rem;
+            padding: 0 1.35rem 1.4rem;
         }
 
         .promo-popup-actions .cta-button {
@@ -2249,17 +2216,16 @@
             margin-top: 0;
             text-align: center;
             box-sizing: border-box;
-            background: #dede3c !important;
-            color: #1a3d70 !important;
-            box-shadow: 0 4px 15px rgba(222, 222, 60, 0.3) !important;
+            border-radius: 14px;
+            background: #25d366 !important;
+            color: #fff !important;
+            box-shadow: 0 8px 22px rgba(37, 211, 102, 0.28) !important;
         }
 
         .promo-popup-actions .cta-button:hover {
-            background: #f0f03a !important;
-            color: #1a3d70 !important;
-            box-shadow: 0 0 20px rgba(222, 222, 60, 0.6),
-                        0 0 40px rgba(222, 222, 60, 0.4),
-                        0 8px 25px rgba(0, 0, 0, 0.2) !important;
+            background: #1ebe57 !important;
+            color: #fff !important;
+            box-shadow: 0 10px 26px rgba(37, 211, 102, 0.35) !important;
         }
 
         .promo-popup-btn {
@@ -2267,7 +2233,7 @@
             min-width: 140px;
             text-align: center;
             padding: 0.85rem 1rem;
-            border-radius: 50px;
+            border-radius: 14px;
             font-weight: 700;
             font-size: 0.9rem;
             text-decoration: none;
@@ -2983,37 +2949,52 @@
             padding: 1rem;
             opacity: 0;
             visibility: hidden;
+            pointer-events: none;
             transition: opacity 0.35s ease, visibility 0.35s ease;
         }
 
         .promo-popup.is-visible {
             opacity: 1;
             visibility: visible;
+            pointer-events: auto;
         }
 
         .promo-popup-overlay {
             position: absolute;
             inset: 0;
-            background: rgba(13, 42, 92, 0.75);
-            backdrop-filter: blur(4px);
+            background: rgba(10, 28, 64, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
         }
 
         .promo-popup-content {
             position: relative;
             background: #fff;
-            border-radius: 20px;
-            max-width: 480px;
+            border-radius: 24px;
+            max-width: 420px;
             width: 100%;
             max-height: 90vh;
             overflow-y: auto;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
-            border: 3px solid var(--secondary-color);
-            animation: promoPopupIn 0.4s ease;
+            box-shadow: 0 24px 64px rgba(10, 28, 64, 0.35);
+            border: none;
+            animation: promoPopupIn 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .promo-popup-content::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 1.5rem;
+            right: 1.5rem;
+            height: 3px;
+            border-radius: 0 0 999px 999px;
+            background: linear-gradient(90deg, #ffe066, var(--secondary-color), #ffe066);
+            z-index: 2;
         }
 
         @keyframes promoPopupIn {
             from {
-                transform: translateY(30px) scale(0.95);
+                transform: translateY(28px) scale(0.97);
                 opacity: 0;
             }
             to {
@@ -3024,14 +3005,14 @@
 
         .promo-popup-close {
             position: absolute;
-            top: 0.75rem;
-            right: 0.75rem;
-            width: 36px;
-            height: 36px;
-            border: none;
-            background: var(--gray-light);
-            color: var(--primary-color);
-            font-size: 1.5rem;
+            top: 0.85rem;
+            right: 0.85rem;
+            width: 34px;
+            height: 34px;
+            border: 1px solid rgba(255, 255, 255, 0.28);
+            background: rgba(255, 255, 255, 0.14);
+            color: #fff;
+            font-size: 1.35rem;
             line-height: 1;
             border-radius: 50%;
             cursor: pointer;
@@ -3039,55 +3020,121 @@
             align-items: center;
             justify-content: center;
             transition: background 0.2s ease, transform 0.2s ease;
-            z-index: 1;
+            z-index: 3;
         }
 
         .promo-popup-close:hover {
-            background: var(--secondary-color);
-            transform: scale(1.1);
+            background: rgba(255, 255, 255, 0.28);
+            transform: scale(1.06);
         }
 
         .promo-popup-header {
-            background: linear-gradient(135deg, var(--primary-color), var(--tertiary-color));
+            background:
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(222, 222, 60, 0.22), transparent 55%),
+                linear-gradient(160deg, #0d2a5c 0%, var(--primary-color) 48%, var(--tertiary-color) 100%);
             color: white;
-            padding: 1.75rem 1.5rem 1.25rem;
-            border-radius: 17px 17px 0 0;
+            padding: 1.85rem 1.5rem 1.4rem;
+            border-radius: 24px 24px 0 0;
             text-align: center;
         }
 
-        .promo-popup-badge {
+        .promo-popup-kicker {
             display: inline-block;
-            background: var(--secondary-color);
-            color: var(--primary-color);
+            margin: 0 0 0.55rem;
+            padding: 0.28rem 0.75rem;
+            border-radius: 999px;
+            background: rgba(222, 222, 60, 0.95);
+            color: #0d2a5c;
+            font-size: 0.72rem;
             font-weight: 800;
-            font-size: 0.85rem;
-            padding: 0.35rem 0.85rem;
-            border-radius: 50px;
-            margin-bottom: 0.75rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .promo-popup-badge {
+            display: none;
         }
 
         .promo-popup-header h2 {
-            font-size: 1.35rem;
-            margin-bottom: 0.35rem;
+            font-size: 1.55rem;
+            line-height: 1.2;
+            margin: 0 0 0.4rem;
             color: white;
+            font-weight: 800;
+            letter-spacing: -0.02em;
         }
 
         .promo-popup-subtitle {
-            font-size: 0.95rem;
-            opacity: 0.95;
+            font-size: 0.92rem;
+            opacity: 0.9;
             margin: 0;
+            line-height: 1.45;
         }
 
         .promo-popup-body {
-            padding: 1.25rem 1.5rem;
+            padding: 1.25rem 1.35rem 0.35rem;
         }
 
         .promo-popup-highlight {
-            background: linear-gradient(90deg, #ffe066, #dede3c);
+            background: linear-gradient(180deg, #fffdf0 0%, #faf7e0 100%);
             color: var(--primary-color);
-            padding: 0.85rem 1rem;
+            padding: 1rem 1rem 1.05rem;
+            border-radius: 16px;
+            margin-bottom: 0.9rem;
+            border: 1px solid rgba(222, 222, 60, 0.55);
+        }
+
+        .promo-popup-label {
+            margin: 0 0 0.7rem;
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: rgba(19, 68, 146, 0.7);
+        }
+
+        .promo-popup-times {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0.55rem;
+        }
+
+        .promo-popup-time {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 2.55rem;
+            padding: 0.45rem 0.5rem;
             border-radius: 12px;
-            margin-bottom: 1rem;
+            background: #fff;
+            color: var(--primary-color);
+            font-size: 0.95rem;
+            font-weight: 800;
+            box-shadow: 0 1px 2px rgba(19, 68, 146, 0.06);
+            border: 1px solid rgba(19, 68, 146, 0.08);
+            animation: promoTimeIn 0.5s ease both;
+        }
+
+        .promo-popup-time:nth-child(1) { animation-delay: 0.08s; }
+        .promo-popup-time:nth-child(2) { animation-delay: 0.14s; }
+        .promo-popup-time:nth-child(3) { animation-delay: 0.2s; }
+        .promo-popup-time:nth-child(4) { animation-delay: 0.26s; }
+
+        .promo-popup-time--accent {
+            background: var(--primary-color);
+            color: var(--secondary-color);
+            border-color: transparent;
+        }
+
+        @keyframes promoTimeIn {
+            from {
+                opacity: 0;
+                transform: translateY(8px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         .promo-popup-highlight strong {
@@ -3103,66 +3150,32 @@
         }
 
         .promo-popup-offer {
+            margin: 0 0 0.35rem;
+            padding: 0.15rem 0.15rem 0.85rem;
             text-align: center;
-            padding: 0.75rem;
-            margin-bottom: 1rem;
-            border: 2px dashed var(--secondary-color);
-            border-radius: 12px;
-        }
-
-        .promo-popup-offer p {
-            margin: 0;
-            font-size: 1.05rem;
-            color: var(--primary-color);
+            font-size: 0.8rem;
+            line-height: 1.5;
+            color: rgba(19, 68, 146, 0.78);
+            border: none;
+            background: transparent;
         }
 
         .promo-conditions {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             font-weight: normal;
-            opacity: 0.85;
+            opacity: 0.8;
         }
 
-        .promo-popup-horarios h3 {
-            font-size: 1rem;
-            color: var(--primary-color);
-            margin-bottom: 0.5rem;
-        }
-
-        .promo-popup-horarios ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .promo-popup-horarios li {
-            padding: 0.4rem 0;
-            font-size: 0.9rem;
-            border-bottom: 1px solid var(--gray-light);
-            line-height: 1.45;
-        }
-
-        .promo-popup-horarios li:last-child {
-            border-bottom: none;
-        }
-
+        .promo-popup-horarios,
         .promo-popup-seguimiento {
-            margin-top: 1rem;
-            padding: 0.85rem;
-            background: var(--gray-light);
-            border-radius: 12px;
-            font-size: 0.9rem;
-            line-height: 1.45;
-        }
-
-        .promo-popup-seguimiento p {
-            margin: 0;
+            display: none;
         }
 
         .promo-popup-actions {
             display: flex;
             flex-direction: column;
             gap: 0.65rem;
-            padding: 0 1.5rem 1.5rem;
+            padding: 0 1.35rem 1.4rem;
         }
 
         .promo-popup-actions .cta-button {
@@ -3170,24 +3183,28 @@
             margin-top: 0;
             text-align: center;
             box-sizing: border-box;
-            background: #dede3c !important;
-            color: #1a3d70 !important;
-            box-shadow: 0 4px 15px rgba(222, 222, 60, 0.3) !important;
+            border-radius: 14px;
+            padding: 0.95rem 1.25rem;
+            font-size: 1rem;
+            letter-spacing: 0.01em;
+            background: #25d366 !important;
+            color: #fff !important;
+            box-shadow: 0 8px 22px rgba(37, 211, 102, 0.28) !important;
+            transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease !important;
         }
 
         .promo-popup-actions .cta-button:hover {
-            background: #f0f03a !important;
-            color: #1a3d70 !important;
-            box-shadow: 0 0 20px rgba(222, 222, 60, 0.6),
-                        0 0 40px rgba(222, 222, 60, 0.4),
-                        0 8px 25px rgba(0, 0, 0, 0.2) !important;
+            background: #1ebe57 !important;
+            color: #fff !important;
+            transform: translateY(-1px);
+            box-shadow: 0 10px 26px rgba(37, 211, 102, 0.35) !important;
         }
 
         .promo-popup-btn {
             display: block;
             text-align: center;
             padding: 0.85rem 1.25rem;
-            border-radius: 50px;
+            border-radius: 14px;
             font-weight: 700;
             text-decoration: none;
             font-size: 0.95rem;
@@ -3210,28 +3227,40 @@
         }
 
         @media (max-width: 480px) {
+            .promo-popup {
+                padding: 0.75rem;
+                align-items: flex-end;
+            }
+
             .promo-popup-content {
-                border-radius: 16px;
+                border-radius: 22px 22px 16px 16px;
+                max-width: 100%;
             }
 
             .promo-popup-header {
-                padding: 1.5rem 1.25rem 1rem;
+                padding: 1.55rem 1.2rem 1.15rem;
+                border-radius: 22px 22px 0 0;
             }
 
             .promo-popup-header h2 {
-                font-size: 1.15rem;
-            }
-
-            .promo-popup-badge {
-                font-size: 0.78rem;
+                font-size: 1.3rem;
             }
 
             .promo-popup-body {
-                padding: 1rem 1.25rem;
+                padding: 1.05rem 1.1rem 0.25rem;
             }
 
             .promo-popup-actions {
-                padding: 0 1.25rem 1.25rem;
+                padding: 0 1.1rem 1.2rem;
+            }
+
+            .promo-popup-times {
+                gap: 0.45rem;
+            }
+
+            .promo-popup-time {
+                font-size: 0.88rem;
+                min-height: 2.35rem;
             }
         }
 
@@ -3252,8 +3281,8 @@
 
         .promo-popup-header {
             background:
-                radial-gradient(ellipse at center, rgba(19, 68, 146, 0.9) 0%, rgba(19, 68, 146, 0.85) 40%, rgba(19, 68, 146, 0.35) 100%),
-                url('../img/fondo-mnm.webp') center / cover no-repeat;
+                radial-gradient(ellipse 80% 60% at 50% 0%, rgba(222, 222, 60, 0.22), transparent 55%),
+                linear-gradient(160deg, #0d2a5c 0%, var(--primary-color) 48%, var(--tertiary-color) 100%);
         }
 
         .featured-highlight {
@@ -3713,22 +3742,42 @@
         }
 
         .promo-popup-event {
-            background: linear-gradient(90deg, rgba(19, 68, 146, 0.94), rgba(19, 68, 146, 0.8)), url('../img/fondo-mnm.webp') center / cover no-repeat;
+            position: relative;
+            overflow: hidden;
+            background:
+                linear-gradient(135deg, rgba(13, 42, 92, 0.96), rgba(19, 68, 146, 0.88)),
+                url('../img/fondo-mnm.webp') center / cover no-repeat;
             color: #fff;
-            padding: 0.85rem 1rem;
-            border-radius: 12px;
-            margin-bottom: 1rem;
+            padding: 1rem 1.05rem 1.05rem;
+            border-radius: 16px;
+            margin-bottom: 0.85rem;
+        }
+
+        .promo-popup-event-tag {
+            display: inline-block;
+            margin-bottom: 0.45rem;
+            padding: 0.18rem 0.55rem;
+            border-radius: 999px;
+            background: rgba(222, 222, 60, 0.95);
+            color: #0d2a5c;
+            font-size: 0.68rem;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
         }
 
         .promo-popup-event strong {
             display: block;
-            margin-bottom: 0.25rem;
+            margin-bottom: 0.3rem;
+            font-size: 1rem;
+            line-height: 1.3;
         }
 
         .promo-popup-event p {
-            font-size: 0.88rem;
-            line-height: 1.4;
+            font-size: 0.86rem;
+            line-height: 1.45;
             margin: 0;
+            opacity: 0.92;
         }
 
         .promo-popup-event p strong {
@@ -3738,22 +3787,28 @@
 
         .promo-popup-event-link {
             display: inline-block;
-            margin-top: 0.5rem;
+            margin-top: 0.65rem;
             color: var(--secondary-color);
-            font-size: 0.9rem;
+            font-size: 0.88rem;
             font-weight: 700;
             text-decoration: none;
+            border-bottom: 1px solid rgba(222, 222, 60, 0.35);
+            padding-bottom: 1px;
+            transition: border-color 0.2s ease, color 0.2s ease;
         }
 
         .promo-popup-event-link:hover {
-            text-decoration: underline;
+            color: #fff;
+            border-bottom-color: rgba(255, 255, 255, 0.55);
+            text-decoration: none;
         }
 
         .promo-popup-logo {
             display: block;
-            width: 84px;
+            width: 72px;
             height: auto;
-            margin: 0 auto 0.6rem;
+            margin: 0 auto 0.7rem;
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
         }
 
         .event-date-weekday {

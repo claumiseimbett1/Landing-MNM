@@ -67,12 +67,12 @@
             }
         }
 
-        // Popup promocional (pronto pago mensual + Relevos MNM)
+        // Popup promocional (vacacionales + Relevos MNM)
         const promoPopup = document.getElementById('promoPopup');
         const promoPopupClose = document.getElementById('promoPopupClose');
         const promoPopupOverlay = document.getElementById('promoPopupOverlay');
         const bubbleHorarios = document.getElementById('bubbleHorarios');
-        const PROMO_POPUP_KEY = 'mnm-promo-popup-nov2026-vacacionales';
+        const PROMO_POPUP_KEY = 'mnm-promo-popup-nov2026-vacacionales-v2';
 
         function cerrarPromoPopup() {
             if (!promoPopup) return;
@@ -115,21 +115,6 @@
         });
 
         initPromoPopup();
-
-        // Pronto pago vigente hasta el 5 de noviembre de 2026 (hora de Colombia)
-        const partesColombia = new Intl.DateTimeFormat('en-US', {
-            timeZone: 'America/Bogota',
-            year: 'numeric',
-            month: 'numeric',
-            day: 'numeric'
-        }).formatToParts(new Date());
-        const parteColombia = (tipo) => Number(partesColombia.find((p) => p.type === tipo).value);
-        const prontoPagoVigente = parteColombia('year') === 2026 && parteColombia('month') === 11 && parteColombia('day') <= 5;
-        if (prontoPagoVigente) {
-            document.querySelectorAll('a[data-wa-pronto]').forEach(link => {
-                link.href = `${link.href.split('?')[0]}?text=${encodeURIComponent(link.dataset.waPronto)}`;
-            });
-        }
 
         function setMenuOpen(isOpen) {
             hamburger.classList.toggle('active', isOpen);
@@ -1050,8 +1035,8 @@
             enabled: false, // Contador oculto; las promos van en el popup y en #planes
             startDate: 'auto',
             endDate: '2026-11-05',
-            title: '💸 ¡PRONTO PAGO + MATRÍCULA GRATIS! 💸',
-            description: 'Paga hasta el 5 de noviembre: 2 veces por semana $165.000 y 3 veces por semana $195.000. Matrícula gratis.'
+            title: '☀️ ¡YA ABRIMOS VACACIONALES! ☀️',
+            description: 'Diferentes planes. Horario: 8:00 AM, 4:00 PM y 5:00 PM. Sábados: 8:00 AM. Matrícula gratis.'
         };
 
         // Función para inicializar el contador

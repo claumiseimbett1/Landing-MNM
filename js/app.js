@@ -234,7 +234,13 @@
         function mensajeErrorEnvioCodigo(errorDetalle) {
             const detalle = (errorDetalle || '').toLowerCase();
 
-            if (detalle.includes('invalid grant') || detalle.includes('reconnect') || detalle.includes('412')) {
+            if (
+                detalle.includes('invalid grant')
+                || detalle.includes('reconnect')
+                || detalle.includes('412')
+                || detalle.includes('sessional location')
+                || detalle.includes('insufficient authentication')
+            ) {
                 return 'El correo del club está desconectado (error Gmail). Usa el botón de WhatsApp abajo para pedir tus notas, o intenta más tarde.';
             }
 

@@ -72,7 +72,7 @@
         const promoPopupClose = document.getElementById('promoPopupClose');
         const promoPopupOverlay = document.getElementById('promoPopupOverlay');
         const bubbleHorarios = document.getElementById('bubbleHorarios');
-        const PROMO_POPUP_KEY = 'mnm-promo-popup-nov2026-relevos';
+        const PROMO_POPUP_KEY = 'mnm-promo-popup-nov2026-vacacionales';
 
         function cerrarPromoPopup() {
             if (!promoPopup) return;

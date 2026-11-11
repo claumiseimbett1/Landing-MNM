@@ -67,12 +67,12 @@
             }
         }
 
-        // Popup promocional (vacacionales + Relevos MNM)
+        // Popup promocional (vacacionales)
         const promoPopup = document.getElementById('promoPopup');
         const promoPopupClose = document.getElementById('promoPopupClose');
         const promoPopupOverlay = document.getElementById('promoPopupOverlay');
         const bubbleHorarios = document.getElementById('bubbleHorarios');
-        const PROMO_POPUP_KEY = 'mnm-promo-popup-nov2026-vacacionales-v2';
+        const PROMO_POPUP_KEY = 'mnm-promo-popup-nov2026-vacacionales-v3';
 
         function cerrarPromoPopup() {
             if (!promoPopup) return;
@@ -1036,7 +1036,7 @@
             startDate: 'auto',
             endDate: '2026-11-05',
             title: '☀️ ¡YA ABRIMOS VACACIONALES! ☀️',
-            description: 'Diferentes planes. Horario: 8:00 AM, 4:00 PM y 5:00 PM. Sábados: 8:00 AM. Matrícula gratis.'
+            description: 'Diferentes planes. Mar, Jue y Sáb 8:00 AM · Mié y Vie 5:00 PM · Sáb 4:00 PM. Matrícula gratis.'
         };
 
         // Función para inicializar el contador
